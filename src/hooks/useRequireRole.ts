@@ -3,8 +3,9 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import type { UserRole } from "@/lib/types";
 
-export default function DashboardPage() {
+export function useRequireRole(requiredRole: UserRole) {
   const router = useRouter();
   const { user, profile, loading } = useAuth();
 
@@ -18,8 +19,11 @@ export default function DashboardPage() {
       router.replace("/onboarding");
       return;
     }
-    router.replace(`/${profile.role}/dashboard`);
-  }, [loading, user, profile, router]);
+    if (profile.role !== requiredRole) {
+      router.replace(`/${profile.role}/dashboard`);
+    }
+  }, [loading, user, profile, requiredRole, router]);
 
-  return <p className="px-6 py-16 text-center text-gray-500">Loading...</p>;
+  const ready = !loading && !!user && !!profile && profile.role === requiredRole;
+  return { user, profile, ready };
 }
