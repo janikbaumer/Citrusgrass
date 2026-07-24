@@ -42,6 +42,8 @@ function RegisterForm() {
     );
   }
 
+  const otherRole = role === "homeowner" ? "renter" : "homeowner";
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
@@ -81,9 +83,9 @@ function RegisterForm() {
           Create your {role} account
         </h1>
         <p className="text-sm text-gray-500">
-          Not a {role === "homeowner" ? "renter" : "homeowner"}?{" "}
+          Not a {role}?{" "}
           <Link
-            href={`/register?role=${role === "homeowner" ? "renter" : "homeowner"}`}
+            href={`/register?role=${otherRole}`}
             className="underline underline-offset-2"
           >
             Switch
