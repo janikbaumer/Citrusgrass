@@ -1,0 +1,49 @@
+import Link from "next/link";
+
+export default function Home() {
+  return (
+    <main className="flex flex-1 flex-col items-center justify-center gap-10 px-6 py-16 text-center">
+      <div className="max-w-xl space-y-3">
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          Welcome to Real Estate Portal
+        </h1>
+        <p className="text-gray-600">To get started, tell us who you are.</p>
+      </div>
+
+      <div className="grid w-full max-w-xl gap-4 sm:grid-cols-2">
+        <Link
+          href="/register?role=homeowner"
+          className="group flex flex-col items-center gap-2 rounded-xl border border-gray-200 bg-white p-8 shadow-sm transition hover:border-gray-900 hover:shadow-md"
+        >
+          <span className="text-4xl" aria-hidden>
+            🏠
+          </span>
+          <span className="text-lg font-medium">I&apos;m a Homeowner</span>
+          <span className="text-sm text-gray-500">
+            List and manage your property
+          </span>
+        </Link>
+
+        <Link
+          href="/register?role=renter"
+          className="group flex flex-col items-center gap-2 rounded-xl border border-gray-200 bg-white p-8 shadow-sm transition hover:border-gray-900 hover:shadow-md"
+        >
+          <span className="text-4xl" aria-hidden>
+            🔑
+          </span>
+          <span className="text-lg font-medium">I&apos;m a Renter</span>
+          <span className="text-sm text-gray-500">
+            Find a place to call home
+          </span>
+        </Link>
+      </div>
+
+      <p className="text-sm text-gray-500">
+        Already have an account?{" "}
+        <Link href="/login" className="font-medium underline underline-offset-2">
+          Log in
+        </Link>
+      </p>
+    </main>
+  );
+}
