@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import type { User } from "firebase/auth";
 import { db } from "@/lib/firebase";
 import type { UserProfile, UserRole } from "@/lib/types";
@@ -11,13 +11,27 @@ export async function userProfileExists(uid: string): Promise<boolean> {
 export async function createUserProfile(
   user: User,
   role: UserRole,
-  name?: string
+  firstName?: string,
+  lastName?: string
 ): Promise<void> {
+  const [derivedFirst, ...derivedRest] = (user.displayName || "")
+    .trim()
+    .split(" ")
+    .filter(Boolean);
+
   const profile: UserProfile = {
-    name: name || user.displayName || "",
+    firstName: firstName || derivedFirst || "",
+    lastName: lastName || derivedRest.join(" "),
     email: user.email || "",
     role,
     createdAt: Date.now(),
   };
   await setDoc(doc(db, "users", user.uid), profile);
+}
+
+export async function updateUserProfile(
+  uid: string,
+  data: Partial<Pick<UserProfile, "firstName" | "lastName" | "phone" | "salaryRange" | "about">>
+): Promise<void> {
+  await updateDoc(doc(db, "users", uid), data);
 }

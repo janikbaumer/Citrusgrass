@@ -19,7 +19,8 @@ function RegisterForm() {
   const roleParam = searchParams.get("role");
   const role = isUserRole(roleParam) ? roleParam : null;
 
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -50,7 +51,7 @@ function RegisterForm() {
     setSubmitting(true);
     try {
       const credential = await createUserWithEmailAndPassword(auth, email, password);
-      await createUserProfile(credential.user, role!, name);
+      await createUserProfile(credential.user, role!, firstName, lastName);
       router.push("/dashboard");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
@@ -106,18 +107,33 @@ function RegisterForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700">
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
-          />
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label htmlFor="firstName" className="mb-1 block text-sm font-medium text-gray-700">
+              First name
+            </label>
+            <input
+              id="firstName"
+              type="text"
+              required
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label htmlFor="lastName" className="mb-1 block text-sm font-medium text-gray-700">
+              Last name
+            </label>
+            <input
+              id="lastName"
+              type="text"
+              required
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+            />
+          </div>
         </div>
         <div>
           <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">
