@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { updateUserProfile } from "@/lib/user";
 
@@ -17,23 +17,16 @@ const SALARY_RANGES = [
 export default function RenterProfilePage() {
   const { user, profile } = useAuth();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [salaryRange, setSalaryRange] = useState("");
-  const [about, setAbout] = useState("");
+  // The renter layout only renders this page once `profile` is loaded, so
+  // these initial values are always accurate on first render.
+  const [firstName, setFirstName] = useState(profile?.firstName || "");
+  const [lastName, setLastName] = useState(profile?.lastName || "");
+  const [phone, setPhone] = useState(profile?.phone || "");
+  const [salaryRange, setSalaryRange] = useState(profile?.salaryRange || "");
+  const [about, setAbout] = useState(profile?.about || "");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!profile) return;
-    setFirstName(profile.firstName || "");
-    setLastName(profile.lastName || "");
-    setPhone(profile.phone || "");
-    setSalaryRange(profile.salaryRange || "");
-    setAbout(profile.about || "");
-  }, [profile]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

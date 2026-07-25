@@ -23,15 +23,17 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [authResolved, setAuthResolved] = useState(false);
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [profileForUid, setProfileForUid] = useState<string | null>(null);
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
+      setAuthResolved(true);
       if (!firebaseUser) {
         setProfile(null);
-        setLoading(false);
+        setProfileForUid(null);
       }
     });
     return unsubscribeAuth;
@@ -40,13 +42,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!user) return;
 
-    setLoading(true);
     const unsubscribeProfile = onSnapshot(doc(db, "users", user.uid), (snapshot) => {
       setProfile(snapshot.exists() ? (snapshot.data() as UserProfile) : null);
-      setLoading(false);
+      setProfileForUid(user.uid);
     });
     return unsubscribeProfile;
   }, [user]);
+
+  const loading = !authResolved || (!!user && profileForUid !== user.uid);
 
   async function signOut() {
     await firebaseSignOut(auth);

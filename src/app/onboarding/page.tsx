@@ -1,13 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { createUserProfile } from "@/lib/user";
+import { isSafeRedirect } from "@/lib/safeRedirect";
 import type { UserRole } from "@/lib/types";
 
-export default function OnboardingPage() {
+function Onboarding() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const next = searchParams.get("next");
   const { user, loading } = useAuth();
   const [submitting, setSubmitting] = useState(false);
 
@@ -24,7 +27,7 @@ export default function OnboardingPage() {
     if (!user) return;
     setSubmitting(true);
     await createUserProfile(user, role);
-    router.push("/dashboard");
+    router.push(isSafeRedirect(next) ? next : "/dashboard");
   }
 
   return (
@@ -58,5 +61,13 @@ export default function OnboardingPage() {
         </button>
       </div>
     </main>
+  );
+}
+
+export default function OnboardingPage() {
+  return (
+    <Suspense fallback={null}>
+      <Onboarding />
+    </Suspense>
   );
 }

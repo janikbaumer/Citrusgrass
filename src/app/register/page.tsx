@@ -11,6 +11,7 @@ import {
 import { auth } from "@/lib/firebase";
 import { createUserProfile, userProfileExists } from "@/lib/user";
 import { isUserRole } from "@/lib/types";
+import { isSafeRedirect } from "@/lib/safeRedirect";
 import { GoogleButton } from "@/components/GoogleButton";
 
 function RegisterForm() {
@@ -18,6 +19,8 @@ function RegisterForm() {
   const searchParams = useSearchParams();
   const roleParam = searchParams.get("role");
   const role = isUserRole(roleParam) ? roleParam : null;
+  const next = searchParams.get("next");
+  const nextParam = isSafeRedirect(next) ? next : null;
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -52,7 +55,7 @@ function RegisterForm() {
     try {
       const credential = await createUserWithEmailAndPassword(auth, email, password);
       await createUserProfile(credential.user, role!, firstName, lastName);
-      router.push("/dashboard");
+      router.push(isSafeRedirect(next) ? next : "/dashboard");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
@@ -69,7 +72,7 @@ function RegisterForm() {
       if (!exists) {
         await createUserProfile(credential.user, role!);
       }
-      router.push("/dashboard");
+      router.push(isSafeRedirect(next) ? next : "/dashboard");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
@@ -86,7 +89,7 @@ function RegisterForm() {
         <p className="text-sm text-gray-500">
           Not a {role}?{" "}
           <Link
-            href={`/register?role=${otherRole}`}
+            href={`/register?role=${otherRole}${nextParam ? `&next=${encodeURIComponent(nextParam)}` : ""}`}
             className="underline underline-offset-2"
           >
             Switch
@@ -176,7 +179,10 @@ function RegisterForm() {
 
       <p className="text-center text-sm text-gray-500">
         Already have an account?{" "}
-        <Link href="/login" className="font-medium underline underline-offset-2">
+        <Link
+          href={`/login${nextParam ? `?next=${encodeURIComponent(nextParam)}` : ""}`}
+          className="font-medium underline underline-offset-2"
+        >
           Log in
         </Link>
       </p>

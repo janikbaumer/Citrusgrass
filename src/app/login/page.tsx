@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   GoogleAuthProvider,
@@ -10,10 +10,14 @@ import {
 } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { userProfileExists } from "@/lib/user";
+import { isSafeRedirect } from "@/lib/safeRedirect";
 import { GoogleButton } from "@/components/GoogleButton";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const next = searchParams.get("next");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +25,11 @@ export default function LoginPage() {
 
   async function routeAfterSignIn(uid: string) {
     const exists = await userProfileExists(uid);
-    router.push(exists ? "/dashboard" : "/onboarding");
+    if (!exists) {
+      router.push(isSafeRedirect(next) ? `/onboarding?next=${encodeURIComponent(next)}` : "/onboarding");
+      return;
+    }
+    router.push(isSafeRedirect(next) ? next : "/dashboard");
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -113,5 +121,13 @@ export default function LoginPage() {
         </Link>
       </p>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginForm />
+    </Suspense>
   );
 }

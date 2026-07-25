@@ -9,10 +9,11 @@ const LINKS: Record<UserRole, { href: string; label: string }[]> = {
   renter: [
     { href: "/renter/dashboard", label: "Dashboard" },
     { href: "/renter/profile", label: "Profile" },
-    { href: "/renter/listings", label: "Listings" },
+    { href: "/renter/listings", label: "Applications" },
   ],
   homeowner: [
     { href: "/homeowner/dashboard", label: "Dashboard" },
+    { href: "/homeowner/properties", label: "Properties" },
     { href: "/homeowner/profile", label: "Profile" },
   ],
 };
@@ -29,7 +30,7 @@ export function RoleNav({ role }: { role: UserRole }) {
             key={link.href}
             href={link.href}
             className={
-              pathname === link.href
+              pathname === link.href || pathname.startsWith(`${link.href}/`)
                 ? "text-sm font-medium text-gray-900"
                 : "text-sm font-medium text-gray-500 hover:text-gray-900"
             }
