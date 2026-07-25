@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -12,13 +13,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* This app is designed light-only - no page wraps its content in a
+   dark-aware card, so it always renders with a light background
+   regardless of OS theme, rather than partially and unreliably
+   supporting dark mode. */
 body {
   background: var(--background);
   color: var(--foreground);

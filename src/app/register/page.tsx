@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -12,6 +12,7 @@ import { auth } from "@/lib/firebase";
 import { createUserProfile, userProfileExists } from "@/lib/user";
 import { isUserRole } from "@/lib/types";
 import { isSafeRedirect } from "@/lib/safeRedirect";
+import { useAuth } from "@/contexts/AuthContext";
 import { GoogleButton } from "@/components/GoogleButton";
 
 function RegisterForm() {
@@ -21,6 +22,7 @@ function RegisterForm() {
   const role = isUserRole(roleParam) ? roleParam : null;
   const next = searchParams.get("next");
   const nextParam = isSafeRedirect(next) ? next : null;
+  const { user, profile, loading: authLoading } = useAuth();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -28,6 +30,15 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (authLoading || !user) return;
+    router.replace(profile ? (nextParam ?? `/${profile.role}/dashboard`) : "/onboarding");
+  }, [authLoading, user, profile, nextParam, router]);
+
+  if (authLoading || user) {
+    return null;
+  }
 
   if (!role) {
     return (

@@ -1,6 +1,23 @@
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Home() {
+  const router = useRouter();
+  const { user, profile, loading } = useAuth();
+
+  useEffect(() => {
+    if (loading || !user) return;
+    router.replace(profile ? `/${profile.role}/dashboard` : "/onboarding");
+  }, [loading, user, profile, router]);
+
+  if (loading || user) {
+    return null;
+  }
+
   return (
     <main className="flex flex-1 flex-col items-center justify-center gap-10 px-6 py-16 text-center">
       <div className="max-w-xl space-y-3">
