@@ -12,7 +12,7 @@ import type { Application, Property } from "@/lib/types";
 export default function ApplyPage() {
   const params = useParams<{ propertyId: string }>();
   const propertyId = params.propertyId;
-  const { user, profile, loading } = useAuth();
+  const { user, profile, loading, signOut } = useAuth();
 
   const [property, setProperty] = useState<Property | null | undefined>(undefined);
   const [existingApplication, setExistingApplication] = useState<Application | null | undefined>(
@@ -106,9 +106,17 @@ export default function ApplyPage() {
         )}
 
         {user && profile && profile.role !== "renter" && (
-          <p className="text-gray-600">
-            You&apos;re signed in as a homeowner. Log in with a renter account to apply.
-          </p>
+          <div className="space-y-3">
+            <p className="text-gray-600">
+              You&apos;re signed in as a homeowner. Log in with a renter account to apply.
+            </p>
+            <button
+              onClick={() => signOut()}
+              className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+            >
+              Log out
+            </button>
+          </div>
         )}
 
         {user && profile && profile.role === "renter" && existingApplication === undefined && (

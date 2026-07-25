@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/contexts/AuthContext";
-import { getProperty } from "@/lib/property";
+import { deleteProperty, getProperty } from "@/lib/property";
 import { updateApplicationStatus } from "@/lib/application";
 import { PipelineBoard } from "@/components/PipelineBoard";
 import type { Application, PipelineStatus, Property } from "@/lib/types";
@@ -13,11 +14,13 @@ import type { Application, PipelineStatus, Property } from "@/lib/types";
 export default function PropertyPipelinePage() {
   const params = useParams<{ id: string }>();
   const propertyId = params.id;
+  const router = useRouter();
   const { user } = useAuth();
 
   const [property, setProperty] = useState<Property | null | undefined>(undefined);
   const [applications, setApplications] = useState<Application[]>([]);
   const [copied, setCopied] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     getProperty(propertyId).then(setProperty);
@@ -63,6 +66,24 @@ export default function PropertyPipelinePage() {
     setTimeout(() => setCopied(false), 2000);
   }
 
+  async function handleDelete() {
+    if (
+      !confirm(
+        "Delete this property? Its apply link will stop working. Existing applications aren't deleted, but they'll no longer show a matching listing. This can't be undone."
+      )
+    ) {
+      return;
+    }
+    setDeleting(true);
+    try {
+      await deleteProperty(propertyId);
+      router.push("/homeowner/properties");
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Something went wrong.");
+      setDeleting(false);
+    }
+  }
+
   if (property === undefined) {
     return <p className="px-6 py-16 text-center text-gray-500">Loading...</p>;
   }
@@ -85,12 +106,27 @@ export default function PropertyPipelinePage() {
             {property.availableFrom}
           </p>
         </div>
-        <button
-          onClick={copyApplyLink}
-          className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
-        >
-          {copied ? "Link copied!" : "Copy apply link"}
-        </button>
+        <div className="flex flex-wrap gap-3">
+          <button
+            onClick={copyApplyLink}
+            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+          >
+            {copied ? "Link copied!" : "Copy apply link"}
+          </button>
+          <Link
+            href={`/homeowner/properties/${propertyId}/edit`}
+            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+          >
+            Edit
+          </Link>
+          <button
+            onClick={handleDelete}
+            disabled={deleting}
+            className="rounded-lg border border-red-200 px-4 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {deleting ? "Deleting..." : "Delete"}
+          </button>
+        </div>
       </div>
 
       <PipelineBoard applications={applications} onStatusChange={handleStatusChange} />
