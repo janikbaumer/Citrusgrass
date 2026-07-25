@@ -1,42 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
-import { db } from "@/lib/firebase";
 import { useAuth } from "@/contexts/AuthContext";
-import { getProperty } from "@/lib/property";
-import { PIPELINE_STATUS_LABELS } from "@/lib/types";
-import type { Application, Property } from "@/lib/types";
-
-interface ApplicationWithProperty extends Application {
-  property: Property | null;
-}
+import { useRenterApplications } from "@/hooks/useRenterApplications";
+import { RENTER_STATUS_LABELS } from "@/lib/types";
 
 export default function RenterListingsPage() {
   const { user } = useAuth();
-  const [applications, setApplications] = useState<ApplicationWithProperty[] | null>(null);
-
-  useEffect(() => {
-    if (!user) return;
-    const q = query(
-      collection(db, "applications"),
-      where("renterId", "==", user.uid),
-      orderBy("createdAt", "desc")
-    );
-    return onSnapshot(q, async (snapshot) => {
-      const withProperties = await Promise.all(
-        snapshot.docs.map(async (docSnapshot) => {
-          const application = {
-            id: docSnapshot.id,
-            ...(docSnapshot.data() as Omit<Application, "id">),
-          };
-          const property = await getProperty(application.propertyId);
-          return { ...application, property };
-        })
-      );
-      setApplications(withProperties);
-    });
-  }, [user]);
+  const applications = useRenterApplications(user?.uid);
 
   return (
     <main className="mx-auto w-full max-w-2xl px-6 py-16">
@@ -66,7 +36,7 @@ export default function RenterListingsPage() {
               </p>
             )}
             <p className="mt-1 text-sm text-gray-600">
-              Status: <span className="font-medium">{PIPELINE_STATUS_LABELS[application.status]}</span>
+              Status: <span className="font-medium">{RENTER_STATUS_LABELS[application.status]}</span>
             </p>
           </li>
         ))}

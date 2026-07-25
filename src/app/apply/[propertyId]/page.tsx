@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { getProperty } from "@/lib/property";
 import { buildRenterSnapshot, createApplication, findExistingApplication } from "@/lib/application";
-import { PIPELINE_STATUS_LABELS } from "@/lib/types";
+import { RENTER_STATUS_LABELS } from "@/lib/types";
 import type { Application, Property } from "@/lib/types";
 
 export default function ApplyPage() {
@@ -135,7 +135,7 @@ export default function ApplyPage() {
           <p className="text-gray-600">
             You already applied. Status:{" "}
             <span className="font-medium">
-              {PIPELINE_STATUS_LABELS[existingApplication.status]}
+              {RENTER_STATUS_LABELS[existingApplication.status]}
             </span>
           </p>
         )}

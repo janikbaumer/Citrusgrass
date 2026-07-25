@@ -58,6 +58,11 @@ export interface Application {
   updatedAt: number;
 }
 
+export interface ApplicationWithProperty extends Application {
+  property: Property | null;
+}
+
+// Labels as seen by the homeowner managing the pipeline.
 export const PIPELINE_STATUS_LABELS: Record<PipelineStatus, string> = {
   viewing_requested: "Viewing requested",
   invited_to_viewing: "Invited to viewing",
@@ -65,6 +70,13 @@ export const PIPELINE_STATUS_LABELS: Record<PipelineStatus, string> = {
   under_review: "Under review",
   accepted: "Accepted",
   declined: "Declined",
+};
+
+// Same statuses as seen by the renter who submitted the application -
+// "received" reads backwards from their side of it.
+export const RENTER_STATUS_LABELS: Record<PipelineStatus, string> = {
+  ...PIPELINE_STATUS_LABELS,
+  application_received: "Application sent",
 };
 
 export const PIPELINE_COLUMNS: { title: string; statuses: PipelineStatus[] }[] = [
