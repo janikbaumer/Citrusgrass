@@ -25,6 +25,8 @@ service cloud.firestore {
         request.resource.data.ownerId ==
           get(/databases/$(database)/documents/properties/$(request.resource.data.propertyId)).data.ownerId;
       allow update: if request.auth != null && request.auth.uid == resource.data.ownerId;
+      allow delete: if request.auth != null &&
+        (request.auth.uid == resource.data.renterId || request.auth.uid == resource.data.ownerId);
     }
   }
 }

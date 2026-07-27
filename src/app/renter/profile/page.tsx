@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { updateUserProfile } from "@/lib/user";
+import { DeleteAccountSection } from "@/components/DeleteAccountSection";
 
 const SALARY_RANGES = [
   "Under $30,000",
@@ -147,6 +148,8 @@ export default function RenterProfilePage() {
           {saving ? "Saving..." : "Save"}
         </button>
       </form>
+
+      <DeleteAccountSection />
     </main>
   );
 }
