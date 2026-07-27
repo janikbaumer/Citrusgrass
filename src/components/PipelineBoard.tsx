@@ -1,12 +1,13 @@
 "use client";
 
 import {
-  PIPELINE_COLUMNS,
+  getPipelineColumns,
   PIPELINE_STATUS_LABELS,
   type Application,
   type PipelineStatus,
 } from "@/lib/types";
 
+const PIPELINE_COLUMNS = getPipelineColumns(PIPELINE_STATUS_LABELS);
 const ALL_STATUSES = PIPELINE_COLUMNS.flatMap((column) => column.statuses);
 
 interface PipelineBoardProps {

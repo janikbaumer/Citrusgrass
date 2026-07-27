@@ -2,13 +2,27 @@ import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from "firebase/
 import { db } from "@/lib/firebase";
 import type { Property } from "@/lib/types";
 
+type PropertyInput = Pick<
+  Property,
+  | "street"
+  | "zipCode"
+  | "city"
+  | "sizeSqm"
+  | "rooms"
+  | "rent"
+  | "additionalCosts"
+  | "availableFrom"
+  | "description"
+>;
+
 export async function createProperty(
   ownerId: string,
-  data: Pick<Property, "address" | "rooms" | "rent" | "availableFrom">
+  data: PropertyInput
 ): Promise<string> {
   const ref = await addDoc(collection(db, "properties"), {
     ownerId,
     ...data,
+    description: data.description || "",
     createdAt: Date.now(),
   });
   return ref.id;
@@ -22,9 +36,12 @@ export async function getProperty(propertyId: string): Promise<Property | null> 
 
 export async function updateProperty(
   propertyId: string,
-  data: Pick<Property, "address" | "rooms" | "rent" | "availableFrom">
+  data: PropertyInput
 ): Promise<void> {
-  await updateDoc(doc(db, "properties", propertyId), data);
+  await updateDoc(doc(db, "properties", propertyId), {
+    ...data,
+    description: data.description || "",
+  });
 }
 
 export async function deleteProperty(propertyId: string): Promise<void> {

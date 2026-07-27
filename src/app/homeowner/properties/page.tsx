@@ -5,6 +5,7 @@ import Link from "next/link";
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/contexts/AuthContext";
+import { formatPropertyAddress, formatPropertySummary } from "@/lib/types";
 import type { Property } from "@/lib/types";
 
 export default function PropertiesPage() {
@@ -59,11 +60,8 @@ export default function PropertiesPage() {
               href={`/homeowner/properties/${property.id}`}
               className="block rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:border-gray-900 hover:shadow-md"
             >
-              <p className="font-medium">{property.address}</p>
-              <p className="text-sm text-gray-500">
-                {property.rooms} rooms &middot; CHF {property.rent}/month &middot; available{" "}
-                {property.availableFrom}
-              </p>
+              <p className="font-medium">{formatPropertyAddress(property)}</p>
+              <p className="text-sm text-gray-500">{formatPropertySummary(property)}</p>
             </Link>
           </li>
         ))}

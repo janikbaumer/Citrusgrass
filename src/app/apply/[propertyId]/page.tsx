@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { getProperty } from "@/lib/property";
 import { buildRenterSnapshot, createApplication, findExistingApplication } from "@/lib/application";
-import { RENTER_STATUS_LABELS } from "@/lib/types";
+import { formatPropertyAddress, formatPropertySummary, RENTER_STATUS_LABELS } from "@/lib/types";
 import type { Application, Property } from "@/lib/types";
 
 export default function ApplyPage() {
@@ -66,11 +66,11 @@ export default function ApplyPage() {
 
   return (
     <main className="mx-auto w-full max-w-lg px-6 py-16 text-center">
-      <h1 className="text-2xl font-semibold">{property.address}</h1>
-      <p className="mt-1 text-gray-500">
-        {property.rooms} rooms &middot; CHF {property.rent}/month &middot; available{" "}
-        {property.availableFrom}
-      </p>
+      <h1 className="text-2xl font-semibold">{formatPropertyAddress(property)}</h1>
+      <p className="mt-1 text-gray-500">{formatPropertySummary(property)}</p>
+      {property.description && (
+        <p className="mx-auto mt-3 max-w-md text-sm text-gray-600">{property.description}</p>
+      )}
 
       <div className="mt-8">
         {!user && (

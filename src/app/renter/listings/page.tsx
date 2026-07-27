@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/contexts/AuthContext";
 import { useRenterApplications } from "@/hooks/useRenterApplications";
-import { RENTER_STATUS_LABELS } from "@/lib/types";
+import { formatPropertyAddress, formatPropertySummary, RENTER_STATUS_LABELS } from "@/lib/types";
 
 export default function RenterListingsPage() {
   const { user } = useAuth();
@@ -28,11 +28,13 @@ export default function RenterListingsPage() {
             className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
           >
             <p className="font-medium">
-              {application.property?.address || "Listing no longer available"}
+              {application.property
+                ? formatPropertyAddress(application.property)
+                : "Listing no longer available"}
             </p>
             {application.property && (
               <p className="text-sm text-gray-500">
-                {application.property.rooms} rooms &middot; CHF {application.property.rent}/month
+                {formatPropertySummary(application.property)}
               </p>
             )}
             <p className="mt-1 text-sm text-gray-600">

@@ -1,6 +1,14 @@
 "use client";
 
-import { PIPELINE_COLUMNS, RENTER_STATUS_LABELS, type ApplicationWithProperty } from "@/lib/types";
+import {
+  formatPropertyAddress,
+  formatPropertySummary,
+  getPipelineColumns,
+  RENTER_STATUS_LABELS,
+  type ApplicationWithProperty,
+} from "@/lib/types";
+
+const PIPELINE_COLUMNS = getPipelineColumns(RENTER_STATUS_LABELS);
 
 interface RenterPipelineBoardProps {
   applications: ApplicationWithProperty[];
@@ -32,12 +40,13 @@ export function RenterPipelineBoard({ applications }: RenterPipelineBoardProps) 
                   }`}
                 >
                   <p className="text-sm font-medium">
-                    {application.property?.address || "Listing no longer available"}
+                    {application.property
+                      ? formatPropertyAddress(application.property)
+                      : "Listing no longer available"}
                   </p>
                   {application.property && (
                     <p className="text-xs text-gray-500">
-                      {application.property.rooms} rooms &middot; CHF{" "}
-                      {application.property.rent}/month
+                      {formatPropertySummary(application.property)}
                     </p>
                   )}
                   <p className="mt-2 text-xs font-medium text-gray-600">

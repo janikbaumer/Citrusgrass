@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { deleteProperty, getProperty } from "@/lib/property";
 import { updateApplicationStatus } from "@/lib/application";
 import { PipelineBoard } from "@/components/PipelineBoard";
+import { formatPropertyAddress, formatPropertySummary } from "@/lib/types";
 import type { Application, PipelineStatus, Property } from "@/lib/types";
 
 export default function PropertyPipelinePage() {
@@ -100,11 +101,11 @@ export default function PropertyPipelinePage() {
     <main className="mx-auto w-full max-w-5xl px-6 py-16">
       <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold">{property.address}</h1>
-          <p className="text-sm text-gray-500">
-            {property.rooms} rooms &middot; CHF {property.rent}/month &middot; available{" "}
-            {property.availableFrom}
-          </p>
+          <h1 className="text-2xl font-semibold">{formatPropertyAddress(property)}</h1>
+          <p className="text-sm text-gray-500">{formatPropertySummary(property)}</p>
+          {property.description && (
+            <p className="mt-2 max-w-xl text-sm text-gray-600">{property.description}</p>
+          )}
         </div>
         <div className="flex flex-wrap gap-3">
           <button

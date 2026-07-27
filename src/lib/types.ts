@@ -23,11 +23,28 @@ export function displayName(profile: Pick<UserProfile, "firstName" | "lastName" 
 export interface Property {
   id: string;
   ownerId: string;
-  address: string;
+  street: string;
+  zipCode: string;
+  city: string;
+  sizeSqm: number;
   rooms: number;
   rent: number;
+  additionalCosts: number;
   availableFrom: string;
+  description?: string;
   createdAt: number;
+}
+
+export function formatPropertyAddress(
+  property: Pick<Property, "street" | "zipCode" | "city">
+): string {
+  return `${property.street}, ${property.zipCode} ${property.city}`;
+}
+
+export function formatPropertySummary(
+  property: Pick<Property, "rooms" | "sizeSqm" | "rent" | "additionalCosts" | "availableFrom">
+): string {
+  return `${property.rooms} rooms · ${property.sizeSqm} m² · CHF ${property.rent} + ${property.additionalCosts} NK/month · available ${property.availableFrom}`;
 }
 
 export interface RenterSnapshot {
@@ -79,10 +96,23 @@ export const RENTER_STATUS_LABELS: Record<PipelineStatus, string> = {
   application_received: "Application sent",
 };
 
-export const PIPELINE_COLUMNS: { title: string; statuses: PipelineStatus[] }[] = [
-  { title: "Application received", statuses: ["application_received"] },
-  { title: "Viewing requests", statuses: ["viewing_requested"] },
-  { title: "Invited to viewing", statuses: ["invited_to_viewing"] },
-  { title: "Under review", statuses: ["under_review"] },
-  { title: "Accepted / Declined", statuses: ["accepted", "declined"] },
+const PIPELINE_COLUMN_GROUPS: PipelineStatus[][] = [
+  ["application_received"],
+  ["viewing_requested"],
+  ["invited_to_viewing"],
+  ["under_review"],
+  ["accepted", "declined"],
 ];
+
+// Column titles are derived from the same label map used for each card's
+// status badge, so a homeowner board and a renter board can never show
+// mismatched wording for the same status again (e.g. a column titled
+// "Application received" next to a card badge reading "Application sent").
+export function getPipelineColumns(
+  labels: Record<PipelineStatus, string>
+): { title: string; statuses: PipelineStatus[] }[] {
+  return PIPELINE_COLUMN_GROUPS.map((statuses) => ({
+    statuses,
+    title: statuses.map((status) => labels[status]).join(" / "),
+  }));
+}
