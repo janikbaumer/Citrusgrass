@@ -52,7 +52,7 @@ export default function NewPropertyPage() {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="street" className="mb-1 block text-sm font-medium text-gray-700">
+          <label htmlFor="street" className="mb-1 block text-sm font-medium text-ink">
             Street (+ house number)
           </label>
           <input
@@ -62,13 +62,13 @@ export default function NewPropertyPage() {
             value={street}
             onChange={(e) => setStreet(e.target.value)}
             placeholder="Bahnhofstrasse 12"
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+            className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="zipCode" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="zipCode" className="mb-1 block text-sm font-medium text-ink">
               PLZ (zip code)
             </label>
             <input
@@ -77,11 +77,11 @@ export default function NewPropertyPage() {
               required
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
             />
           </div>
           <div>
-            <label htmlFor="city" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="city" className="mb-1 block text-sm font-medium text-ink">
               City
             </label>
             <input
@@ -90,14 +90,14 @@ export default function NewPropertyPage() {
               required
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="rooms" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="rooms" className="mb-1 block text-sm font-medium text-ink">
               Rooms
             </label>
             <input
@@ -108,11 +108,11 @@ export default function NewPropertyPage() {
               required
               value={rooms}
               onChange={(e) => setRooms(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
             />
           </div>
           <div>
-            <label htmlFor="sizeSqm" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="sizeSqm" className="mb-1 block text-sm font-medium text-ink">
               Size (m²)
             </label>
             <input
@@ -122,14 +122,14 @@ export default function NewPropertyPage() {
               required
               value={sizeSqm}
               onChange={(e) => setSizeSqm(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="rent" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="rent" className="mb-1 block text-sm font-medium text-ink">
               Rent (CHF/month)
             </label>
             <input
@@ -139,13 +139,13 @@ export default function NewPropertyPage() {
               required
               value={rent}
               onChange={(e) => setRent(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
             />
           </div>
           <div>
             <label
               htmlFor="additionalCosts"
-              className="mb-1 block text-sm font-medium text-gray-700"
+              className="mb-1 block text-sm font-medium text-ink"
             >
               Additional costs (Nebenkosten, CHF/month)
             </label>
@@ -156,13 +156,13 @@ export default function NewPropertyPage() {
               required
               value={additionalCosts}
               onChange={(e) => setAdditionalCosts(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="availableFrom" className="mb-1 block text-sm font-medium text-gray-700">
+          <label htmlFor="availableFrom" className="mb-1 block text-sm font-medium text-ink">
             Available from
           </label>
           <input
@@ -171,29 +171,29 @@ export default function NewPropertyPage() {
             required
             value={availableFrom}
             onChange={(e) => setAvailableFrom(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+            className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
           />
         </div>
 
         <div>
-          <label htmlFor="description" className="mb-1 block text-sm font-medium text-gray-700">
-            Description <span className="font-normal text-gray-400">(optional)</span>
+          <label htmlFor="description" className="mb-1 block text-sm font-medium text-ink">
+            Description <span className="font-normal text-muted">(optional)</span>
           </label>
           <textarea
             id="description"
             rows={4}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+            className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
           />
         </div>
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-danger">{error}</p>}
 
         <button
           type="submit"
           disabled={submitting}
-          className="w-full rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
+          className="w-full rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
           {submitting ? "Adding..." : "Add property"}
         </button>

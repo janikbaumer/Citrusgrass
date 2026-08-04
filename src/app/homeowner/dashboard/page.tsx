@@ -11,8 +11,8 @@ export default function HomeownerDashboardPage() {
       <h1 className="text-2xl font-semibold">
         Welcome, {profile && displayName(profile)}
       </h1>
-      <p className="text-gray-500">Your homeowner dashboard.</p>
-      <p className="text-sm text-gray-400">More coming soon.</p>
+      <p className="text-muted">Your homeowner dashboard.</p>
+      <p className="text-sm text-muted">More coming soon.</p>
     </main>
   );
 }

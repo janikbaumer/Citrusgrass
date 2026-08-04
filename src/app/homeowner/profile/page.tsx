@@ -44,7 +44,7 @@ export default function HomeownerProfilePage() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="firstName" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="firstName" className="mb-1 block text-sm font-medium text-ink">
               First name
             </label>
             <input
@@ -53,11 +53,11 @@ export default function HomeownerProfilePage() {
               required
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
             />
           </div>
           <div>
-            <label htmlFor="lastName" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="lastName" className="mb-1 block text-sm font-medium text-ink">
               Last name
             </label>
             <input
@@ -66,33 +66,33 @@ export default function HomeownerProfilePage() {
               required
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
             />
           </div>
         </div>
 
         <div>
-          <span className="mb-1 block text-sm font-medium text-gray-700">Landlord type</span>
+          <span className="mb-1 block text-sm font-medium text-ink">Landlord type</span>
           <div className="flex gap-6">
-            <label className="flex items-center gap-2 text-sm text-gray-700">
+            <label className="flex items-center gap-2 text-sm text-ink">
               <input
                 type="radio"
                 name="landlordType"
                 value="private"
                 checked={landlordType === "private"}
                 onChange={() => setLandlordType("private")}
-                className="text-gray-900 focus:ring-gray-900"
+                className="accent-accent"
               />
               Private
             </label>
-            <label className="flex items-center gap-2 text-sm text-gray-700">
+            <label className="flex items-center gap-2 text-sm text-ink">
               <input
                 type="radio"
                 name="landlordType"
                 value="company"
                 checked={landlordType === "company"}
                 onChange={() => setLandlordType("company")}
-                className="text-gray-900 focus:ring-gray-900"
+                className="accent-accent"
               />
               Company
             </label>
@@ -100,7 +100,7 @@ export default function HomeownerProfilePage() {
         </div>
 
         <div>
-          <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">
+          <label htmlFor="email" className="mb-1 block text-sm font-medium text-ink">
             Email
           </label>
           <input
@@ -108,12 +108,12 @@ export default function HomeownerProfilePage() {
             type="email"
             disabled
             value={profile?.email || ""}
-            className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-500"
+            className="w-full rounded-xl border border-line bg-bg px-3 py-2 text-sm text-muted"
           />
         </div>
 
         <div>
-          <label htmlFor="phone" className="mb-1 block text-sm font-medium text-gray-700">
+          <label htmlFor="phone" className="mb-1 block text-sm font-medium text-ink">
             Phone
           </label>
           <input
@@ -121,17 +121,17 @@ export default function HomeownerProfilePage() {
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+            className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
           />
         </div>
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
-        {saved && !error && <p className="text-sm text-green-600">Saved.</p>}
+        {error && <p className="text-sm text-danger">{error}</p>}
+        {saved && !error && <p className="text-sm text-good">Saved.</p>}
 
         <button
           type="submit"
           disabled={saving}
-          className="w-full rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
+          className="w-full rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
           {saving ? "Saving..." : "Save"}
         </button>

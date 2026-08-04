@@ -22,21 +22,21 @@ export function RenterPipelineBoard({ applications }: RenterPipelineBoardProps) 
           column.statuses.includes(application.status)
         );
         return (
-          <div key={column.title} className="rounded-xl bg-gray-50 p-3">
-            <h2 className="mb-3 text-sm font-semibold text-gray-700">
+          <div key={column.title} className="rounded-2xl bg-bg p-3">
+            <h2 className="mb-3 text-sm font-semibold text-ink">
               {column.title}{" "}
-              <span className="font-normal text-gray-400">({columnApplications.length})</span>
+              <span className="font-normal text-muted">({columnApplications.length})</span>
             </h2>
             <div className="space-y-3">
               {columnApplications.map((application) => (
                 <div
                   key={application.id}
-                  className={`rounded-lg border bg-white p-3 shadow-sm ${
+                  className={`rounded-2xl border bg-surface p-3 shadow-warm-sm ${
                     application.status === "accepted"
-                      ? "border-green-300"
+                      ? "border-good"
                       : application.status === "declined"
-                        ? "border-red-200 opacity-70"
-                        : "border-gray-200"
+                        ? "border-danger opacity-70"
+                        : "border-line"
                   }`}
                 >
                   <p className="text-sm font-medium">
@@ -45,17 +45,17 @@ export function RenterPipelineBoard({ applications }: RenterPipelineBoardProps) 
                       : "Listing no longer available"}
                   </p>
                   {application.property && (
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-muted">
                       {formatPropertySummary(application.property)}
                     </p>
                   )}
-                  <p className="mt-2 text-xs font-medium text-gray-600">
+                  <p className="mt-2 text-xs font-medium text-muted">
                     {RENTER_STATUS_LABELS[application.status]}
                   </p>
                 </div>
               ))}
               {columnApplications.length === 0 && (
-                <p className="text-xs text-gray-400">Nothing here.</p>
+                <p className="text-xs text-muted">Nothing here.</p>
               )}
             </div>
           </div>

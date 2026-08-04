@@ -15,7 +15,7 @@ function Onboarding() {
   const [submitting, setSubmitting] = useState(false);
 
   if (loading) {
-    return <p className="px-6 py-16 text-center text-gray-500">Loading...</p>;
+    return <p className="px-6 py-16 text-center text-muted">Loading...</p>;
   }
 
   if (!user) {
@@ -34,7 +34,7 @@ function Onboarding() {
     <main className="flex flex-1 flex-col items-center justify-center gap-8 px-6 py-16 text-center">
       <div className="max-w-xl space-y-2">
         <h1 className="text-2xl font-semibold">One more step</h1>
-        <p className="text-gray-600">
+        <p className="text-muted">
           Are you here as a homeowner or a renter?
         </p>
       </div>
@@ -42,7 +42,7 @@ function Onboarding() {
         <button
           onClick={() => chooseRole("homeowner")}
           disabled={submitting}
-          className="flex flex-col items-center gap-2 rounded-xl border border-gray-200 bg-white p-8 shadow-sm transition hover:border-gray-900 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex flex-col items-center gap-2 rounded-2xl bg-surface p-8 shadow-warm-sm transition hover:shadow-warm disabled:cursor-not-allowed disabled:opacity-60"
         >
           <span className="text-4xl" aria-hidden>
             🏠
@@ -52,7 +52,7 @@ function Onboarding() {
         <button
           onClick={() => chooseRole("renter")}
           disabled={submitting}
-          className="flex flex-col items-center gap-2 rounded-xl border border-gray-200 bg-white p-8 shadow-sm transition hover:border-gray-900 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex flex-col items-center gap-2 rounded-2xl bg-surface p-8 shadow-warm-sm transition hover:shadow-warm disabled:cursor-not-allowed disabled:opacity-60"
         >
           <span className="text-4xl" aria-hidden>
             🔑

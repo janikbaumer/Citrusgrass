@@ -1,24 +1,42 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #efe7da;
+  --foreground: #33261c;
   color-scheme: light;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* "Hearth" palette - warm, rounded, approachable. */
+  --color-bg: #efe7da;
+  --color-surface: #f8f3ea;
+  --color-ink: #33261c;
+  --color-muted: #7a6a5a;
+  --color-line: #ddceb8;
+  --color-accent: #bd7f35;
+  --color-accent-hover: #a06f2d;
+  --color-accent-ink: #fff8ee;
+  --color-good: #5b7a52;
+  --color-good-bg: #e6ecdf;
+  --color-danger: #b5533f;
+  --color-danger-bg: #f3e2dc;
+
+  --shadow-warm: 0 12px 28px -18px rgba(51, 38, 28, 0.45);
+  --shadow-warm-sm: 0 8px 18px -14px rgba(51, 38, 28, 0.4);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 /* This app is designed light-only - no page wraps its content in a
-   dark-aware card, so it always renders with a light background
+   dark-aware card, so it always renders with the Hearth palette
    regardless of OS theme, rather than partially and unreliably
    supporting dark mode. */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), -apple-system, "Segoe UI", sans-serif;
 }

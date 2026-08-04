@@ -24,40 +24,40 @@ export default function Home() {
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
           Welcome to Real Estate Portal
         </h1>
-        <p className="text-gray-600">To get started, tell us who you are.</p>
+        <p className="text-muted">To get started, tell us who you are.</p>
       </div>
 
       <div className="grid w-full max-w-xl gap-4 sm:grid-cols-2">
         <Link
           href="/register?role=homeowner"
-          className="group flex flex-col items-center gap-2 rounded-xl border border-gray-200 bg-white p-8 shadow-sm transition hover:border-gray-900 hover:shadow-md"
+          className="group flex flex-col items-center gap-2 rounded-2xl bg-surface p-8 shadow-warm-sm transition hover:shadow-warm"
         >
           <span className="text-4xl" aria-hidden>
             🏠
           </span>
           <span className="text-lg font-medium">I&apos;m a Homeowner</span>
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-muted">
             List and manage your property
           </span>
         </Link>
 
         <Link
           href="/register?role=renter"
-          className="group flex flex-col items-center gap-2 rounded-xl border border-gray-200 bg-white p-8 shadow-sm transition hover:border-gray-900 hover:shadow-md"
+          className="group flex flex-col items-center gap-2 rounded-2xl bg-surface p-8 shadow-warm-sm transition hover:shadow-warm"
         >
           <span className="text-4xl" aria-hidden>
             🔑
           </span>
           <span className="text-lg font-medium">I&apos;m a Renter</span>
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-muted">
             Find a place to call home
           </span>
         </Link>
       </div>
 
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-muted">
         Already have an account?{" "}
-        <Link href="/login" className="font-medium underline underline-offset-2">
+        <Link href="/login" className="font-medium text-accent underline underline-offset-2">
           Log in
         </Link>
       </p>

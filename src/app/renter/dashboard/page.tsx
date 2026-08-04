@@ -15,13 +15,13 @@ export default function RenterDashboardPage() {
         <h1 className="text-2xl font-semibold">
           Welcome, {profile && displayName(profile)}
         </h1>
-        <p className="text-gray-500">Here&apos;s where your applications stand.</p>
+        <p className="text-muted">Here&apos;s where your applications stand.</p>
       </div>
 
-      {applications === null && <p className="text-center text-gray-500">Loading...</p>}
+      {applications === null && <p className="text-center text-muted">Loading...</p>}
 
       {applications?.length === 0 && (
-        <p className="text-center text-gray-500">
+        <p className="text-center text-muted">
           You haven&apos;t applied to anything yet. Applications you submit via a landlord&apos;s
           apply link will show up here.
         </p>

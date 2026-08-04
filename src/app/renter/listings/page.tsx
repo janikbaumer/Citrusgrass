@@ -12,10 +12,10 @@ export default function RenterListingsPage() {
     <main className="mx-auto w-full max-w-2xl px-6 py-16">
       <h1 className="mb-6 text-2xl font-semibold">Your Applications</h1>
 
-      {applications === null && <p className="text-gray-500">Loading...</p>}
+      {applications === null && <p className="text-muted">Loading...</p>}
 
       {applications?.length === 0 && (
-        <p className="text-gray-500">
+        <p className="text-muted">
           You haven&apos;t applied to anything yet. Applications you submit via a landlord&apos;s
           apply link will show up here.
         </p>
@@ -25,7 +25,7 @@ export default function RenterListingsPage() {
         {applications?.map((application) => (
           <li
             key={application.id}
-            className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
+            className="rounded-2xl bg-surface p-4 shadow-warm-sm"
           >
             <p className="font-medium">
               {application.property
@@ -33,11 +33,11 @@ export default function RenterListingsPage() {
                 : "Listing no longer available"}
             </p>
             {application.property && (
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-muted">
                 {formatPropertySummary(application.property)}
               </p>
             )}
-            <p className="mt-1 text-sm text-gray-600">
+            <p className="mt-1 text-sm text-ink">
               Status: <span className="font-medium">{RENTER_STATUS_LABELS[application.status]}</span>
             </p>
           </li>

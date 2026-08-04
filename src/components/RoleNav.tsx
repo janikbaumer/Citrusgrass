@@ -23,7 +23,7 @@ export function RoleNav({ role }: { role: UserRole }) {
   const { signOut } = useAuth();
 
   return (
-    <nav className="flex items-center justify-between border-b border-gray-200 px-6 py-3">
+    <nav className="flex items-center justify-between border-b border-line bg-surface px-6 py-3">
       <div className="flex gap-5">
         {LINKS[role].map((link) => (
           <Link
@@ -31,8 +31,8 @@ export function RoleNav({ role }: { role: UserRole }) {
             href={link.href}
             className={
               pathname === link.href || pathname.startsWith(`${link.href}/`)
-                ? "text-sm font-medium text-gray-900"
-                : "text-sm font-medium text-gray-500 hover:text-gray-900"
+                ? "text-sm font-medium text-accent"
+                : "text-sm font-medium text-muted hover:text-ink"
             }
           >
             {link.label}
@@ -41,7 +41,7 @@ export function RoleNav({ role }: { role: UserRole }) {
       </div>
       <button
         onClick={() => signOut()}
-        className="text-sm font-medium text-gray-500 hover:text-gray-900"
+        className="text-sm font-medium text-muted hover:text-ink"
       >
         Sign out
       </button>

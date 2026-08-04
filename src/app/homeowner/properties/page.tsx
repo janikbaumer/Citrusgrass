@@ -35,18 +35,18 @@ export default function PropertiesPage() {
         <h1 className="text-2xl font-semibold">Your Properties</h1>
         <Link
           href="/homeowner/properties/new"
-          className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800"
+          className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition hover:bg-accent-hover"
         >
           Add property
         </Link>
       </div>
 
-      {properties === null && <p className="text-gray-500">Loading...</p>}
+      {properties === null && <p className="text-muted">Loading...</p>}
 
       {properties?.length === 0 && (
-        <p className="text-gray-500">
+        <p className="text-muted">
           You haven&apos;t added a property yet.{" "}
-          <Link href="/homeowner/properties/new" className="underline underline-offset-2">
+          <Link href="/homeowner/properties/new" className="text-accent underline underline-offset-2">
             Add your first one
           </Link>
           .
@@ -58,10 +58,10 @@ export default function PropertiesPage() {
           <li key={property.id}>
             <Link
               href={`/homeowner/properties/${property.id}`}
-              className="block rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:border-gray-900 hover:shadow-md"
+              className="block rounded-2xl bg-surface p-4 shadow-warm-sm transition hover:shadow-warm"
             >
               <p className="font-medium">{formatPropertyAddress(property)}</p>
-              <p className="text-sm text-gray-500">{formatPropertySummary(property)}</p>
+              <p className="text-sm text-muted">{formatPropertySummary(property)}</p>
             </Link>
           </li>
         ))}

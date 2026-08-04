@@ -63,9 +63,9 @@ export function DeleteAccountSection() {
   }
 
   return (
-    <div className="mt-12 rounded-xl border border-red-200 p-6">
-      <h2 className="text-lg font-semibold text-red-700">Delete account</h2>
-      <p className="mt-1 text-sm text-gray-600">
+    <div className="mt-12 rounded-2xl border border-danger/40 bg-danger-bg p-6">
+      <h2 className="text-lg font-semibold text-danger">Delete account</h2>
+      <p className="mt-1 text-sm text-ink">
         {profile?.role === "homeowner"
           ? "This permanently deletes your account, every property you've listed, and every application submitted to them."
           : "This permanently deletes your account and every application you've submitted."}{" "}
@@ -74,7 +74,7 @@ export function DeleteAccountSection() {
 
       <div className="mt-4 max-w-sm space-y-3">
         <div>
-          <label htmlFor="confirmDelete" className="mb-1 block text-sm font-medium text-gray-700">
+          <label htmlFor="confirmDelete" className="mb-1 block text-sm font-medium text-ink">
             Type DELETE to confirm
           </label>
           <input
@@ -82,7 +82,7 @@ export function DeleteAccountSection() {
             type="text"
             value={confirmText}
             onChange={(e) => setConfirmText(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-red-600 focus:outline-none"
+            className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-danger focus:outline-none"
           />
         </div>
 
@@ -90,7 +90,7 @@ export function DeleteAccountSection() {
           <div>
             <label
               htmlFor="reauthPassword"
-              className="mb-1 block text-sm font-medium text-gray-700"
+              className="mb-1 block text-sm font-medium text-ink"
             >
               Confirm your password to continue
             </label>
@@ -99,23 +99,23 @@ export function DeleteAccountSection() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-red-600 focus:outline-none"
+              className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-danger focus:outline-none"
             />
           </div>
         )}
 
         {needsReauth && isGoogleAccount && (
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-muted">
             Click delete again to confirm your identity with Google.
           </p>
         )}
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-danger">{error}</p>}
 
         <button
           onClick={handleDelete}
           disabled={!canDelete || deleting}
-          className="rounded-lg bg-red-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
+          className="rounded-full bg-danger px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {deleting ? "Deleting..." : "Delete my account permanently"}
         </button>

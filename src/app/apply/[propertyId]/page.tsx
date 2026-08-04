@@ -55,11 +55,11 @@ export default function ApplyPage() {
   }
 
   if (property === undefined || loading) {
-    return <p className="px-6 py-16 text-center text-gray-500">Loading...</p>;
+    return <p className="px-6 py-16 text-center text-muted">Loading...</p>;
   }
 
   if (property === null) {
-    return <p className="px-6 py-16 text-center text-gray-500">This listing wasn&apos;t found.</p>;
+    return <p className="px-6 py-16 text-center text-muted">This listing wasn&apos;t found.</p>;
   }
 
   const next = `/apply/${propertyId}`;
@@ -67,25 +67,25 @@ export default function ApplyPage() {
   return (
     <main className="mx-auto w-full max-w-lg px-6 py-16 text-center">
       <h1 className="text-2xl font-semibold">{formatPropertyAddress(property)}</h1>
-      <p className="mt-1 text-gray-500">{formatPropertySummary(property)}</p>
+      <p className="mt-1 text-muted">{formatPropertySummary(property)}</p>
       {property.description && (
-        <p className="mx-auto mt-3 max-w-md text-sm text-gray-600">{property.description}</p>
+        <p className="mx-auto mt-3 max-w-md text-sm text-ink">{property.description}</p>
       )}
 
       <div className="mt-8">
         {!user && (
           <div className="space-y-3">
-            <p className="text-gray-600">Log in or create a renter account to apply.</p>
+            <p className="text-ink">Log in or create a renter account to apply.</p>
             <div className="flex justify-center gap-3">
               <Link
                 href={`/login?next=${encodeURIComponent(next)}`}
-                className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+                className="rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-ink transition hover:bg-bg"
               >
                 Log in
               </Link>
               <Link
                 href={`/register?role=renter&next=${encodeURIComponent(next)}`}
-                className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800"
+                className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition hover:bg-accent-hover"
               >
                 Sign up as a renter
               </Link>
@@ -95,10 +95,10 @@ export default function ApplyPage() {
 
         {user && !profile && (
           <div className="space-y-3">
-            <p className="text-gray-600">Finish setting up your account to apply.</p>
+            <p className="text-ink">Finish setting up your account to apply.</p>
             <Link
               href={`/onboarding?next=${encodeURIComponent(next)}`}
-              className="inline-block rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800"
+              className="inline-block rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition hover:bg-accent-hover"
             >
               Continue
             </Link>
@@ -107,12 +107,12 @@ export default function ApplyPage() {
 
         {user && profile && profile.role !== "renter" && (
           <div className="space-y-3">
-            <p className="text-gray-600">
+            <p className="text-ink">
               You&apos;re signed in as a homeowner. Log in with a renter account to apply.
             </p>
             <button
               onClick={() => signOut()}
-              className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+              className="rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-ink transition hover:bg-bg"
             >
               Log out
             </button>
@@ -120,19 +120,19 @@ export default function ApplyPage() {
         )}
 
         {user && profile && profile.role === "renter" && existingApplication === undefined && (
-          <p className="text-gray-500">Checking your application status...</p>
+          <p className="text-muted">Checking your application status...</p>
         )}
 
         {user && profile && profile.role === "renter" && existingApplication === null && (
           <div className="space-y-3">
-            <p className="text-gray-600">
+            <p className="text-ink">
               Apply using your existing renter profile ({profile.firstName} {profile.lastName}).
             </p>
-            {error && <p className="text-sm text-red-600">{error}</p>}
+            {error && <p className="text-sm text-danger">{error}</p>}
             <button
               onClick={handleApply}
               disabled={submitting}
-              className="rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
             >
               {submitting ? "Applying..." : "Apply now"}
             </button>
@@ -140,7 +140,7 @@ export default function ApplyPage() {
         )}
 
         {user && profile && profile.role === "renter" && existingApplication && (
-          <p className="text-gray-600">
+          <p className="text-ink">
             You already applied. Status:{" "}
             <span className="font-medium">
               {RENTER_STATUS_LABELS[existingApplication.status]}

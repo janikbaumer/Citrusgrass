@@ -21,5 +21,5 @@ export default function DashboardPage() {
     router.replace(`/${profile.role}/dashboard`);
   }, [loading, user, profile, router]);
 
-  return <p className="px-6 py-16 text-center text-gray-500">Loading...</p>;
+  return <p className="px-6 py-16 text-center text-muted">Loading...</p>;
 }

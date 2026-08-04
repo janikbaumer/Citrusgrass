@@ -52,7 +52,7 @@ export default function RenterProfilePage() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="firstName" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="firstName" className="mb-1 block text-sm font-medium text-ink">
               First name
             </label>
             <input
@@ -61,11 +61,11 @@ export default function RenterProfilePage() {
               required
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
             />
           </div>
           <div>
-            <label htmlFor="lastName" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="lastName" className="mb-1 block text-sm font-medium text-ink">
               Last name
             </label>
             <input
@@ -74,13 +74,13 @@ export default function RenterProfilePage() {
               required
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">
+          <label htmlFor="email" className="mb-1 block text-sm font-medium text-ink">
             Email
           </label>
           <input
@@ -88,12 +88,12 @@ export default function RenterProfilePage() {
             type="email"
             disabled
             value={profile?.email || ""}
-            className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-500"
+            className="w-full rounded-xl border border-line bg-bg px-3 py-2 text-sm text-muted"
           />
         </div>
 
         <div>
-          <label htmlFor="phone" className="mb-1 block text-sm font-medium text-gray-700">
+          <label htmlFor="phone" className="mb-1 block text-sm font-medium text-ink">
             Phone
           </label>
           <input
@@ -101,19 +101,19 @@ export default function RenterProfilePage() {
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+            className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
           />
         </div>
 
         <div>
-          <label htmlFor="salaryRange" className="mb-1 block text-sm font-medium text-gray-700">
+          <label htmlFor="salaryRange" className="mb-1 block text-sm font-medium text-ink">
             Salary range
           </label>
           <select
             id="salaryRange"
             value={salaryRange}
             onChange={(e) => setSalaryRange(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+            className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
           >
             <option value="">Select a range</option>
             {SALARY_RANGES.map((range) => (
@@ -125,7 +125,7 @@ export default function RenterProfilePage() {
         </div>
 
         <div>
-          <label htmlFor="about" className="mb-1 block text-sm font-medium text-gray-700">
+          <label htmlFor="about" className="mb-1 block text-sm font-medium text-ink">
             About you
           </label>
           <textarea
@@ -133,17 +133,17 @@ export default function RenterProfilePage() {
             rows={4}
             value={about}
             onChange={(e) => setAbout(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+            className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
           />
         </div>
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
-        {saved && !error && <p className="text-sm text-green-600">Saved.</p>}
+        {error && <p className="text-sm text-danger">{error}</p>}
+        {saved && !error && <p className="text-sm text-good">Saved.</p>}
 
         <button
           type="submit"
           disabled={saving}
-          className="w-full rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
+          className="w-full rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
           {saving ? "Saving..." : "Save"}
         </button>

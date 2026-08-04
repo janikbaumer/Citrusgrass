@@ -23,37 +23,37 @@ export function PipelineBoard({ applications, onStatusChange }: PipelineBoardPro
           column.statuses.includes(application.status)
         );
         return (
-          <div key={column.title} className="rounded-xl bg-gray-50 p-3">
-            <h2 className="mb-3 text-sm font-semibold text-gray-700">
+          <div key={column.title} className="rounded-2xl bg-bg p-3">
+            <h2 className="mb-3 text-sm font-semibold text-ink">
               {column.title}{" "}
-              <span className="font-normal text-gray-400">({columnApplications.length})</span>
+              <span className="font-normal text-muted">({columnApplications.length})</span>
             </h2>
             <div className="space-y-3">
               {columnApplications.map((application) => (
                 <div
                   key={application.id}
-                  className={`rounded-lg border bg-white p-3 shadow-sm ${
+                  className={`rounded-2xl border bg-surface p-3 shadow-warm-sm ${
                     application.status === "accepted"
-                      ? "border-green-300"
+                      ? "border-good"
                       : application.status === "declined"
-                        ? "border-red-200 opacity-70"
-                        : "border-gray-200"
+                        ? "border-danger opacity-70"
+                        : "border-line"
                   }`}
                 >
                   <p className="text-sm font-medium">
                     {application.renter.firstName} {application.renter.lastName}
                   </p>
-                  <p className="text-xs text-gray-500">{application.renter.email}</p>
+                  <p className="text-xs text-muted">{application.renter.email}</p>
                   {application.renter.phone && (
-                    <p className="text-xs text-gray-500">{application.renter.phone}</p>
+                    <p className="text-xs text-muted">{application.renter.phone}</p>
                   )}
                   {application.renter.salaryRange && (
-                    <p className="mt-1 text-xs text-gray-500">
+                    <p className="mt-1 text-xs text-muted">
                       Salary: {application.renter.salaryRange}
                     </p>
                   )}
                   {application.renter.about && (
-                    <p className="mt-1 line-clamp-3 text-xs text-gray-400">
+                    <p className="mt-1 line-clamp-3 text-xs text-muted">
                       {application.renter.about}
                     </p>
                   )}
@@ -63,7 +63,7 @@ export function PipelineBoard({ applications, onStatusChange }: PipelineBoardPro
                     onChange={(e) =>
                       onStatusChange(application, e.target.value as PipelineStatus)
                     }
-                    className="mt-3 w-full rounded-md border border-gray-300 bg-white px-2 py-1 text-xs focus:border-gray-900 focus:outline-none"
+                    className="mt-3 w-full rounded-lg border border-line bg-surface px-2 py-1 text-xs focus:border-accent focus:outline-none"
                   >
                     {ALL_STATUSES.map((status) => (
                       <option key={status} value={status}>
@@ -74,7 +74,7 @@ export function PipelineBoard({ applications, onStatusChange }: PipelineBoardPro
                 </div>
               ))}
               {columnApplications.length === 0 && (
-                <p className="text-xs text-gray-400">No applicants.</p>
+                <p className="text-xs text-muted">No applicants.</p>
               )}
             </div>
           </div>
