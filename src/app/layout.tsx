@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Real Estate Portal",
+  title: "Citrusgrass",
   description: "Find your home, or list yours.",
 };
 

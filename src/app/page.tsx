@@ -22,7 +22,7 @@ export default function Home() {
     <main className="flex flex-1 flex-col items-center justify-center gap-10 px-6 py-16 text-center">
       <div className="max-w-xl space-y-3">
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Welcome to Real Estate Portal
+          Welcome to Citrusgrass
         </h1>
         <p className="text-muted">To get started, tell us who you are.</p>
       </div>
