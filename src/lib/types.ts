@@ -1,5 +1,7 @@
 export type UserRole = "homeowner" | "renter";
 
+export type LandlordType = "private" | "company";
+
 export interface UserProfile {
   firstName: string;
   lastName: string;
@@ -9,6 +11,7 @@ export interface UserProfile {
   phone?: string;
   salaryRange?: string;
   about?: string;
+  landlordType?: LandlordType;
 }
 
 export function isUserRole(value: string | null): value is UserRole {

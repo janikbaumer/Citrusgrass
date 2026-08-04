@@ -31,7 +31,12 @@ export async function createUserProfile(
 
 export async function updateUserProfile(
   uid: string,
-  data: Partial<Pick<UserProfile, "firstName" | "lastName" | "phone" | "salaryRange" | "about">>
+  data: Partial<
+    Pick<
+      UserProfile,
+      "firstName" | "lastName" | "phone" | "salaryRange" | "about" | "landlordType"
+    >
+  >
 ): Promise<void> {
   await updateDoc(doc(db, "users", uid), data);
 }
