@@ -7,6 +7,7 @@ import { db } from "@/lib/firebase";
 import { useAuth } from "@/contexts/AuthContext";
 import { formatPropertyAddress, formatPropertySummary } from "@/lib/types";
 import type { Property } from "@/lib/types";
+import { EmptyStateIllustration } from "@/components/illustrations/EmptyStateIllustration";
 
 export default function PropertiesPage() {
   const { user } = useAuth();
@@ -44,13 +45,16 @@ export default function PropertiesPage() {
       {properties === null && <p className="text-muted">Loading...</p>}
 
       {properties?.length === 0 && (
-        <p className="text-muted">
-          You haven&apos;t added a property yet.{" "}
-          <Link href="/homeowner/properties/new" className="text-accent underline underline-offset-2">
-            Add your first one
-          </Link>
-          .
-        </p>
+        <div className="flex flex-col items-center gap-3 py-6 text-center">
+          <EmptyStateIllustration className="h-24 w-auto" />
+          <p className="text-muted">
+            You haven&apos;t added a property yet.{" "}
+            <Link href="/homeowner/properties/new" className="text-accent underline underline-offset-2">
+              Add your first one
+            </Link>
+            .
+          </p>
+        </div>
       )}
 
       <ul className="space-y-3">

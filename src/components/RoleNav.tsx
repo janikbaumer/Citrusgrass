@@ -39,12 +39,23 @@ export function RoleNav({ role }: { role: UserRole }) {
           </Link>
         ))}
       </div>
-      <button
-        onClick={() => signOut()}
-        className="text-sm font-medium text-muted hover:text-ink"
-      >
-        Sign out
-      </button>
+      <div className="flex items-center gap-5">
+        <Link href="/about" className="text-sm font-medium text-muted hover:text-ink">
+          About us
+        </Link>
+        <Link href="/faq" className="text-sm font-medium text-muted hover:text-ink">
+          FAQ
+        </Link>
+        <Link href="/contact" className="text-sm font-medium text-muted hover:text-ink">
+          Contact
+        </Link>
+        <button
+          onClick={() => signOut()}
+          className="text-sm font-medium text-muted hover:text-ink"
+        >
+          Sign out
+        </button>
+      </div>
     </nav>
   );
 }

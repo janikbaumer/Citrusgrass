@@ -3,6 +3,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { useRenterApplications } from "@/hooks/useRenterApplications";
 import { formatPropertyAddress, formatPropertySummary, RENTER_STATUS_LABELS } from "@/lib/types";
+import { EmptyStateIllustration } from "@/components/illustrations/EmptyStateIllustration";
 
 export default function RenterListingsPage() {
   const { user } = useAuth();
@@ -15,10 +16,13 @@ export default function RenterListingsPage() {
       {applications === null && <p className="text-muted">Loading...</p>}
 
       {applications?.length === 0 && (
-        <p className="text-muted">
-          You haven&apos;t applied to anything yet. Applications you submit via a landlord&apos;s
-          apply link will show up here.
-        </p>
+        <div className="flex flex-col items-center gap-3 py-6 text-center">
+          <EmptyStateIllustration className="h-24 w-auto" />
+          <p className="text-muted">
+            You haven&apos;t applied to anything yet. Applications you submit via a landlord&apos;s
+            apply link will show up here.
+          </p>
+        </div>
       )}
 
       <ul className="space-y-3">

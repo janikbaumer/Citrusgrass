@@ -36,7 +36,12 @@
    regardless of OS theme, rather than partially and unreliably
    supporting dark mode. */
 body {
-  background: var(--background);
+  background:
+    radial-gradient(560px circle at 10% -8%, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent 60%),
+    radial-gradient(480px circle at 100% 12%, color-mix(in srgb, var(--color-good) 14%, transparent), transparent 60%),
+    radial-gradient(680px circle at 50% 115%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 60%),
+    var(--background);
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-geist-sans), -apple-system, "Segoe UI", sans-serif;
 }

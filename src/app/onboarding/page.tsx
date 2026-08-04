@@ -6,6 +6,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { createUserProfile } from "@/lib/user";
 import { isSafeRedirect } from "@/lib/safeRedirect";
 import type { UserRole } from "@/lib/types";
+import { HouseIcon } from "@/components/illustrations/HouseIcon";
+import { KeyIcon } from "@/components/illustrations/KeyIcon";
 
 function Onboarding() {
   const router = useRouter();
@@ -44,9 +46,7 @@ function Onboarding() {
           disabled={submitting}
           className="flex flex-col items-center gap-2 rounded-2xl bg-surface p-8 shadow-warm-sm transition hover:shadow-warm disabled:cursor-not-allowed disabled:opacity-60"
         >
-          <span className="text-4xl" aria-hidden>
-            🏠
-          </span>
+          <HouseIcon className="h-10 w-10" />
           <span className="text-lg font-medium">I&apos;m a Homeowner</span>
         </button>
         <button
@@ -54,9 +54,7 @@ function Onboarding() {
           disabled={submitting}
           className="flex flex-col items-center gap-2 rounded-2xl bg-surface p-8 shadow-warm-sm transition hover:shadow-warm disabled:cursor-not-allowed disabled:opacity-60"
         >
-          <span className="text-4xl" aria-hidden>
-            🔑
-          </span>
+          <KeyIcon className="h-10 w-10" />
           <span className="text-lg font-medium">I&apos;m a Renter</span>
         </button>
       </div>

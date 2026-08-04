@@ -4,6 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRenterApplications } from "@/hooks/useRenterApplications";
 import { RenterPipelineBoard } from "@/components/RenterPipelineBoard";
 import { displayName } from "@/lib/types";
+import { EmptyStateIllustration } from "@/components/illustrations/EmptyStateIllustration";
 
 export default function RenterDashboardPage() {
   const { user, profile } = useAuth();
@@ -21,10 +22,13 @@ export default function RenterDashboardPage() {
       {applications === null && <p className="text-center text-muted">Loading...</p>}
 
       {applications?.length === 0 && (
-        <p className="text-center text-muted">
-          You haven&apos;t applied to anything yet. Applications you submit via a landlord&apos;s
-          apply link will show up here.
-        </p>
+        <div className="flex flex-col items-center gap-3 py-6 text-center">
+          <EmptyStateIllustration className="h-24 w-auto" />
+          <p className="text-muted">
+            You haven&apos;t applied to anything yet. Applications you submit via a landlord&apos;s
+            apply link will show up here.
+          </p>
+        </div>
       )}
 
       {applications && applications.length > 0 && (
