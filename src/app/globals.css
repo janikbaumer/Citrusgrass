@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #efe7da;
-  --foreground: #33261c;
+  --background: #fbfaf2;
+  --foreground: #263a1f;
   color-scheme: light;
 }
 
@@ -10,29 +10,29 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* "Hearth" palette - warm, rounded, approachable. */
-  --color-bg: #efe7da;
-  --color-surface: #f8f3ea;
-  --color-ink: #33261c;
-  --color-muted: #7a6a5a;
-  --color-line: #ddceb8;
-  --color-accent: #bd7f35;
-  --color-accent-hover: #a06f2d;
-  --color-accent-ink: #fff8ee;
-  --color-good: #5b7a52;
-  --color-good-bg: #e6ecdf;
-  --color-danger: #b5533f;
-  --color-danger-bg: #f3e2dc;
+  /* "Zest" palette - citrus lime accent on a fresh, grassy ground. */
+  --color-bg: #fbfaf2;
+  --color-surface: #ffffff;
+  --color-ink: #263a1f;
+  --color-muted: #74836a;
+  --color-line: #e2e6d3;
+  --color-accent: #8bc53f;
+  --color-accent-hover: #77ac33;
+  --color-accent-ink: #1c2b15;
+  --color-good: #2f7d5f;
+  --color-good-bg: #e2f0ea;
+  --color-danger: #d9622e;
+  --color-danger-bg: #f7e3d6;
 
-  --shadow-warm: 0 12px 28px -18px rgba(51, 38, 28, 0.45);
-  --shadow-warm-sm: 0 8px 18px -14px rgba(51, 38, 28, 0.4);
+  --shadow-warm: 0 12px 28px -18px rgba(38, 58, 31, 0.45);
+  --shadow-warm-sm: 0 8px 18px -14px rgba(38, 58, 31, 0.4);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 /* This app is designed light-only - no page wraps its content in a
-   dark-aware card, so it always renders with the Hearth palette
+   dark-aware card, so it always renders with the Zest palette
    regardless of OS theme, rather than partially and unreliably
    supporting dark mode. */
 body {
