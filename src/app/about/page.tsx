@@ -1,24 +1,9 @@
-import Link from "next/link";
+import { PublicHeader } from "@/components/PublicHeader";
 
 export default function AboutPage() {
   return (
     <>
-      <header className="flex items-center justify-between px-6 py-5">
-        <Link href="/" className="text-lg font-semibold text-ink">
-          Citrusgrass
-        </Link>
-        <nav className="flex gap-5 text-sm font-medium text-muted">
-          <Link href="/about" className="text-accent">
-            About us
-          </Link>
-          <Link href="/faq" className="hover:text-ink">
-            FAQ
-          </Link>
-          <Link href="/contact" className="hover:text-ink">
-            Contact
-          </Link>
-        </nav>
-      </header>
+      <PublicHeader active="/about" />
 
       <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-16">
         <h1 className="mb-6 text-2xl font-semibold">About us</h1>

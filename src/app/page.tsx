@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { PublicHeader } from "@/components/PublicHeader";
 import { HandoffIllustration } from "@/components/illustrations/HandoffIllustration";
 import { HouseIcon } from "@/components/illustrations/HouseIcon";
 import { KeyIcon } from "@/components/illustrations/KeyIcon";
@@ -23,20 +24,7 @@ export default function Home() {
 
   return (
     <>
-      <header className="flex items-center justify-between px-6 py-5">
-        <span className="text-lg font-semibold text-ink">Citrusgrass</span>
-        <nav className="flex gap-5 text-sm font-medium text-muted">
-          <Link href="/about" className="hover:text-ink">
-            About us
-          </Link>
-          <Link href="/faq" className="hover:text-ink">
-            FAQ
-          </Link>
-          <Link href="/contact" className="hover:text-ink">
-            Contact
-          </Link>
-        </nav>
-      </header>
+      <PublicHeader />
 
       <main className="flex flex-1 flex-col items-center justify-center gap-10 px-6 py-16 text-center">
         <HandoffIllustration className="h-auto w-full max-w-md" />
