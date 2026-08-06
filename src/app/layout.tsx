@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Citrusgrass",
-  description: "Find your home, or list yours.",
+  description: "Fully automated application process with Citrusgrass.",
 };
 
 export default function RootLayout({
