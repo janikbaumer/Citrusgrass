@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Citrusgrass</title>
+<meta name="description" content="Find your home, or list yours." />
+<style>
+  :root {
+    --color-bg: #fbfaf2;
+    --color-surface: #ffffff;
+    --color-ink: #263a1f;
+    --color-muted: #74836a;
+    --color-line: #e2e6d3;
+    --color-accent: #8bc53f;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    padding: 1.5rem;
+  }
+
+  main {
+    max-width: 28rem;
+    width: 100%;
+    text-align: center;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 1.25rem;
+    padding: 3rem 2rem;
+    box-shadow: 0 12px 28px -18px rgba(38, 58, 31, 0.45);
+  }
+
+  .mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    margin-bottom: 1.25rem;
+    font-size: 1.5rem;
+  }
+
+  h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .tagline {
+    margin: 0 0 1.5rem;
+    color: var(--color-muted);
+    font-size: 1rem;
+  }
+
+  .status {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    color: var(--color-ink);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="mark" aria-hidden="true">🍋</div>
+  <h1>Citrusgrass</h1>
+  <p class="tagline">Find your home, or list yours.</p>
+  <span class="status">Coming soon</span>
+</main>
+</body>
+</html>
