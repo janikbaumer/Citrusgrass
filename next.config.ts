@@ -10,12 +10,9 @@ export default function nextConfig(phase: string): NextConfig {
   if (phase === PHASE_PRODUCTION_BUILD) {
     return { output: "export" };
   }
-  return {};
+  return {
+    allowedDevOrigins: process.env.TAILSCALE_HOSTNAME
+      ? [process.env.TAILSCALE_HOSTNAME]
+      : [],
+  };
 }
-
-module.exports = {
-  allowedDevOrigins: process.env.TAILSCALE_HOSTNAME 
-    ? [process.env.TAILSCALE_HOSTNAME] 
-    : [],
-}
-
