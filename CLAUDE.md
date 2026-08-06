@@ -6,13 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-- `npm run dev` — start the dev server (localhost:3000)
+- `./scripts/deploy_dev.sh` — (re)start the dev server (localhost:3000); kills any existing `next dev` process first, so it's safe to re-run any time to pick up config/env changes
 - `npm run build` — production build (also runs the TypeScript check)
 - `npx tsc --noEmit` — typecheck only
 - `npm run lint` — ESLint (flat config, `eslint-config-next`)
 - No test framework is set up in this repo.
 
-There is no CI — after any change, run `npx tsc --noEmit`, `npm run lint`, and `npm run build` locally before considering work done, and restart the dev server (`pkill -f "next dev"` then `npm run dev`) to sanity-check routes.
+There is no CI — after any change, run `npx tsc --noEmit`, `npm run lint`, and `npm run build` locally before considering work done, and re-run `./scripts/deploy_dev.sh` to sanity-check routes.
 
 ## Architecture
 
@@ -45,6 +45,6 @@ Citrusgrass is deployed at **citrusgrass.com**, as a Next.js **static export** (
 
 **Hosting**: the user's Hetzner VPS (hostname `flatGPTserverIPv4`, root, public IPv4 `167.235.245.41`) — this repo's working copy lives directly on this VPS, so building and deploying both happen locally on the same machine (no SSH hop needed). The VPS already runs **Caddy natively via systemd** (`/etc/caddy/Caddyfile`) for another project (flat-gpt.com) — no Docker needed for Citrusgrass itself, since it's pure static files. Citrusgrass has its own **purely-additive site block** in that same Caddyfile (`root * /var/www/citrusgrass`, plus `path_regexp` rewrite rules for the three dynamic-route shells, plus a `handle_errors` block for a real 404 status on genuinely missing paths) — the pre-existing `flat-gpt.com` block and catch-all blocks are untouched. Caddy auto-provisions/renews the Let's Encrypt cert; no manual cert steps. Domain is registered at Infomaniak, with its DNS A record pointed at the VPS IP; domain registration and hosting are fully independent — nothing moved away from Infomaniak. Firebase Auth's authorized domains list (Authentication → Settings → Authorized domains) must include `citrusgrass.com`, or sign-in fails in production even though the site itself loads.
 
-**Making changes**: edit source in this repo (`/root/Citrusgrass`), never directly in `/var/www/citrusgrass` — that only holds built static output, not source, and any manual edit there would be overwritten by the next deploy. After editing, either ask Claude to deploy, or run `./scripts/deploy.sh` — which is just `npm run build` followed by a local `rsync --delete out/ /var/www/citrusgrass/` (no SSH involved, since the repo and the doc root are on the same box). The Caddyfile itself is infrastructure, not app code, so it isn't part of this repo and is only touched again if routing/hosting changes (new domain, new dynamic route pattern needing its own rewrite rule).
+**Making changes**: edit source in this repo (`/root/Citrusgrass`), never directly in `/var/www/citrusgrass` — that only holds built static output, not source, and any manual edit there would be overwritten by the next deploy. After editing, either ask Claude to deploy, or run `./scripts/deploy_prod.sh` — which is just `npm run build` followed by a local `rsync --delete out/ /var/www/citrusgrass/` (no SSH involved, since the repo and the doc root are on the same box). The Caddyfile itself is infrastructure, not app code, so it isn't part of this repo and is only touched again if routing/hosting changes (new domain, new dynamic route pattern needing its own rewrite rule).
 
 **When server-side logic will become necessary**: only once a feature needs a secret API key or a webhook — e.g. credit check (CRIF/Intrum/tilbago), e-signature (Skribble/Swisscom Sign), or an LLM-based listing-text parser. Decision made: don't preemptively switch to a dynamic Next.js server for this. When one of those is actually built, add it as a small separate service (e.g. FastAPI, matching existing Python/Docker experience) running alongside the static site on the same Hetzner box, rather than converting this app to run Node.js continuously on the server.
