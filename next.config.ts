@@ -12,3 +12,10 @@ export default function nextConfig(phase: string): NextConfig {
   }
   return {};
 }
+
+module.exports = {
+  allowedDevOrigins: process.env.TAILSCALE_HOSTNAME 
+    ? [process.env.TAILSCALE_HOSTNAME] 
+    : [],
+}
+
