@@ -6,6 +6,7 @@ import Link from "next/link";
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { deleteProperty, getProperty } from "@/lib/property";
 import { updateApplicationStatus } from "@/lib/application";
 import { PipelineBoard } from "@/components/PipelineBoard";
@@ -17,6 +18,7 @@ export default function PropertyPipelineClient() {
   const propertyId = params.id;
   const router = useRouter();
   const { user } = useAuth();
+  const { t } = useLanguage();
 
   const [property, setProperty] = useState<Property | null | undefined>(undefined);
   const [applications, setApplications] = useState<Application[]>([]);
@@ -49,12 +51,7 @@ export default function PropertyPipelineClient() {
   }, [propertyId, user]);
 
   async function handleStatusChange(application: Application, status: PipelineStatus) {
-    if (
-      status === "accepted" &&
-      !confirm(
-        "Accepting this applicant will automatically decline every other applicant for this property. Continue?"
-      )
-    ) {
+    if (status === "accepted" && !confirm(t("homeownerPropertyDetail.confirmAccept"))) {
       return;
     }
     await updateApplicationStatus(application.id, propertyId, status);
@@ -68,11 +65,7 @@ export default function PropertyPipelineClient() {
   }
 
   async function handleDelete() {
-    if (
-      !confirm(
-        "Delete this property? Its apply link will stop working. Existing applications aren't deleted, but they'll no longer show a matching listing. This can't be undone."
-      )
-    ) {
+    if (!confirm(t("homeownerPropertyDetail.confirmDelete"))) {
       return;
     }
     setDeleting(true);
@@ -80,21 +73,21 @@ export default function PropertyPipelineClient() {
       await deleteProperty(propertyId);
       router.push("/homeowner/properties");
     } catch (err) {
-      alert(err instanceof Error ? err.message : "Something went wrong.");
+      alert(err instanceof Error ? err.message : t("common.somethingWrong"));
       setDeleting(false);
     }
   }
 
   if (property === undefined) {
-    return <p className="px-6 py-16 text-center text-muted">Loading...</p>;
+    return <p className="px-6 py-16 text-center text-muted">{t("common.loading")}</p>;
   }
 
   if (property === null) {
-    return <p className="px-6 py-16 text-center text-muted">Property not found.</p>;
+    return <p className="px-6 py-16 text-center text-muted">{t("common.propertyNotFound")}</p>;
   }
 
   if (user && property.ownerId !== user.uid) {
-    return <p className="px-6 py-16 text-center text-muted">This isn&apos;t your property.</p>;
+    return <p className="px-6 py-16 text-center text-muted">{t("common.notYourProperty")}</p>;
   }
 
   return (
@@ -112,20 +105,20 @@ export default function PropertyPipelineClient() {
             onClick={copyApplyLink}
             className="rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-ink transition hover:bg-bg"
           >
-            {copied ? "Link copied!" : "Copy apply link"}
+            {copied ? t("homeownerPropertyDetail.linkCopied") : t("homeownerPropertyDetail.copyApplyLink")}
           </button>
           <Link
             href={`/homeowner/properties/${propertyId}/edit`}
             className="rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-ink transition hover:bg-bg"
           >
-            Edit
+            {t("homeownerPropertyDetail.edit")}
           </Link>
           <button
             onClick={handleDelete}
             disabled={deleting}
             className="rounded-full border border-danger/40 bg-danger-bg px-4 py-2 text-sm font-medium text-danger transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {deleting ? "Deleting..." : "Delete"}
+            {deleting ? t("homeownerPropertyDetail.deleting") : t("homeownerPropertyDetail.delete")}
           </button>
         </div>
       </div>

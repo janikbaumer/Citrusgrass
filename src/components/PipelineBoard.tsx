@@ -2,13 +2,11 @@
 
 import {
   getPipelineColumns,
-  PIPELINE_STATUS_LABELS,
+  getPipelineStatusLabels,
   type Application,
   type PipelineStatus,
 } from "@/lib/types";
-
-const PIPELINE_COLUMNS = getPipelineColumns(PIPELINE_STATUS_LABELS);
-const ALL_STATUSES = PIPELINE_COLUMNS.flatMap((column) => column.statuses);
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PipelineBoardProps {
   applications: Application[];
@@ -16,9 +14,14 @@ interface PipelineBoardProps {
 }
 
 export function PipelineBoard({ applications, onStatusChange }: PipelineBoardProps) {
+  const { t } = useLanguage();
+  const statusLabels = getPipelineStatusLabels(t);
+  const pipelineColumns = getPipelineColumns(statusLabels);
+  const allStatuses = pipelineColumns.flatMap((column) => column.statuses);
+
   return (
     <div className="grid gap-4 md:grid-cols-5">
-      {PIPELINE_COLUMNS.map((column) => {
+      {pipelineColumns.map((column) => {
         const columnApplications = applications.filter((application) =>
           column.statuses.includes(application.status)
         );
@@ -49,7 +52,7 @@ export function PipelineBoard({ applications, onStatusChange }: PipelineBoardPro
                   )}
                   {application.renter.salaryRange && (
                     <p className="mt-1 text-xs text-muted">
-                      Salary: {application.renter.salaryRange}
+                      {t("pipelineBoard.salary")} {application.renter.salaryRange}
                     </p>
                   )}
                   {application.renter.about && (
@@ -65,16 +68,16 @@ export function PipelineBoard({ applications, onStatusChange }: PipelineBoardPro
                     }
                     className="mt-3 w-full rounded-lg border border-line bg-surface px-2 py-1 text-xs focus:border-accent focus:outline-none"
                   >
-                    {ALL_STATUSES.map((status) => (
+                    {allStatuses.map((status) => (
                       <option key={status} value={status}>
-                        {PIPELINE_STATUS_LABELS[status]}
+                        {statusLabels[status]}
                       </option>
                     ))}
                   </select>
                 </div>
               ))}
               {columnApplications.length === 0 && (
-                <p className="text-xs text-muted">No applicants.</p>
+                <p className="text-xs text-muted">{t("pipelineBoard.noApplicants")}</p>
               )}
             </div>
           </div>

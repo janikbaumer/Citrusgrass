@@ -3,24 +3,28 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import type { UserRole } from "@/lib/types";
+import type { TranslationKey } from "@/lib/i18n/en";
 
-const LINKS: Record<UserRole, { href: string; label: string }[]> = {
+const LINKS: Record<UserRole, { href: string; labelKey: TranslationKey }[]> = {
   renter: [
-    { href: "/renter/dashboard", label: "Dashboard" },
-    { href: "/renter/profile", label: "Profile" },
-    { href: "/renter/listings", label: "Applications" },
+    { href: "/renter/dashboard", labelKey: "roleNav.dashboard" },
+    { href: "/renter/profile", labelKey: "roleNav.profile" },
+    { href: "/renter/listings", labelKey: "roleNav.applications" },
   ],
   homeowner: [
-    { href: "/homeowner/dashboard", label: "Dashboard" },
-    { href: "/homeowner/properties", label: "Properties" },
-    { href: "/homeowner/profile", label: "Profile" },
+    { href: "/homeowner/dashboard", labelKey: "roleNav.dashboard" },
+    { href: "/homeowner/properties", labelKey: "roleNav.properties" },
+    { href: "/homeowner/profile", labelKey: "roleNav.profile" },
   ],
 };
 
 export function RoleNav({ role }: { role: UserRole }) {
   const pathname = usePathname();
   const { signOut } = useAuth();
+  const { t } = useLanguage();
 
   return (
     <nav className="flex items-center justify-between border-b border-line bg-surface px-6 py-3">
@@ -35,25 +39,26 @@ export function RoleNav({ role }: { role: UserRole }) {
                 : "text-sm font-medium text-muted hover:text-ink"
             }
           >
-            {link.label}
+            {t(link.labelKey)}
           </Link>
         ))}
       </div>
       <div className="flex items-center gap-5">
         <Link href="/about" className="text-sm font-medium text-muted hover:text-ink">
-          About us
+          {t("publicHeader.about")}
         </Link>
         <Link href="/faq" className="text-sm font-medium text-muted hover:text-ink">
-          FAQ
+          {t("publicHeader.faq")}
         </Link>
         <Link href="/contact" className="text-sm font-medium text-muted hover:text-ink">
-          Contact
+          {t("publicHeader.contact")}
         </Link>
+        <LanguageSwitcher />
         <button
           onClick={() => signOut()}
           className="text-sm font-medium text-muted hover:text-ink"
         >
-          Sign out
+          {t("roleNav.signOut")}
         </button>
       </div>
     </nav>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { getProperty, updateProperty } from "@/lib/property";
 import type { Property } from "@/lib/types";
 
@@ -11,6 +12,7 @@ export default function EditPropertyClient() {
   const propertyId = params.id;
   const router = useRouter();
   const { user } = useAuth();
+  const { t } = useLanguage();
 
   const [property, setProperty] = useState<Property | null | undefined>(undefined);
   const [street, setStreet] = useState("");
@@ -60,32 +62,32 @@ export default function EditPropertyClient() {
       });
       router.push(`/homeowner/properties/${propertyId}`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : t("common.somethingWrong"));
     } finally {
       setSubmitting(false);
     }
   }
 
   if (property === undefined) {
-    return <p className="px-6 py-16 text-center text-muted">Loading...</p>;
+    return <p className="px-6 py-16 text-center text-muted">{t("common.loading")}</p>;
   }
 
   if (property === null) {
-    return <p className="px-6 py-16 text-center text-muted">Property not found.</p>;
+    return <p className="px-6 py-16 text-center text-muted">{t("common.propertyNotFound")}</p>;
   }
 
   if (user && property.ownerId !== user.uid) {
-    return <p className="px-6 py-16 text-center text-muted">This isn&apos;t your property.</p>;
+    return <p className="px-6 py-16 text-center text-muted">{t("common.notYourProperty")}</p>;
   }
 
   return (
     <main className="mx-auto w-full max-w-md px-6 py-16">
-      <h1 className="mb-6 text-center text-2xl font-semibold">Edit property</h1>
+      <h1 className="mb-6 text-center text-2xl font-semibold">{t("homeownerPropertyEdit.title")}</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="street" className="mb-1 block text-sm font-medium text-ink">
-            Street (+ house number)
+            {t("property.street")}
           </label>
           <input
             id="street"
@@ -101,7 +103,7 @@ export default function EditPropertyClient() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="zipCode" className="mb-1 block text-sm font-medium text-ink">
-              PLZ (zip code)
+              {t("property.zip")}
             </label>
             <input
               id="zipCode"
@@ -114,7 +116,7 @@ export default function EditPropertyClient() {
           </div>
           <div>
             <label htmlFor="city" className="mb-1 block text-sm font-medium text-ink">
-              City
+              {t("property.city")}
             </label>
             <input
               id="city"
@@ -130,7 +132,7 @@ export default function EditPropertyClient() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="rooms" className="mb-1 block text-sm font-medium text-ink">
-              Rooms
+              {t("property.rooms")}
             </label>
             <input
               id="rooms"
@@ -145,7 +147,7 @@ export default function EditPropertyClient() {
           </div>
           <div>
             <label htmlFor="sizeSqm" className="mb-1 block text-sm font-medium text-ink">
-              Size (m²)
+              {t("property.size")}
             </label>
             <input
               id="sizeSqm"
@@ -162,7 +164,7 @@ export default function EditPropertyClient() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="rent" className="mb-1 block text-sm font-medium text-ink">
-              Rent (CHF/month)
+              {t("property.rent")}
             </label>
             <input
               id="rent"
@@ -179,7 +181,7 @@ export default function EditPropertyClient() {
               htmlFor="additionalCosts"
               className="mb-1 block text-sm font-medium text-ink"
             >
-              Additional costs (Nebenkosten, CHF/month)
+              {t("property.additionalCosts")}
             </label>
             <input
               id="additionalCosts"
@@ -195,7 +197,7 @@ export default function EditPropertyClient() {
 
         <div>
           <label htmlFor="availableFrom" className="mb-1 block text-sm font-medium text-ink">
-            Available from
+            {t("property.availableFrom")}
           </label>
           <input
             id="availableFrom"
@@ -209,7 +211,7 @@ export default function EditPropertyClient() {
 
         <div>
           <label htmlFor="description" className="mb-1 block text-sm font-medium text-ink">
-            Description <span className="font-normal text-muted">(optional)</span>
+            {t("property.description")} <span className="font-normal text-muted">{t("property.optional")}</span>
           </label>
           <textarea
             id="description"
@@ -227,7 +229,7 @@ export default function EditPropertyClient() {
           disabled={submitting}
           className="w-full rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {submitting ? "Saving..." : "Save changes"}
+          {submitting ? t("common.saving") : t("homeownerPropertyEdit.submit")}
         </button>
       </form>
     </main>

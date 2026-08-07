@@ -10,11 +10,13 @@ import {
   reauthenticateWithPopup,
 } from "firebase/auth";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { deleteAccountData } from "@/lib/account";
 
 export function DeleteAccountSection() {
   const router = useRouter();
   const { user, profile } = useAuth();
+  const { t } = useLanguage();
   const [confirmText, setConfirmText] = useState("");
   const [password, setPassword] = useState("");
   const [needsReauth, setNeedsReauth] = useState(false);
@@ -36,7 +38,7 @@ export function DeleteAccountSection() {
         await reauthenticateWithPopup(user, new GoogleAuthProvider());
       } else {
         if (!password) {
-          throw new Error("Enter your password to confirm.");
+          throw new Error(t("deleteAccount.enterPasswordError"));
         }
         await reauthenticateWithCredential(
           user,
@@ -56,7 +58,7 @@ export function DeleteAccountSection() {
       await deleteUserWithReauth();
       router.push("/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : t("common.somethingWrong"));
     } finally {
       setDeleting(false);
     }
@@ -64,18 +66,18 @@ export function DeleteAccountSection() {
 
   return (
     <div className="mt-12 rounded-2xl border border-danger/40 bg-danger-bg p-6">
-      <h2 className="text-lg font-semibold text-danger">Delete account</h2>
+      <h2 className="text-lg font-semibold text-danger">{t("deleteAccount.title")}</h2>
       <p className="mt-1 text-sm text-ink">
         {profile?.role === "homeowner"
-          ? "This permanently deletes your account, every property you've listed, and every application submitted to them."
-          : "This permanently deletes your account and every application you've submitted."}{" "}
-        This can&apos;t be undone.
+          ? t("deleteAccount.warningHomeowner")
+          : t("deleteAccount.warningRenter")}{" "}
+        {t("deleteAccount.cannotBeUndone")}
       </p>
 
       <div className="mt-4 max-w-sm space-y-3">
         <div>
           <label htmlFor="confirmDelete" className="mb-1 block text-sm font-medium text-ink">
-            Type DELETE to confirm
+            {t("deleteAccount.typeToConfirm")}
           </label>
           <input
             id="confirmDelete"
@@ -92,7 +94,7 @@ export function DeleteAccountSection() {
               htmlFor="reauthPassword"
               className="mb-1 block text-sm font-medium text-ink"
             >
-              Confirm your password to continue
+              {t("deleteAccount.confirmPassword")}
             </label>
             <input
               id="reauthPassword"
@@ -105,9 +107,7 @@ export function DeleteAccountSection() {
         )}
 
         {needsReauth && isGoogleAccount && (
-          <p className="text-sm text-muted">
-            Click delete again to confirm your identity with Google.
-          </p>
+          <p className="text-sm text-muted">{t("deleteAccount.confirmGoogleIdentity")}</p>
         )}
 
         {error && <p className="text-sm text-danger">{error}</p>}
@@ -117,7 +117,7 @@ export function DeleteAccountSection() {
           disabled={!canDelete || deleting}
           className="rounded-full bg-danger px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {deleting ? "Deleting..." : "Delete my account permanently"}
+          {deleting ? t("deleteAccount.deleting") : t("deleteAccount.submit")}
         </button>
       </div>
     </div>

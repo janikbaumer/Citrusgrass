@@ -4,20 +4,23 @@ import {
   formatPropertyAddress,
   formatPropertySummary,
   getPipelineColumns,
-  RENTER_STATUS_LABELS,
+  getRenterStatusLabels,
   type ApplicationWithProperty,
 } from "@/lib/types";
-
-const PIPELINE_COLUMNS = getPipelineColumns(RENTER_STATUS_LABELS);
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface RenterPipelineBoardProps {
   applications: ApplicationWithProperty[];
 }
 
 export function RenterPipelineBoard({ applications }: RenterPipelineBoardProps) {
+  const { t } = useLanguage();
+  const statusLabels = getRenterStatusLabels(t);
+  const pipelineColumns = getPipelineColumns(statusLabels);
+
   return (
     <div className="grid gap-4 md:grid-cols-5">
-      {PIPELINE_COLUMNS.map((column) => {
+      {pipelineColumns.map((column) => {
         const columnApplications = applications.filter((application) =>
           column.statuses.includes(application.status)
         );
@@ -42,7 +45,7 @@ export function RenterPipelineBoard({ applications }: RenterPipelineBoardProps) 
                   <p className="text-sm font-medium">
                     {application.property
                       ? formatPropertyAddress(application.property)
-                      : "Listing no longer available"}
+                      : t("common.listingUnavailable")}
                   </p>
                   {application.property && (
                     <p className="text-xs text-muted">
@@ -50,12 +53,12 @@ export function RenterPipelineBoard({ applications }: RenterPipelineBoardProps) 
                     </p>
                   )}
                   <p className="mt-2 text-xs font-medium text-muted">
-                    {RENTER_STATUS_LABELS[application.status]}
+                    {statusLabels[application.status]}
                   </p>
                 </div>
               ))}
               {columnApplications.length === 0 && (
-                <p className="text-xs text-muted">Nothing here.</p>
+                <p className="text-xs text-muted">{t("renterPipelineBoard.nothingHere")}</p>
               )}
             </div>
           </div>

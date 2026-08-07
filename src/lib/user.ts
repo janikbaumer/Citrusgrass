@@ -34,7 +34,13 @@ export async function updateUserProfile(
   data: Partial<
     Pick<
       UserProfile,
-      "firstName" | "lastName" | "phone" | "salaryRange" | "about" | "landlordType"
+      | "firstName"
+      | "lastName"
+      | "phone"
+      | "salaryRange"
+      | "about"
+      | "landlordType"
+      | "preferredLanguage"
     >
   >
 ): Promise<void> {

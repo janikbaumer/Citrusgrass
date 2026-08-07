@@ -12,6 +12,7 @@ import { auth } from "@/lib/firebase";
 import { userProfileExists } from "@/lib/user";
 import { isSafeRedirect } from "@/lib/safeRedirect";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { GoogleButton } from "@/components/GoogleButton";
 import { PublicHeader } from "@/components/PublicHeader";
 
@@ -21,6 +22,7 @@ function LoginForm() {
   const next = searchParams.get("next");
   const nextParam = isSafeRedirect(next) ? next : null;
   const { user, profile, loading: authLoading } = useAuth();
+  const { t } = useLanguage();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,7 +55,7 @@ function LoginForm() {
       const credential = await signInWithEmailAndPassword(auth, email, password);
       await routeAfterSignIn(credential.user.uid);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : t("common.somethingWrong"));
     } finally {
       setSubmitting(false);
     }
@@ -66,7 +68,7 @@ function LoginForm() {
       const credential = await signInWithPopup(auth, new GoogleAuthProvider());
       await routeAfterSignIn(credential.user.uid);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : t("common.somethingWrong"));
     } finally {
       setSubmitting(false);
     }
@@ -77,24 +79,24 @@ function LoginForm() {
       <PublicHeader />
 
       <div className="mx-auto max-w-md space-y-6 px-6 py-16">
-        <h1 className="text-center text-2xl font-semibold">Log in</h1>
+        <h1 className="text-center text-2xl font-semibold">{t("login.title")}</h1>
 
         <GoogleButton
           onClick={handleGoogleSignIn}
           disabled={submitting}
-          label="Sign in with Google"
+          label={t("login.googleSignIn")}
         />
 
         <div className="flex items-center gap-3 text-xs uppercase text-muted">
           <div className="h-px flex-1 bg-line" />
-          or
+          {t("login.or")}
           <div className="h-px flex-1 bg-line" />
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="email" className="mb-1 block text-sm font-medium text-ink">
-              Email
+              {t("field.email")}
             </label>
             <input
               id="email"
@@ -107,7 +109,7 @@ function LoginForm() {
           </div>
           <div>
             <label htmlFor="password" className="mb-1 block text-sm font-medium text-ink">
-              Password
+              {t("field.password")}
             </label>
             <input
               id="password"
@@ -126,14 +128,14 @@ function LoginForm() {
             disabled={submitting}
             className="w-full rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {submitting ? "Logging in..." : "Log in"}
+            {submitting ? t("login.submitting") : t("login.title")}
           </button>
         </form>
 
         <p className="text-center text-sm text-muted">
-          Don&apos;t have an account?{" "}
+          {t("login.noAccount")}{" "}
           <Link href="/" className="font-medium text-accent underline underline-offset-2">
-            Sign up
+            {t("login.signUp")}
           </Link>
         </p>
       </div>

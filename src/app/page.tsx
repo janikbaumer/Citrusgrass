@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { PublicHeader } from "@/components/PublicHeader";
 import { HandoffIllustration } from "@/components/illustrations/HandoffIllustration";
 import { HouseIcon } from "@/components/illustrations/HouseIcon";
@@ -12,6 +13,7 @@ import { KeyIcon } from "@/components/illustrations/KeyIcon";
 export default function Home() {
   const router = useRouter();
   const { user, profile, loading } = useAuth();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (loading || !user) return;
@@ -31,9 +33,9 @@ export default function Home() {
 
         <div className="max-w-xl space-y-3">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Welcome to Citrusgrass
+            {t("home.title")}
           </h1>
-          <p className="text-muted">To get started, tell us who you are.</p>
+          <p className="text-muted">{t("home.subtitle")}</p>
         </div>
 
         <div className="grid w-full max-w-xl gap-4 sm:grid-cols-2">
@@ -42,10 +44,8 @@ export default function Home() {
             className="group flex flex-col items-center gap-2 rounded-2xl bg-surface p-8 shadow-warm-sm transition hover:shadow-warm"
           >
             <HouseIcon className="h-10 w-10" />
-            <span className="text-lg font-medium">I&apos;m a Homeowner</span>
-            <span className="text-sm text-muted">
-              List and manage your property
-            </span>
+            <span className="text-lg font-medium">{t("home.homeownerCardTitle")}</span>
+            <span className="text-sm text-muted">{t("home.homeownerCardSubtitle")}</span>
           </Link>
 
           <Link
@@ -53,17 +53,15 @@ export default function Home() {
             className="group flex flex-col items-center gap-2 rounded-2xl bg-surface p-8 shadow-warm-sm transition hover:shadow-warm"
           >
             <KeyIcon className="h-10 w-10" />
-            <span className="text-lg font-medium">I&apos;m a Renter</span>
-            <span className="text-sm text-muted">
-              Find a place to call home
-            </span>
+            <span className="text-lg font-medium">{t("home.renterCardTitle")}</span>
+            <span className="text-sm text-muted">{t("home.renterCardSubtitle")}</span>
           </Link>
         </div>
 
         <p className="text-sm text-muted">
-          Already have an account?{" "}
+          {t("home.haveAccount")}{" "}
           <Link href="/login" className="font-medium text-accent underline underline-offset-2">
-            Log in
+            {t("common.logIn")}
           </Link>
         </p>
       </main>

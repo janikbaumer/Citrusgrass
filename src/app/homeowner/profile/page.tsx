@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { updateUserProfile } from "@/lib/user";
 import { DeleteAccountSection } from "@/components/DeleteAccountSection";
 import type { LandlordType } from "@/lib/types";
 
 export default function HomeownerProfilePage() {
   const { user, profile } = useAuth();
+  const { t } = useLanguage();
 
   // The homeowner layout only renders this page once `profile` is loaded,
   // so these initial values are always accurate on first render.
@@ -31,7 +33,7 @@ export default function HomeownerProfilePage() {
       await updateUserProfile(user.uid, { firstName, lastName, landlordType, phone });
       setSaved(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : t("common.somethingWrong"));
     } finally {
       setSaving(false);
     }
@@ -39,13 +41,13 @@ export default function HomeownerProfilePage() {
 
   return (
     <main className="mx-auto w-full max-w-lg px-6 py-16">
-      <h1 className="mb-6 text-center text-2xl font-semibold">Homeowner Profile</h1>
+      <h1 className="mb-6 text-center text-2xl font-semibold">{t("homeownerProfile.title")}</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="firstName" className="mb-1 block text-sm font-medium text-ink">
-              First name
+              {t("field.firstName")}
             </label>
             <input
               id="firstName"
@@ -58,7 +60,7 @@ export default function HomeownerProfilePage() {
           </div>
           <div>
             <label htmlFor="lastName" className="mb-1 block text-sm font-medium text-ink">
-              Last name
+              {t("field.lastName")}
             </label>
             <input
               id="lastName"
@@ -72,7 +74,7 @@ export default function HomeownerProfilePage() {
         </div>
 
         <div>
-          <span className="mb-1 block text-sm font-medium text-ink">Landlord type</span>
+          <span className="mb-1 block text-sm font-medium text-ink">{t("homeownerProfile.landlordType")}</span>
           <div className="flex gap-6">
             <label className="flex items-center gap-2 text-sm text-ink">
               <input
@@ -83,7 +85,7 @@ export default function HomeownerProfilePage() {
                 onChange={() => setLandlordType("private")}
                 className="accent-accent"
               />
-              Private
+              {t("homeownerProfile.private")}
             </label>
             <label className="flex items-center gap-2 text-sm text-ink">
               <input
@@ -94,14 +96,14 @@ export default function HomeownerProfilePage() {
                 onChange={() => setLandlordType("company")}
                 className="accent-accent"
               />
-              Company
+              {t("homeownerProfile.company")}
             </label>
           </div>
         </div>
 
         <div>
           <label htmlFor="email" className="mb-1 block text-sm font-medium text-ink">
-            Email
+            {t("field.email")}
           </label>
           <input
             id="email"
@@ -114,7 +116,7 @@ export default function HomeownerProfilePage() {
 
         <div>
           <label htmlFor="phone" className="mb-1 block text-sm font-medium text-ink">
-            Phone
+            {t("field.phone")}
           </label>
           <input
             id="phone"
@@ -126,14 +128,14 @@ export default function HomeownerProfilePage() {
         </div>
 
         {error && <p className="text-sm text-danger">{error}</p>}
-        {saved && !error && <p className="text-sm text-good">Saved.</p>}
+        {saved && !error && <p className="text-sm text-good">{t("common.saved")}</p>}
 
         <button
           type="submit"
           disabled={saving}
           className="w-full rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {saving ? "Saving..." : "Save"}
+          {saving ? t("common.saving") : t("common.save")}
         </button>
       </form>
 

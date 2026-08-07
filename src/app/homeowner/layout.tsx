@@ -2,13 +2,15 @@
 
 import type { ReactNode } from "react";
 import { useRequireRole } from "@/hooks/useRequireRole";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { RoleNav } from "@/components/RoleNav";
 
 export default function HomeownerLayout({ children }: { children: ReactNode }) {
   const { ready } = useRequireRole("homeowner");
+  const { t } = useLanguage();
 
   if (!ready) {
-    return <p className="px-6 py-16 text-center text-muted">Loading...</p>;
+    return <p className="px-6 py-16 text-center text-muted">{t("common.loading")}</p>;
   }
 
   return (

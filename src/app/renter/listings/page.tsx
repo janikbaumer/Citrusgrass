@@ -1,27 +1,27 @@
 "use client";
 
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useRenterApplications } from "@/hooks/useRenterApplications";
-import { formatPropertyAddress, formatPropertySummary, RENTER_STATUS_LABELS } from "@/lib/types";
+import { formatPropertyAddress, formatPropertySummary, getRenterStatusLabels } from "@/lib/types";
 import { EmptyStateIllustration } from "@/components/illustrations/EmptyStateIllustration";
 
 export default function RenterListingsPage() {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const applications = useRenterApplications(user?.uid);
+  const renterStatusLabels = getRenterStatusLabels(t);
 
   return (
     <main className="mx-auto w-full max-w-2xl px-6 py-16">
-      <h1 className="mb-6 text-2xl font-semibold">Your Applications</h1>
+      <h1 className="mb-6 text-2xl font-semibold">{t("renterListings.title")}</h1>
 
-      {applications === null && <p className="text-muted">Loading...</p>}
+      {applications === null && <p className="text-muted">{t("common.loading")}</p>}
 
       {applications?.length === 0 && (
         <div className="flex flex-col items-center gap-3 py-6 text-center">
           <EmptyStateIllustration className="h-24 w-auto" />
-          <p className="text-muted">
-            You haven&apos;t applied to anything yet. Applications you submit via a landlord&apos;s
-            apply link will show up here.
-          </p>
+          <p className="text-muted">{t("applications.empty")}</p>
         </div>
       )}
 
@@ -34,7 +34,7 @@ export default function RenterListingsPage() {
             <p className="font-medium">
               {application.property
                 ? formatPropertyAddress(application.property)
-                : "Listing no longer available"}
+                : t("common.listingUnavailable")}
             </p>
             {application.property && (
               <p className="text-sm text-muted">
@@ -42,7 +42,7 @@ export default function RenterListingsPage() {
               </p>
             )}
             <p className="mt-1 text-sm text-ink">
-              Status: <span className="font-medium">{RENTER_STATUS_LABELS[application.status]}</span>
+              {t("renterListings.status")} <span className="font-medium">{renterStatusLabels[application.status]}</span>
             </p>
           </li>
         ))}

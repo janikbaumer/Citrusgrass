@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { createProperty } from "@/lib/property";
 
 export default function NewPropertyPage() {
   const router = useRouter();
   const { user } = useAuth();
+  const { t } = useLanguage();
 
   const [street, setStreet] = useState("");
   const [zipCode, setZipCode] = useState("");
@@ -40,7 +42,7 @@ export default function NewPropertyPage() {
       });
       router.push(`/homeowner/properties/${propertyId}`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : t("common.somethingWrong"));
     } finally {
       setSubmitting(false);
     }
@@ -48,12 +50,12 @@ export default function NewPropertyPage() {
 
   return (
     <main className="mx-auto w-full max-w-md px-6 py-16">
-      <h1 className="mb-6 text-center text-2xl font-semibold">Add a property</h1>
+      <h1 className="mb-6 text-center text-2xl font-semibold">{t("homeownerPropertiesNew.title")}</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="street" className="mb-1 block text-sm font-medium text-ink">
-            Street (+ house number)
+            {t("property.street")}
           </label>
           <input
             id="street"
@@ -69,7 +71,7 @@ export default function NewPropertyPage() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="zipCode" className="mb-1 block text-sm font-medium text-ink">
-              PLZ (zip code)
+              {t("property.zip")}
             </label>
             <input
               id="zipCode"
@@ -82,7 +84,7 @@ export default function NewPropertyPage() {
           </div>
           <div>
             <label htmlFor="city" className="mb-1 block text-sm font-medium text-ink">
-              City
+              {t("property.city")}
             </label>
             <input
               id="city"
@@ -98,7 +100,7 @@ export default function NewPropertyPage() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="rooms" className="mb-1 block text-sm font-medium text-ink">
-              Rooms
+              {t("property.rooms")}
             </label>
             <input
               id="rooms"
@@ -113,7 +115,7 @@ export default function NewPropertyPage() {
           </div>
           <div>
             <label htmlFor="sizeSqm" className="mb-1 block text-sm font-medium text-ink">
-              Size (m²)
+              {t("property.size")}
             </label>
             <input
               id="sizeSqm"
@@ -130,7 +132,7 @@ export default function NewPropertyPage() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="rent" className="mb-1 block text-sm font-medium text-ink">
-              Rent (CHF/month)
+              {t("property.rent")}
             </label>
             <input
               id="rent"
@@ -147,7 +149,7 @@ export default function NewPropertyPage() {
               htmlFor="additionalCosts"
               className="mb-1 block text-sm font-medium text-ink"
             >
-              Additional costs (Nebenkosten, CHF/month)
+              {t("property.additionalCosts")}
             </label>
             <input
               id="additionalCosts"
@@ -163,7 +165,7 @@ export default function NewPropertyPage() {
 
         <div>
           <label htmlFor="availableFrom" className="mb-1 block text-sm font-medium text-ink">
-            Available from
+            {t("property.availableFrom")}
           </label>
           <input
             id="availableFrom"
@@ -177,7 +179,7 @@ export default function NewPropertyPage() {
 
         <div>
           <label htmlFor="description" className="mb-1 block text-sm font-medium text-ink">
-            Description <span className="font-normal text-muted">(optional)</span>
+            {t("property.description")} <span className="font-normal text-muted">{t("property.optional")}</span>
           </label>
           <textarea
             id="description"
@@ -195,7 +197,7 @@ export default function NewPropertyPage() {
           disabled={submitting}
           className="w-full rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {submitting ? "Adding..." : "Add property"}
+          {submitting ? t("homeownerPropertiesNew.submitting") : t("homeownerPropertiesNew.submit")}
         </button>
       </form>
     </main>

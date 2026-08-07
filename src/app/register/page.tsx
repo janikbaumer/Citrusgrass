@@ -13,6 +13,7 @@ import { createUserProfile, userProfileExists } from "@/lib/user";
 import { isUserRole } from "@/lib/types";
 import { isSafeRedirect } from "@/lib/safeRedirect";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { GoogleButton } from "@/components/GoogleButton";
 
 function RegisterForm() {
@@ -23,6 +24,7 @@ function RegisterForm() {
   const next = searchParams.get("next");
   const nextParam = isSafeRedirect(next) ? next : null;
   const { user, profile, loading: authLoading } = useAuth();
+  const { t } = useLanguage();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -43,15 +45,13 @@ function RegisterForm() {
   if (!role) {
     return (
       <div className="mx-auto max-w-md space-y-4 px-6 py-16 text-center">
-        <h1 className="text-2xl font-semibold">Which are you?</h1>
-        <p className="text-muted">
-          Pick a role first so we can set up your account correctly.
-        </p>
+        <h1 className="text-2xl font-semibold">{t("register.whichAreYou")}</h1>
+        <p className="text-muted">{t("register.pickRoleFirst")}</p>
         <Link
           href="/"
           className="inline-block rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-ink hover:bg-accent-hover"
         >
-          Choose homeowner or renter
+          {t("register.chooseRole")}
         </Link>
       </div>
     );
@@ -68,7 +68,7 @@ function RegisterForm() {
       await createUserProfile(credential.user, role!, firstName, lastName);
       router.push(isSafeRedirect(next) ? next : "/dashboard");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : t("common.somethingWrong"));
     } finally {
       setSubmitting(false);
     }
@@ -85,7 +85,7 @@ function RegisterForm() {
       }
       router.push(isSafeRedirect(next) ? next : "/dashboard");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : t("common.somethingWrong"));
     } finally {
       setSubmitting(false);
     }
@@ -95,15 +95,15 @@ function RegisterForm() {
     <div className="mx-auto max-w-md space-y-6 px-6 py-16">
       <div className="space-y-1 text-center">
         <h1 className="text-2xl font-semibold">
-          Create your {role} account
+          {t("register.title", { role: t(`roles.${role}`) })}
         </h1>
         <p className="text-sm text-muted">
-          Not a {role}?{" "}
+          {t("register.notRole", { role: t(`roles.${role}`) })}{" "}
           <Link
             href={`/register?role=${otherRole}${nextParam ? `&next=${encodeURIComponent(nextParam)}` : ""}`}
             className="text-accent underline underline-offset-2"
           >
-            Switch
+            {t("register.switch")}
           </Link>
         </p>
       </div>
@@ -111,12 +111,12 @@ function RegisterForm() {
       <GoogleButton
         onClick={handleGoogleSignUp}
         disabled={submitting}
-        label="Sign up with Google"
+        label={t("register.googleSignUp")}
       />
 
       <div className="flex items-center gap-3 text-xs uppercase text-muted">
         <div className="h-px flex-1 bg-line" />
-        or
+        {t("login.or")}
         <div className="h-px flex-1 bg-line" />
       </div>
 
@@ -124,7 +124,7 @@ function RegisterForm() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="firstName" className="mb-1 block text-sm font-medium text-ink">
-              First name
+              {t("field.firstName")}
             </label>
             <input
               id="firstName"
@@ -137,7 +137,7 @@ function RegisterForm() {
           </div>
           <div>
             <label htmlFor="lastName" className="mb-1 block text-sm font-medium text-ink">
-              Last name
+              {t("field.lastName")}
             </label>
             <input
               id="lastName"
@@ -151,7 +151,7 @@ function RegisterForm() {
         </div>
         <div>
           <label htmlFor="email" className="mb-1 block text-sm font-medium text-ink">
-            Email
+            {t("field.email")}
           </label>
           <input
             id="email"
@@ -164,7 +164,7 @@ function RegisterForm() {
         </div>
         <div>
           <label htmlFor="password" className="mb-1 block text-sm font-medium text-ink">
-            Password
+            {t("field.password")}
           </label>
           <input
             id="password"
@@ -184,17 +184,17 @@ function RegisterForm() {
           disabled={submitting}
           className="w-full rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {submitting ? "Creating account..." : "Create account"}
+          {submitting ? t("register.submitting") : t("register.submit")}
         </button>
       </form>
 
       <p className="text-center text-sm text-muted">
-        Already have an account?{" "}
+        {t("register.haveAccount")}{" "}
         <Link
           href={`/login${nextParam ? `?next=${encodeURIComponent(nextParam)}` : ""}`}
           className="font-medium text-accent underline underline-offset-2"
         >
-          Log in
+          {t("common.logIn")}
         </Link>
       </p>
     </div>

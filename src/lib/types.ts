@@ -1,6 +1,10 @@
+import type { TranslationKey } from "./i18n/en";
+
 export type UserRole = "homeowner" | "renter";
 
 export type LandlordType = "private" | "company";
+
+export type Language = "en" | "de";
 
 export interface UserProfile {
   firstName: string;
@@ -12,6 +16,7 @@ export interface UserProfile {
   salaryRange?: string;
   about?: string;
   landlordType?: LandlordType;
+  preferredLanguage?: Language;
 }
 
 export function isUserRole(value: string | null): value is UserRole {
@@ -82,22 +87,28 @@ export interface ApplicationWithProperty extends Application {
   property: Property | null;
 }
 
+type Translate = (key: TranslationKey) => string;
+
 // Labels as seen by the homeowner managing the pipeline.
-export const PIPELINE_STATUS_LABELS: Record<PipelineStatus, string> = {
-  viewing_requested: "Viewing requested",
-  invited_to_viewing: "Invited to viewing",
-  application_received: "Application received",
-  under_review: "Under review",
-  accepted: "Accepted",
-  declined: "Declined",
-};
+export function getPipelineStatusLabels(t: Translate): Record<PipelineStatus, string> {
+  return {
+    viewing_requested: t("pipeline.viewingRequested"),
+    invited_to_viewing: t("pipeline.invitedToViewing"),
+    application_received: t("pipeline.applicationReceived"),
+    under_review: t("pipeline.underReview"),
+    accepted: t("pipeline.accepted"),
+    declined: t("pipeline.declined"),
+  };
+}
 
 // Same statuses as seen by the renter who submitted the application -
 // "received" reads backwards from their side of it.
-export const RENTER_STATUS_LABELS: Record<PipelineStatus, string> = {
-  ...PIPELINE_STATUS_LABELS,
-  application_received: "Application sent",
-};
+export function getRenterStatusLabels(t: Translate): Record<PipelineStatus, string> {
+  return {
+    ...getPipelineStatusLabels(t),
+    application_received: t("pipeline.applicationSent"),
+  };
+}
 
 const PIPELINE_COLUMN_GROUPS: PipelineStatus[][] = [
   ["application_received"],

@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useRenterApplications } from "@/hooks/useRenterApplications";
 import { RenterPipelineBoard } from "@/components/RenterPipelineBoard";
 import { displayName } from "@/lib/types";
@@ -8,26 +9,24 @@ import { EmptyStateIllustration } from "@/components/illustrations/EmptyStateIll
 
 export default function RenterDashboardPage() {
   const { user, profile } = useAuth();
+  const { t } = useLanguage();
   const applications = useRenterApplications(user?.uid);
 
   return (
     <main className="mx-auto w-full max-w-5xl px-6 py-16">
       <div className="mb-8 text-center">
         <h1 className="text-2xl font-semibold">
-          Welcome, {profile && displayName(profile)}
+          {t("common.welcome")} {profile && displayName(profile)}
         </h1>
-        <p className="text-muted">Here&apos;s where your applications stand.</p>
+        <p className="text-muted">{t("renterDashboard.subtitle")}</p>
       </div>
 
-      {applications === null && <p className="text-center text-muted">Loading...</p>}
+      {applications === null && <p className="text-center text-muted">{t("common.loading")}</p>}
 
       {applications?.length === 0 && (
         <div className="flex flex-col items-center gap-3 py-6 text-center">
           <EmptyStateIllustration className="h-24 w-auto" />
-          <p className="text-muted">
-            You haven&apos;t applied to anything yet. Applications you submit via a landlord&apos;s
-            apply link will show up here.
-          </p>
+          <p className="text-muted">{t("applications.empty")}</p>
         </div>
       )}
 
