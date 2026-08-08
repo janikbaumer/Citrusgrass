@@ -14,11 +14,13 @@ const LINKS: Record<UserRole, { href: string; labelKey: TranslationKey }[]> = {
     { href: "/renter/dashboard", labelKey: "roleNav.dashboard" },
     { href: "/renter/profile", labelKey: "roleNav.profile" },
     { href: "/renter/listings", labelKey: "roleNav.applications" },
+    { href: "/renter/settings", labelKey: "roleNav.settings" },
   ],
   homeowner: [
     { href: "/homeowner/dashboard", labelKey: "roleNav.dashboard" },
     { href: "/homeowner/properties", labelKey: "roleNav.properties" },
     { href: "/homeowner/profile", labelKey: "roleNav.profile" },
+    { href: "/homeowner/settings", labelKey: "roleNav.settings" },
   ],
 };
 

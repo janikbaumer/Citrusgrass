@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { updateUserProfile } from "@/lib/user";
-import { DeleteAccountSection } from "@/components/DeleteAccountSection";
 import type { TranslationKey } from "@/lib/i18n/en";
 
 // The Firestore-stored `value` stays the original English string for
@@ -154,8 +153,6 @@ export default function RenterProfilePage() {
           {saving ? t("common.saving") : t("common.save")}
         </button>
       </form>
-
-      <DeleteAccountSection />
     </main>
   );
 }

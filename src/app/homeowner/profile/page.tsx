@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { updateUserProfile } from "@/lib/user";
-import { DeleteAccountSection } from "@/components/DeleteAccountSection";
 import type { LandlordType } from "@/lib/types";
 
 export default function HomeownerProfilePage() {
@@ -138,8 +137,6 @@ export default function HomeownerProfilePage() {
           {saving ? t("common.saving") : t("common.save")}
         </button>
       </form>
-
-      <DeleteAccountSection />
     </main>
   );
 }

@@ -49,6 +49,7 @@ const en = {
   "roleNav.profile": "Profile",
   "roleNav.applications": "Applications",
   "roleNav.properties": "Properties",
+  "roleNav.settings": "Settings",
   "roleNav.signOut": "Sign out",
 
   // Language switcher (PublicHeader + RoleNav).
@@ -195,6 +196,18 @@ const en = {
   "faq.q4": "I'm a homeowner — how do I list a property?",
   "faq.a4":
     "Sign up as a homeowner, add your property from your dashboard, and share the apply link it generates with whoever you want to be able to apply.",
+
+  // src/app/homeowner/settings/page.tsx + src/app/renter/settings/page.tsx
+  "settings.title": "Settings",
+
+  // src/components/ChangePasswordSection.tsx
+  "changePassword.title": "Change password",
+  "changePassword.googleAccount": "You signed in with Google, so there's no password to change here.",
+  "changePassword.currentPassword": "Current password",
+  "changePassword.newPassword": "New password",
+  "changePassword.confirmPassword": "Confirm new password",
+  "changePassword.mismatchError": "New passwords don't match.",
+  "changePassword.submit": "Change password",
 
   // src/components/DeleteAccountSection.tsx
   "deleteAccount.title": "Delete account",

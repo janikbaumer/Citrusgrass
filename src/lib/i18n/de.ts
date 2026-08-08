@@ -44,6 +44,7 @@ const de: Record<TranslationKey, string> = {
   "roleNav.profile": "Profil",
   "roleNav.applications": "Bewerbungen",
   "roleNav.properties": "Immobilien",
+  "roleNav.settings": "Einstellungen",
   "roleNav.signOut": "Abmelden",
 
   "languageSwitcher.english": "EN",
@@ -169,6 +170,17 @@ const de: Record<TranslationKey, string> = {
   "faq.q4": "Ich bin Vermieter — wie inseriere ich eine Immobilie?",
   "faq.a4":
     "Registriere dich als Vermieter, füge deine Immobilie über deine Übersicht hinzu und teile den generierten Bewerbungslink mit allen, die sich bewerben können sollen.",
+
+  "settings.title": "Einstellungen",
+
+  "changePassword.title": "Passwort ändern",
+  "changePassword.googleAccount":
+    "Du hast dich mit Google angemeldet, daher gibt es hier kein Passwort zu ändern.",
+  "changePassword.currentPassword": "Aktuelles Passwort",
+  "changePassword.newPassword": "Neues Passwort",
+  "changePassword.confirmPassword": "Neues Passwort bestätigen",
+  "changePassword.mismatchError": "Die neuen Passwörter stimmen nicht überein.",
+  "changePassword.submit": "Passwort ändern",
 
   "deleteAccount.title": "Konto löschen",
   "deleteAccount.warningHomeowner":
