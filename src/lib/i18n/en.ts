@@ -15,6 +15,7 @@ const en = {
   "common.welcome": "Welcome,",
   "common.menu": "Menu",
   "common.cancel": "Cancel",
+  "common.readMore": "Read more",
 
   // Shared form field labels (register, homeowner profile, renter profile).
   "field.firstName": "First name",
@@ -65,6 +66,27 @@ const en = {
   "home.renterCardTitle": "I'm a Renter",
   "home.renterCardSubtitle": "Find a place to call home",
   "home.haveAccount": "Already have an account?",
+
+  // src/app/page.tsx - landing page sections below the hero
+  "landing.benefitsTitle": "Why Citrusgrass",
+  "landing.benefit1Title": "Invite-only, not public listings",
+  "landing.benefit1Description":
+    "Renters only ever see a property after you share a direct apply link - there's no public search to browse.",
+  "landing.benefit2Title": "Apply in one click",
+  "landing.benefit2Description":
+    "Renters apply using their saved profile - no forms to refill for every listing.",
+  "landing.benefit3Title": "Track every application",
+  "landing.benefit3Description":
+    "Both sides follow the same status board, from received to accepted.",
+  "landing.howItWorksTitle": "How it works",
+  "landing.homeownerStepsTitle": "For homeowners",
+  "landing.homeownerStep1": "Add your property with address, rent, and details.",
+  "landing.homeownerStep2": "Share your unique apply link with anyone you want to apply.",
+  "landing.homeownerStep3": "Review applicants and track them on your pipeline board.",
+  "landing.renterStepsTitle": "For renters",
+  "landing.renterStep1": "Get an apply link from a homeowner listing their place.",
+  "landing.renterStep2": "Apply using your saved profile - no repeated forms.",
+  "landing.renterStep3": "Track exactly where your application stands.",
 
   // src/app/login/page.tsx
   "login.title": "Log in",

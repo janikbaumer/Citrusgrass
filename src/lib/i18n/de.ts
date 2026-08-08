@@ -15,6 +15,7 @@ const de: Record<TranslationKey, string> = {
   "common.welcome": "Willkommen,",
   "common.menu": "Menü",
   "common.cancel": "Abbrechen",
+  "common.readMore": "Mehr erfahren",
 
   "field.firstName": "Vorname",
   "field.lastName": "Nachname",
@@ -58,6 +59,26 @@ const de: Record<TranslationKey, string> = {
   "home.renterCardTitle": "Ich bin Mieter",
   "home.renterCardSubtitle": "Finde ein Zuhause",
   "home.haveAccount": "Schon ein Konto?",
+
+  "landing.benefitsTitle": "Warum Citrusgrass",
+  "landing.benefit1Title": "Nur auf Einladung, keine öffentlichen Inserate",
+  "landing.benefit1Description":
+    "Mieter sehen eine Immobilie erst, wenn du einen direkten Bewerbungslink teilst - es gibt keine öffentliche Suche zum Durchstöbern.",
+  "landing.benefit2Title": "Bewerbung mit einem Klick",
+  "landing.benefit2Description":
+    "Mieter bewerben sich mit ihrem gespeicherten Profil - kein erneutes Ausfüllen für jedes Inserat.",
+  "landing.benefit3Title": "Jede Bewerbung im Blick",
+  "landing.benefit3Description":
+    "Beide Seiten verfolgen denselben Status - von eingegangen bis angenommen.",
+  "landing.howItWorksTitle": "So funktioniert's",
+  "landing.homeownerStepsTitle": "Für Vermieter",
+  "landing.homeownerStep1": "Füge deine Immobilie mit Adresse, Miete und Details hinzu.",
+  "landing.homeownerStep2": "Teile deinen persönlichen Bewerbungslink mit allen, die sich bewerben sollen.",
+  "landing.homeownerStep3": "Prüfe Bewerber und verfolge sie auf deiner Pipeline.",
+  "landing.renterStepsTitle": "Für Mieter",
+  "landing.renterStep1": "Erhalte einen Bewerbungslink von einem Vermieter.",
+  "landing.renterStep2": "Bewirb dich mit deinem gespeicherten Profil - ohne erneutes Ausfüllen.",
+  "landing.renterStep3": "Verfolge genau, wo deine Bewerbung steht.",
 
   "login.title": "Anmelden",
   "login.googleSignIn": "Mit Google anmelden",
