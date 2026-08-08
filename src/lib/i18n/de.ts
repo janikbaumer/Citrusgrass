@@ -14,6 +14,7 @@ const de: Record<TranslationKey, string> = {
   "common.logIn": "Anmelden",
   "common.welcome": "Willkommen,",
   "common.menu": "Menü",
+  "common.cancel": "Abbrechen",
 
   "field.firstName": "Vorname",
   "field.lastName": "Nachname",
@@ -110,6 +111,7 @@ const de: Record<TranslationKey, string> = {
     "Wenn du diese Bewerbung annimmst, werden automatisch alle anderen Bewerbungen für diese Immobilie abgelehnt. Fortfahren?",
   "homeownerPropertyDetail.confirmDelete":
     "Diese Immobilie löschen? Der Bewerbungslink funktioniert danach nicht mehr. Bestehende Bewerbungen werden nicht gelöscht, zeigen aber kein passendes Inserat mehr an. Dies kann nicht rückgängig gemacht werden.",
+  "homeownerPropertyDetail.confirmAcceptButton": "Bewerber akzeptieren",
 
   "renterDashboard.subtitle": "Hier siehst du den Stand deiner Bewerbungen.",
 
@@ -206,6 +208,10 @@ const de: Record<TranslationKey, string> = {
   "pipelineBoard.noApplicants": "Keine Bewerber.",
 
   "renterPipelineBoard.nothingHere": "Nichts hier.",
+
+  "footer.tagline":
+    "Verbindet Vermieter und Mieter durch einen vollständig automatisierten Bewerbungsprozess.",
+  "footer.copyright": "© {year} Citrusgrass. Alle Rechte vorbehalten.",
 };
 
 export default de;

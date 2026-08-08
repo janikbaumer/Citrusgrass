@@ -62,6 +62,7 @@ export async function createApplication(
 export async function updateApplicationStatus(
   applicationId: string,
   propertyId: string,
+  ownerId: string,
   status: PipelineStatus
 ): Promise<void> {
   await updateDoc(doc(db, "applications", applicationId), {
@@ -71,7 +72,14 @@ export async function updateApplicationStatus(
 
   if (status !== "accepted") return;
 
-  const q = query(collection(db, "applications"), where("propertyId", "==", propertyId));
+  // Filters on both fields because the security rule checks ownerId, and
+  // Firestore can only allow a list query if it can prove safety directly
+  // from the query's where clauses matching the rule (see CLAUDE.md).
+  const q = query(
+    collection(db, "applications"),
+    where("propertyId", "==", propertyId),
+    where("ownerId", "==", ownerId)
+  );
   const snapshot = await getDocs(q);
   const batch = writeBatch(db);
   let hasDeclines = false;

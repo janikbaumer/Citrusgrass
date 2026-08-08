@@ -14,6 +14,7 @@ const en = {
   "common.logIn": "Log in",
   "common.welcome": "Welcome,",
   "common.menu": "Menu",
+  "common.cancel": "Cancel",
 
   // Shared form field labels (register, homeowner profile, renter profile).
   "field.firstName": "First name",
@@ -126,6 +127,7 @@ const en = {
     "Accepting this applicant will automatically decline every other applicant for this property. Continue?",
   "homeownerPropertyDetail.confirmDelete":
     "Delete this property? Its apply link will stop working. Existing applications aren't deleted, but they'll no longer show a matching listing. This can't be undone.",
+  "homeownerPropertyDetail.confirmAcceptButton": "Accept applicant",
 
   // src/app/renter/dashboard/page.tsx
   "renterDashboard.subtitle": "Here's where your applications stand.",
@@ -239,6 +241,10 @@ const en = {
 
   // src/components/RenterPipelineBoard.tsx
   "renterPipelineBoard.nothingHere": "Nothing here.",
+
+  // src/components/Footer.tsx
+  "footer.tagline": "Connecting homeowners and renters through a fully automated application process.",
+  "footer.copyright": "© {year} Citrusgrass. All rights reserved.",
 } as const;
 
 export type TranslationKey = keyof typeof en;
