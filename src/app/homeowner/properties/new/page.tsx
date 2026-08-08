@@ -49,7 +49,7 @@ export default function NewPropertyPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-md px-6 py-16">
+    <main className="mx-auto w-full max-w-md px-6 py-10 sm:py-16">
       <h1 className="mb-6 text-center text-2xl font-semibold">{t("homeownerPropertiesNew.title")}</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">

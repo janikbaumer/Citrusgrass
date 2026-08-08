@@ -78,7 +78,7 @@ function LoginForm() {
     <>
       <PublicHeader />
 
-      <div className="mx-auto max-w-md space-y-6 px-6 py-16">
+      <div className="mx-auto max-w-md space-y-6 px-6 py-10 sm:py-16">
         <h1 className="text-center text-2xl font-semibold">{t("login.title")}</h1>
 
         <GoogleButton

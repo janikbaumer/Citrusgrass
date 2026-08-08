@@ -13,7 +13,7 @@ export default function RenterListingsPage() {
   const renterStatusLabels = getRenterStatusLabels(t);
 
   return (
-    <main className="mx-auto w-full max-w-2xl px-6 py-16">
+    <main className="mx-auto w-full max-w-2xl px-6 py-10 sm:py-16">
       <h1 className="mb-6 text-2xl font-semibold">{t("renterListings.title")}</h1>
 
       {applications === null && <p className="text-muted">{t("common.loading")}</p>}

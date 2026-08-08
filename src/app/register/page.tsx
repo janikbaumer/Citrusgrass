@@ -44,7 +44,7 @@ function RegisterForm() {
 
   if (!role) {
     return (
-      <div className="mx-auto max-w-md space-y-4 px-6 py-16 text-center">
+      <div className="mx-auto max-w-md space-y-4 px-6 py-10 sm:py-16 text-center">
         <h1 className="text-2xl font-semibold">{t("register.whichAreYou")}</h1>
         <p className="text-muted">{t("register.pickRoleFirst")}</p>
         <Link
@@ -92,7 +92,7 @@ function RegisterForm() {
   }
 
   return (
-    <div className="mx-auto max-w-md space-y-6 px-6 py-16">
+    <div className="mx-auto max-w-md space-y-6 px-6 py-10 sm:py-16">
       <div className="space-y-1 text-center">
         <h1 className="text-2xl font-semibold">
           {t("register.title", { role: t(`roles.${role}`) })}

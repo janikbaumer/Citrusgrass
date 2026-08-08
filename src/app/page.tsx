@@ -28,7 +28,7 @@ export default function Home() {
     <>
       <PublicHeader />
 
-      <main className="flex flex-1 flex-col items-center justify-center gap-10 px-6 py-16 text-center">
+      <main className="flex flex-1 flex-col items-center justify-center gap-10 px-6 py-10 sm:py-16 text-center">
         <HandoffIllustration className="h-auto w-full max-w-md" />
 
         <div className="max-w-xl space-y-3">

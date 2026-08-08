@@ -33,7 +33,7 @@ export default function PropertiesPage() {
   }, [user]);
 
   return (
-    <main className="mx-auto w-full max-w-2xl px-6 py-16">
+    <main className="mx-auto w-full max-w-2xl px-6 py-10 sm:py-16">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-semibold">{t("homeownerProperties.title")}</h1>
         <Link

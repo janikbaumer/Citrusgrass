@@ -13,6 +13,7 @@ const en = {
   "common.listingUnavailable": "Listing no longer available",
   "common.logIn": "Log in",
   "common.welcome": "Welcome,",
+  "common.menu": "Menu",
 
   // Shared form field labels (register, homeowner profile, renter profile).
   "field.firstName": "First name",

@@ -13,6 +13,7 @@ const de: Record<TranslationKey, string> = {
   "common.listingUnavailable": "Inserat nicht mehr verfügbar",
   "common.logIn": "Anmelden",
   "common.welcome": "Willkommen,",
+  "common.menu": "Menü",
 
   "field.firstName": "Vorname",
   "field.lastName": "Nachname",

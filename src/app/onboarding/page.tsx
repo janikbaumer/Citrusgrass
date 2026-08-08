@@ -19,7 +19,7 @@ function Onboarding() {
   const [submitting, setSubmitting] = useState(false);
 
   if (loading) {
-    return <p className="px-6 py-16 text-center text-muted">{t("common.loading")}</p>;
+    return <p className="px-6 py-10 sm:py-16 text-center text-muted">{t("common.loading")}</p>;
   }
 
   if (!user) {
@@ -35,7 +35,7 @@ function Onboarding() {
   }
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-8 px-6 py-16 text-center">
+    <main className="flex flex-1 flex-col items-center justify-center gap-8 px-6 py-10 sm:py-16 text-center">
       <div className="max-w-xl space-y-2">
         <h1 className="text-2xl font-semibold">{t("onboarding.title")}</h1>
         <p className="text-muted">{t("onboarding.subtitle")}</p>

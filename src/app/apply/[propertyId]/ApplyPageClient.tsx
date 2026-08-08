@@ -58,17 +58,17 @@ export default function ApplyPageClient() {
   }
 
   if (property === undefined || loading) {
-    return <p className="px-6 py-16 text-center text-muted">{t("common.loading")}</p>;
+    return <p className="px-6 py-10 sm:py-16 text-center text-muted">{t("common.loading")}</p>;
   }
 
   if (property === null) {
-    return <p className="px-6 py-16 text-center text-muted">{t("apply.notFound")}</p>;
+    return <p className="px-6 py-10 sm:py-16 text-center text-muted">{t("apply.notFound")}</p>;
   }
 
   const next = `/apply/${propertyId}`;
 
   return (
-    <main className="mx-auto w-full max-w-lg px-6 py-16 text-center">
+    <main className="mx-auto w-full max-w-lg px-6 py-10 sm:py-16 text-center">
       <h1 className="text-2xl font-semibold">{formatPropertyAddress(property)}</h1>
       <p className="mt-1 text-muted">{formatPropertySummary(property)}</p>
       {property.description && (
@@ -79,7 +79,7 @@ export default function ApplyPageClient() {
         {!user && (
           <div className="space-y-3">
             <p className="text-ink">{t("apply.logInPrompt")}</p>
-            <div className="flex justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-3">
               <Link
                 href={`/login?next=${encodeURIComponent(next)}`}
                 className="rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-ink transition hover:bg-bg"

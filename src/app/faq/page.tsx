@@ -18,7 +18,7 @@ export default function FaqPage() {
     <>
       <PublicHeader active="/faq" />
 
-      <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-16">
+      <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-10 sm:py-16">
         <h1 className="mb-6 text-2xl font-semibold">{t("faq.title")}</h1>
         <div className="space-y-6">
           {FAQS.map((faq) => (

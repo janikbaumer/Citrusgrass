@@ -13,7 +13,7 @@ export default function RenterDashboardPage() {
   const applications = useRenterApplications(user?.uid);
 
   return (
-    <main className="mx-auto w-full max-w-5xl px-6 py-16">
+    <main className="mx-auto w-full max-w-5xl px-6 py-10 sm:py-16">
       <div className="mb-8 text-center">
         <h1 className="text-2xl font-semibold">
           {t("common.welcome")} {profile && displayName(profile)}

@@ -10,7 +10,7 @@ export default function AboutPage() {
     <>
       <PublicHeader active="/about" />
 
-      <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-16">
+      <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-10 sm:py-16">
         <h1 className="mb-6 text-2xl font-semibold">{t("about.title")}</h1>
         <div className="space-y-4 text-ink">
           <p>{t("about.p1")}</p>

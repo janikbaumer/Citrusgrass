@@ -79,19 +79,19 @@ export default function PropertyPipelineClient() {
   }
 
   if (property === undefined) {
-    return <p className="px-6 py-16 text-center text-muted">{t("common.loading")}</p>;
+    return <p className="px-6 py-10 sm:py-16 text-center text-muted">{t("common.loading")}</p>;
   }
 
   if (property === null) {
-    return <p className="px-6 py-16 text-center text-muted">{t("common.propertyNotFound")}</p>;
+    return <p className="px-6 py-10 sm:py-16 text-center text-muted">{t("common.propertyNotFound")}</p>;
   }
 
   if (user && property.ownerId !== user.uid) {
-    return <p className="px-6 py-16 text-center text-muted">{t("common.notYourProperty")}</p>;
+    return <p className="px-6 py-10 sm:py-16 text-center text-muted">{t("common.notYourProperty")}</p>;
   }
 
   return (
-    <main className="mx-auto w-full max-w-5xl px-6 py-16">
+    <main className="mx-auto w-full max-w-5xl px-6 py-10 sm:py-16">
       <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold">{formatPropertyAddress(property)}</h1>
