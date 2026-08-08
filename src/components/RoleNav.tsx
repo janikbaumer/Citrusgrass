@@ -53,7 +53,9 @@ export function RoleNav({ role }: { role: UserRole }) {
         <Link href="/contact" className="text-sm font-medium text-muted hover:text-ink">
           {t("publicHeader.contact")}
         </Link>
+        <span aria-hidden="true" className="h-4 w-px bg-line" />
         <LanguageSwitcher />
+        <span aria-hidden="true" className="h-4 w-px bg-line" />
         <button
           onClick={() => signOut()}
           className="text-sm font-medium text-muted hover:text-ink"
