@@ -53,6 +53,8 @@ const de: Record<TranslationKey, string> = {
   "languageSwitcher.german": "DE",
 
   "home.title": "Willkommen bei Citrusgrass",
+  "home.valueProp":
+    "Der vollständig automatisierte Weg, Mietbewerbungen zu verwalten - für Vermieter und Mieter.",
   "home.subtitle": "Um loszulegen, sag uns, wer du bist.",
   "home.homeownerCardTitle": "Ich bin Vermieter",
   "home.homeownerCardSubtitle": "Verwalte und inseriere deine Immobilie",
@@ -79,6 +81,10 @@ const de: Record<TranslationKey, string> = {
   "landing.renterStep1": "Erhalte einen Bewerbungslink von einem Vermieter.",
   "landing.renterStep2": "Bewirb dich mit deinem gespeicherten Profil - ohne erneutes Ausfüllen.",
   "landing.renterStep3": "Verfolge genau, wo deine Bewerbung steht.",
+  "landing.getInTouch": "Kontakt aufnehmen",
+  "landing.partnersTitle": "Vermieter auf Citrusgrass",
+  "landing.partnersSubtitle":
+    "Wir stehen noch am Anfang - hier werden bald Vermieter-Partner vorgestellt.",
 
   "login.title": "Anmelden",
   "login.googleSignIn": "Mit Google anmelden",

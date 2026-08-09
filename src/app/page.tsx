@@ -54,6 +54,7 @@ export default function Home() {
             <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
               {t("home.title")}
             </h1>
+            <p className="text-lg text-ink">{t("home.valueProp")}</p>
             <p className="text-muted">{t("home.subtitle")}</p>
           </div>
 
@@ -93,12 +94,20 @@ export default function Home() {
                 {t("about.title")}
               </h2>
               <p className="text-ink">{t("about.p1")}</p>
-              <Link
-                href="/about"
-                className="inline-block text-sm font-medium text-accent underline underline-offset-2"
-              >
-                {t("common.readMore")}
-              </Link>
+              <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 sm:justify-start">
+                <Link
+                  href="/about"
+                  className="text-sm font-medium text-accent underline underline-offset-2"
+                >
+                  {t("common.readMore")}
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-sm font-medium text-accent underline underline-offset-2"
+                >
+                  {t("landing.getInTouch")}
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -147,6 +156,21 @@ export default function Home() {
                   <li>{t("landing.renterStep3")}</li>
                 </ol>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-line bg-surface px-6 py-10 sm:py-16">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="text-2xl font-semibold">{t("landing.partnersTitle")}</h2>
+            <p className="mt-2 text-sm text-muted">{t("landing.partnersSubtitle")}</p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4" aria-hidden="true">
+              {[0, 1, 2, 3].map((slot) => (
+                <div
+                  key={slot}
+                  className="h-12 w-28 rounded-xl border border-dashed border-line bg-bg"
+                />
+              ))}
             </div>
           </div>
         </section>

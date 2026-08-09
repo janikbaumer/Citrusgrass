@@ -60,6 +60,8 @@ const en = {
 
   // src/app/page.tsx
   "home.title": "Welcome to Citrusgrass",
+  "home.valueProp":
+    "The fully automated way to manage rental applications - for homeowners and renters alike.",
   "home.subtitle": "To get started, tell us who you are.",
   "home.homeownerCardTitle": "I'm a Homeowner",
   "home.homeownerCardSubtitle": "List and manage your property",
@@ -87,6 +89,10 @@ const en = {
   "landing.renterStep1": "Get an apply link from a homeowner listing their place.",
   "landing.renterStep2": "Apply using your saved profile - no repeated forms.",
   "landing.renterStep3": "Track exactly where your application stands.",
+  "landing.getInTouch": "Get in touch",
+  "landing.partnersTitle": "Homeowners on Citrusgrass",
+  "landing.partnersSubtitle":
+    "We're just getting started - homeowner partners will be featured here soon.",
 
   // src/app/login/page.tsx
   "login.title": "Log in",
