@@ -10,7 +10,7 @@ const en = {
   "common.saved": "Saved.",
   "common.propertyNotFound": "Property not found.",
   "common.notYourProperty": "This isn't your property.",
-  "common.listingUnavailable": "Listing no longer available",
+  "common.listingUnavailable": "This listing was removed by the homeowner",
   "common.logIn": "Log in",
   "common.welcome": "Welcome,",
   "common.menu": "Menu",
@@ -255,7 +255,6 @@ const en = {
 
   // Pipeline status labels, shown to homeowners.
   "pipeline.viewingRequested": "Viewing requested",
-  "pipeline.invitedToViewing": "Invited to viewing",
   "pipeline.applicationReceived": "Application received",
   "pipeline.underReview": "Under review",
   "pipeline.accepted": "Accepted",

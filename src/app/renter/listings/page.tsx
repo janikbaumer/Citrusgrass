@@ -26,26 +26,34 @@ export default function RenterListingsPage() {
       )}
 
       <ul className="space-y-3">
-        {applications?.map((application) => (
-          <li
-            key={application.id}
-            className="rounded-2xl bg-surface p-4 shadow-warm-sm"
-          >
-            <p className="font-medium">
-              {application.property
-                ? formatPropertyAddress(application.property)
-                : t("common.listingUnavailable")}
-            </p>
-            {application.property && (
-              <p className="text-sm text-muted">
-                {formatPropertySummary(application.property)}
+        {applications?.map((application) => {
+          const displayProperty = application.property ?? application.propertySnapshot;
+          return (
+            <li
+              key={application.id}
+              className={`rounded-2xl bg-surface p-4 shadow-warm-sm ${
+                application.property ? "" : "opacity-60"
+              }`}
+            >
+              <p className="font-medium">
+                {displayProperty
+                  ? formatPropertyAddress(displayProperty)
+                  : t("common.listingUnavailable")}
               </p>
-            )}
-            <p className="mt-1 text-sm text-ink">
-              {t("renterListings.status")} <span className="font-medium">{renterStatusLabels[application.status]}</span>
-            </p>
-          </li>
-        ))}
+              {displayProperty && (
+                <p className="text-sm text-muted">
+                  {formatPropertySummary(displayProperty)}
+                </p>
+              )}
+              {!application.property && displayProperty && (
+                <p className="mt-1 text-sm text-danger">{t("common.listingUnavailable")}</p>
+              )}
+              <p className="mt-1 text-sm text-ink">
+                {t("renterListings.status")} <span className="font-medium">{renterStatusLabels[application.status]}</span>
+              </p>
+            </li>
+          );
+        })}
       </ul>
     </main>
   );

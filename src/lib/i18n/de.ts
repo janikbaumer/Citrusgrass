@@ -10,7 +10,7 @@ const de: Record<TranslationKey, string> = {
   "common.saved": "Gespeichert.",
   "common.propertyNotFound": "Immobilie nicht gefunden.",
   "common.notYourProperty": "Das ist nicht deine Immobilie.",
-  "common.listingUnavailable": "Inserat nicht mehr verfügbar",
+  "common.listingUnavailable": "Dieses Inserat wurde vom Vermieter entfernt",
   "common.logIn": "Anmelden",
   "common.welcome": "Willkommen,",
   "common.menu": "Menü",
@@ -224,7 +224,6 @@ const de: Record<TranslationKey, string> = {
   "deleteAccount.submit": "Mein Konto endgültig löschen",
 
   "pipeline.viewingRequested": "Besichtigung angefragt",
-  "pipeline.invitedToViewing": "Zur Besichtigung eingeladen",
   "pipeline.applicationReceived": "Bewerbung eingegangen",
   "pipeline.underReview": "In Prüfung",
   "pipeline.accepted": "Angenommen",

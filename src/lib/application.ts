@@ -10,7 +10,14 @@ import {
   writeBatch,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import type { Application, PipelineStatus, RenterSnapshot, UserProfile } from "@/lib/types";
+import type {
+  Application,
+  PipelineStatus,
+  Property,
+  PropertySnapshot,
+  RenterSnapshot,
+  UserProfile,
+} from "@/lib/types";
 
 export function buildRenterSnapshot(profile: UserProfile): RenterSnapshot {
   const snapshot: RenterSnapshot = {
@@ -22,6 +29,19 @@ export function buildRenterSnapshot(profile: UserProfile): RenterSnapshot {
   if (profile.salaryRange) snapshot.salaryRange = profile.salaryRange;
   if (profile.about) snapshot.about = profile.about;
   return snapshot;
+}
+
+export function buildPropertySnapshot(property: Property): PropertySnapshot {
+  return {
+    street: property.street,
+    zipCode: property.zipCode,
+    city: property.city,
+    sizeSqm: property.sizeSqm,
+    rooms: property.rooms,
+    rent: property.rent,
+    additionalCosts: property.additionalCosts,
+    availableFrom: property.availableFrom,
+  };
 }
 
 export async function findExistingApplication(
@@ -44,7 +64,8 @@ export async function createApplication(
   propertyId: string,
   ownerId: string,
   renterId: string,
-  renter: RenterSnapshot
+  renter: RenterSnapshot,
+  propertySnapshot: PropertySnapshot
 ): Promise<string> {
   const now = Date.now();
   const ref = await addDoc(collection(db, "applications"), {
@@ -52,6 +73,7 @@ export async function createApplication(
     ownerId,
     renterId,
     renter,
+    propertySnapshot,
     status: "application_received" satisfies PipelineStatus,
     createdAt: now,
     updatedAt: now,

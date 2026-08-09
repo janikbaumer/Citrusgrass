@@ -20,7 +20,7 @@ export function PipelineBoard({ applications, onStatusChange }: PipelineBoardPro
   const allStatuses = pipelineColumns.flatMap((column) => column.statuses);
 
   return (
-    <div className="grid gap-4 md:grid-cols-5">
+    <div className="grid gap-4 md:grid-cols-4">
       {pipelineColumns.map((column) => {
         const columnApplications = applications.filter((application) =>
           column.statuses.includes(application.status)

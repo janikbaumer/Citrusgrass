@@ -6,7 +6,12 @@ import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getProperty } from "@/lib/property";
-import { buildRenterSnapshot, createApplication, findExistingApplication } from "@/lib/application";
+import {
+  buildPropertySnapshot,
+  buildRenterSnapshot,
+  createApplication,
+  findExistingApplication,
+} from "@/lib/application";
 import { formatPropertyAddress, formatPropertySummary, getRenterStatusLabels } from "@/lib/types";
 import type { Application, Property } from "@/lib/types";
 
@@ -39,13 +44,15 @@ export default function ApplyPageClient() {
     setSubmitting(true);
     try {
       const snapshot = buildRenterSnapshot(profile!);
-      const id = await createApplication(propertyId, property.ownerId, user.uid, snapshot);
+      const propertySnapshot = buildPropertySnapshot(property);
+      const id = await createApplication(propertyId, property.ownerId, user.uid, snapshot, propertySnapshot);
       setExistingApplication({
         id,
         propertyId,
         ownerId: property.ownerId,
         renterId: user.uid,
         renter: snapshot,
+        propertySnapshot,
         status: "application_received",
         createdAt: Date.now(),
         updatedAt: Date.now(),

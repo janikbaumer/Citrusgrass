@@ -55,6 +55,17 @@ export function formatPropertySummary(
   return `${property.rooms} rooms · ${property.sizeSqm} m² · CHF ${property.rent} + ${property.additionalCosts} NK/month · available ${property.availableFrom}`;
 }
 
+// A snapshot of the property's address/details at the time a renter applied,
+// mirroring RenterSnapshot below - so an application still shows which
+// listing it was for even after the homeowner deletes the property (only
+// the properties/{id} doc is deleted, not the application - see
+// src/lib/property.ts's deleteProperty). Optional because applications
+// created before this field existed won't have it.
+export type PropertySnapshot = Pick<
+  Property,
+  "street" | "zipCode" | "city" | "sizeSqm" | "rooms" | "rent" | "additionalCosts" | "availableFrom"
+>;
+
 export interface RenterSnapshot {
   firstName: string;
   lastName: string;
@@ -66,7 +77,6 @@ export interface RenterSnapshot {
 
 export type PipelineStatus =
   | "viewing_requested"
-  | "invited_to_viewing"
   | "application_received"
   | "under_review"
   | "accepted"
@@ -78,6 +88,7 @@ export interface Application {
   ownerId: string;
   renterId: string;
   renter: RenterSnapshot;
+  propertySnapshot?: PropertySnapshot;
   status: PipelineStatus;
   createdAt: number;
   updatedAt: number;
@@ -93,7 +104,6 @@ type Translate = (key: TranslationKey) => string;
 export function getPipelineStatusLabels(t: Translate): Record<PipelineStatus, string> {
   return {
     viewing_requested: t("pipeline.viewingRequested"),
-    invited_to_viewing: t("pipeline.invitedToViewing"),
     application_received: t("pipeline.applicationReceived"),
     under_review: t("pipeline.underReview"),
     accepted: t("pipeline.accepted"),
@@ -111,9 +121,8 @@ export function getRenterStatusLabels(t: Translate): Record<PipelineStatus, stri
 }
 
 const PIPELINE_COLUMN_GROUPS: PipelineStatus[][] = [
-  ["application_received"],
   ["viewing_requested"],
-  ["invited_to_viewing"],
+  ["application_received"],
   ["under_review"],
   ["accepted", "declined"],
 ];
