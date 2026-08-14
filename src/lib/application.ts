@@ -19,7 +19,9 @@ import type {
   UserProfile,
 } from "@/lib/types";
 
-export function buildRenterSnapshot(profile: UserProfile): RenterSnapshot {
+export function buildRenterSnapshot(
+  profile: Pick<UserProfile, "firstName" | "lastName" | "email" | "phone" | "salaryRange" | "about">
+): RenterSnapshot {
   const snapshot: RenterSnapshot = {
     firstName: profile.firstName,
     lastName: profile.lastName,
@@ -58,6 +60,23 @@ export async function findExistingApplication(
   if (snapshot.empty) return null;
   const found = snapshot.docs[0];
   return { id: found.id, ...(found.data() as Omit<Application, "id">) };
+}
+
+// Re-syncs a renter's snapshot on every application they've submitted,
+// called whenever they save their own profile (see src/app/renter/profile/page.tsx).
+// Not a live join - the applications security rule only lets a renter
+// update this one field on their own applications - but keeps the
+// homeowner-visible data as fresh as the renter's last profile save
+// instead of permanently frozen at apply-time.
+export async function resyncRenterSnapshot(renterId: string, renter: RenterSnapshot): Promise<void> {
+  const q = query(collection(db, "applications"), where("renterId", "==", renterId));
+  const snapshot = await getDocs(q);
+  if (snapshot.empty) return;
+  const batch = writeBatch(db);
+  snapshot.docs.forEach((docSnapshot) => {
+    batch.update(docSnapshot.ref, { renter });
+  });
+  await batch.commit();
 }
 
 export async function createApplication(

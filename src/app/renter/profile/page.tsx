@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { updateUserProfile } from "@/lib/user";
+import { buildRenterSnapshot, resyncRenterSnapshot } from "@/lib/application";
 import type { TranslationKey } from "@/lib/i18n/en";
 
 // The Firestore-stored `value` stays the original English string for
@@ -42,6 +43,10 @@ export default function RenterProfilePage() {
     setError(null);
     try {
       await updateUserProfile(user.uid, { firstName, lastName, phone, salaryRange, about });
+      await resyncRenterSnapshot(
+        user.uid,
+        buildRenterSnapshot({ firstName, lastName, email: profile!.email, phone, salaryRange, about })
+      );
       setSaved(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : t("common.somethingWrong"));
