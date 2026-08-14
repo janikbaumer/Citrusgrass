@@ -14,7 +14,7 @@ export function Footer() {
   const year = String(new Date().getFullYear());
 
   return (
-    <footer className="mt-auto border-t border-line px-4 py-8 text-sm text-muted sm:px-6">
+    <footer className="zest-glow-bottom mt-auto border-t border-line px-4 py-8 text-sm text-muted sm:px-6">
       <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:justify-between sm:text-left">
         <div>
           <p className="font-semibold text-ink">{t("publicHeader.brand")}</p>

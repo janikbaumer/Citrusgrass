@@ -46,7 +46,7 @@ export function RoleNav({ role }: { role: UserRole }) {
   }
 
   return (
-    <nav className="border-b border-line bg-surface px-4 py-3 sm:px-6">
+    <nav className="zest-glow-top border-b border-line bg-surface px-4 py-3 sm:px-6">
       <div className="flex items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-4 sm:gap-5">
           {LINKS[role].map((link) => (

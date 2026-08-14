@@ -16,7 +16,7 @@ export function PublicHeader({ active }: { active?: (typeof LINKS)[number]["href
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="px-4 py-5 sm:px-6">
+    <header className="zest-glow-top px-4 py-5 sm:px-6">
       <div className="flex items-center justify-between">
         <Link href="/" className="text-lg font-semibold text-ink">
           {t("publicHeader.brand")}

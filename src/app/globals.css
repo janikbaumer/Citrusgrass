@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbfaf2;
+  --background: #ffffff;
   --foreground: #263a1f;
   color-scheme: light;
 }
@@ -36,12 +36,23 @@
    regardless of OS theme, rather than partially and unreliably
    supporting dark mode. */
 body {
-  background:
-    radial-gradient(560px circle at 10% -8%, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent 60%),
-    radial-gradient(480px circle at 100% 12%, color-mix(in srgb, var(--color-good) 14%, transparent), transparent 60%),
-    radial-gradient(680px circle at 50% 115%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 60%),
-    var(--background);
-  background-attachment: fixed;
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), -apple-system, "Segoe UI", sans-serif;
+}
+
+/* The page background is plain white (see `body` above) - these two
+   classes keep the decorative green/lime glow scoped to the header and
+   footer bars instead of painting the whole page, layered as
+   background-image so they sit on top of an element's own
+   background-color (e.g. RoleNav's bg-surface) rather than replacing it. */
+.zest-glow-top {
+  background-image:
+    radial-gradient(240px circle at 8% -60%, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 70%),
+    radial-gradient(200px circle at 96% 140%, color-mix(in srgb, var(--color-good) 16%, transparent), transparent 70%);
+}
+
+.zest-glow-bottom {
+  background-image:
+    radial-gradient(320px circle at 50% 220%, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 70%);
 }
