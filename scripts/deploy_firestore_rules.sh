@@ -3,6 +3,6 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-npx --yes firebase-tools deploy --only firestore:rules,firestore:indexes
+npx --yes firebase-tools deploy --only firestore:rules,firestore:indexes,storage
 
-echo "Deployed firestore.rules and firestore.indexes.json to the citrusgrass Firebase project"
+echo "Deployed firestore.rules, firestore.indexes.json, and storage.rules to the citrusgrass Firebase project"

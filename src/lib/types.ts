@@ -17,6 +17,7 @@ export interface UserProfile {
   about?: string;
   landlordType?: LandlordType;
   preferredLanguage?: Language;
+  photoURL?: string;
 }
 
 export function isUserRole(value: string | null): value is UserRole {

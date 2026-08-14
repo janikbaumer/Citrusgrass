@@ -1,6 +1,7 @@
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import type { User } from "firebase/auth";
-import { db } from "@/lib/firebase";
+import { db, storage } from "@/lib/firebase";
 import type { UserProfile, UserRole } from "@/lib/types";
 
 export async function userProfileExists(uid: string): Promise<boolean> {
@@ -41,8 +42,19 @@ export async function updateUserProfile(
       | "about"
       | "landlordType"
       | "preferredLanguage"
+      | "photoURL"
     >
   >
 ): Promise<void> {
   await updateDoc(doc(db, "users", uid), data);
+}
+
+export async function uploadProfilePicture(uid: string, file: File): Promise<string> {
+  const pictureRef = ref(storage, `profile-pictures/${uid}`);
+  await uploadBytes(pictureRef, file, { contentType: file.type });
+  return getDownloadURL(pictureRef);
+}
+
+export async function deleteProfilePicture(uid: string): Promise<void> {
+  await deleteObject(ref(storage, `profile-pictures/${uid}`));
 }

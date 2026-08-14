@@ -40,6 +40,12 @@ const en = {
   "roles.homeowner": "homeowner",
   "roles.renter": "renter",
 
+  // src/components/ProfileHeader.tsx
+  "profile.changePhoto": "Change photo",
+  "profile.removePhoto": "Remove photo",
+  "profile.photoTooLarge": "Image must be smaller than 5 MB.",
+  "profile.photoInvalidType": "Please choose an image file.",
+
   // src/components/PublicHeader.tsx
   "publicHeader.brand": "Citrusgrass",
   "publicHeader.about": "About us",
@@ -125,7 +131,6 @@ const en = {
   "homeownerDashboard.moreComing": "More coming soon.",
 
   // src/app/homeowner/profile/page.tsx
-  "homeownerProfile.title": "Homeowner Profile",
   "homeownerProfile.landlordType": "Landlord type",
   "homeownerProfile.private": "Private",
   "homeownerProfile.company": "Company",
@@ -165,7 +170,6 @@ const en = {
     "You haven't applied to anything yet. Applications you submit via a landlord's apply link will show up here.",
 
   // src/app/renter/profile/page.tsx
-  "renterProfile.title": "Rental Profile",
   "renterProfile.salaryRange": "Salary range",
   "renterProfile.selectRange": "Select a range",
   "renterProfile.about": "About you",

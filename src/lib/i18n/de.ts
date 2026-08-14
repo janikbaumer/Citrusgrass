@@ -37,6 +37,11 @@ const de: Record<TranslationKey, string> = {
   "roles.homeowner": "Vermieter",
   "roles.renter": "Mieter",
 
+  "profile.changePhoto": "Foto ändern",
+  "profile.removePhoto": "Foto entfernen",
+  "profile.photoTooLarge": "Das Bild muss kleiner als 5 MB sein.",
+  "profile.photoInvalidType": "Bitte wähle eine Bilddatei aus.",
+
   "publicHeader.brand": "Citrusgrass",
   "publicHeader.about": "Über uns",
   "publicHeader.faq": "FAQ",
@@ -112,7 +117,6 @@ const de: Record<TranslationKey, string> = {
   "homeownerDashboard.subtitle": "Deine Vermieter-Übersicht.",
   "homeownerDashboard.moreComing": "Mehr folgt in Kürze.",
 
-  "homeownerProfile.title": "Vermieterprofil",
   "homeownerProfile.landlordType": "Vermietertyp",
   "homeownerProfile.private": "Privat",
   "homeownerProfile.company": "Firma",
@@ -145,7 +149,6 @@ const de: Record<TranslationKey, string> = {
   "applications.empty":
     "Du hast dich noch nirgends beworben. Bewerbungen, die du über den Bewerbungslink eines Vermieters einreichst, erscheinen hier.",
 
-  "renterProfile.title": "Mieterprofil",
   "renterProfile.salaryRange": "Gehaltsbereich",
   "renterProfile.selectRange": "Bereich auswählen",
   "renterProfile.about": "Über dich",

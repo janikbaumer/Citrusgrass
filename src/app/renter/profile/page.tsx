@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { updateUserProfile } from "@/lib/user";
 import { buildRenterSnapshot, resyncRenterSnapshot } from "@/lib/application";
+import { ProfileHeader } from "@/components/ProfileHeader";
 import type { TranslationKey } from "@/lib/i18n/en";
 
 // The Firestore-stored `value` stays the original English string for
@@ -57,9 +58,12 @@ export default function RenterProfilePage() {
 
   return (
     <main className="mx-auto w-full max-w-lg px-6 py-10 sm:py-16">
-      <h1 className="mb-6 text-center text-2xl font-semibold">{t("renterProfile.title")}</h1>
+      <ProfileHeader role="renter" />
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4 rounded-2xl bg-surface p-6 shadow-warm-sm"
+      >
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="firstName" className="mb-1 block text-sm font-medium text-ink">
