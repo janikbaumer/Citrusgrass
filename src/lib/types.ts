@@ -67,6 +67,8 @@ export function getProfileCompletion(profile: UserProfile): number {
   return Math.round((filled / fields.length) * 100);
 }
 
+export type PropertyStatus = "active" | "rented";
+
 export interface Property {
   id: string;
   ownerId: string;
@@ -80,6 +82,12 @@ export interface Property {
   availableFrom: string;
   description?: string;
   createdAt: number;
+  // Both optional: properties created before these fields existed won't
+  // have them set, and simply won't match the public /browse query's
+  // where clauses until their owner next saves the edit form (which
+  // always writes an explicit value going forward - see property.ts).
+  isPubliclyListed?: boolean;
+  status?: PropertyStatus;
 }
 
 export function formatPropertyAddress(

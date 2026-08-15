@@ -1,6 +1,6 @@
 import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import type { Property } from "@/lib/types";
+import type { Property, PropertyStatus } from "@/lib/types";
 
 type PropertyInput = Pick<
   Property,
@@ -13,7 +13,10 @@ type PropertyInput = Pick<
   | "additionalCosts"
   | "availableFrom"
   | "description"
+  | "isPubliclyListed"
 >;
+
+type PropertyEditInput = PropertyInput & Pick<Property, "status">;
 
 export async function createProperty(
   ownerId: string,
@@ -23,6 +26,7 @@ export async function createProperty(
     ownerId,
     ...data,
     description: data.description || "",
+    status: "active" satisfies PropertyStatus,
     createdAt: Date.now(),
   });
   return ref.id;
@@ -36,7 +40,7 @@ export async function getProperty(propertyId: string): Promise<Property | null> 
 
 export async function updateProperty(
   propertyId: string,
-  data: PropertyInput
+  data: PropertyEditInput
 ): Promise<void> {
   await updateDoc(doc(db, "properties", propertyId), {
     ...data,

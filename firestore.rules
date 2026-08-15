@@ -6,10 +6,16 @@ service cloud.firestore {
     }
 
     match /properties/{propertyId} {
-      // Anyone with the direct link can view a single property (the apply page),
-      // but the collection can't be listed/browsed without being the owner.
+      // Anyone with the direct link can view a single property (the apply
+      // page) - this always worked regardless of isPubliclyListed, and
+      // still does. The collection can be listed either by its owner
+      // (their own /homeowner/properties dashboard) or, as of the public
+      // /browse page, by anyone querying for publicly-listed + active
+      // properties specifically - the query itself must filter on both
+      // fields for Firestore to prove this rule is satisfied for a list.
       allow get: if true;
-      allow list: if request.auth != null && request.auth.uid == resource.data.ownerId;
+      allow list: if (request.auth != null && request.auth.uid == resource.data.ownerId)
+        || (resource.data.isPubliclyListed == true && resource.data.status == "active");
       allow create: if request.auth != null && request.auth.uid == request.resource.data.ownerId;
       allow update, delete: if request.auth != null && request.auth.uid == resource.data.ownerId;
     }

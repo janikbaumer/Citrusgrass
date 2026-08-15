@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getProperty, updateProperty } from "@/lib/property";
-import type { Property } from "@/lib/types";
+import type { Property, PropertyStatus } from "@/lib/types";
 
 export default function EditPropertyClient() {
   const params = useParams<{ id: string }>();
@@ -24,6 +24,8 @@ export default function EditPropertyClient() {
   const [additionalCosts, setAdditionalCosts] = useState("");
   const [availableFrom, setAvailableFrom] = useState("");
   const [description, setDescription] = useState("");
+  const [isPubliclyListed, setIsPubliclyListed] = useState(true);
+  const [status, setStatus] = useState<PropertyStatus>("active");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -40,6 +42,8 @@ export default function EditPropertyClient() {
         setAdditionalCosts(String(result.additionalCosts));
         setAvailableFrom(result.availableFrom || "");
         setDescription(result.description || "");
+        setIsPubliclyListed(result.isPubliclyListed ?? true);
+        setStatus(result.status ?? "active");
       }
     });
   }, [propertyId]);
@@ -59,6 +63,8 @@ export default function EditPropertyClient() {
         additionalCosts: Number(additionalCosts),
         availableFrom,
         description,
+        isPubliclyListed,
+        status,
       });
       router.push(`/homeowner/properties/${propertyId}`);
     } catch (err) {
@@ -220,6 +226,48 @@ export default function EditPropertyClient() {
             onChange={(e) => setDescription(e.target.value)}
             className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
           />
+        </div>
+
+        <div>
+          <span className="mb-1 block text-sm font-medium text-ink">{t("property.status")}</span>
+          <div className="flex gap-6">
+            <label className="flex items-center gap-2 text-sm text-ink">
+              <input
+                type="radio"
+                name="status"
+                value="active"
+                checked={status === "active"}
+                onChange={() => setStatus("active")}
+                className="accent-accent"
+              />
+              {t("property.statusActive")}
+            </label>
+            <label className="flex items-center gap-2 text-sm text-ink">
+              <input
+                type="radio"
+                name="status"
+                value="rented"
+                checked={status === "rented"}
+                onChange={() => setStatus("rented")}
+                className="accent-accent"
+              />
+              {t("property.statusRented")}
+            </label>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-3 rounded-xl border border-line bg-surface px-3 py-3">
+          <input
+            id="isPubliclyListed"
+            type="checkbox"
+            checked={isPubliclyListed}
+            onChange={(e) => setIsPubliclyListed(e.target.checked)}
+            className="mt-0.5 accent-accent"
+          />
+          <label htmlFor="isPubliclyListed" className="text-sm text-ink">
+            <span className="block font-medium">{t("property.publiclyListed")}</span>
+            <span className="block text-xs text-muted">{t("property.publiclyListedHelp")}</span>
+          </label>
         </div>
 
         {error && <p className="text-sm text-danger">{error}</p>}

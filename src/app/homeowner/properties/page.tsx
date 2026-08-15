@@ -68,6 +68,24 @@ export default function PropertiesPage() {
             >
               <p className="font-medium">{formatPropertyAddress(property)}</p>
               <p className="text-sm text-muted">{formatPropertySummary(property)}</p>
+              <div className="mt-2 flex gap-2">
+                <span
+                  className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                    property.isPubliclyListed === true
+                      ? "bg-accent/15 text-accent"
+                      : "bg-bg text-muted"
+                  }`}
+                >
+                  {property.isPubliclyListed === true
+                    ? t("property.publiclyListed")
+                    : t("homeownerProperties.inviteOnly")}
+                </span>
+                {property.status === "rented" && (
+                  <span className="rounded-full bg-danger-bg px-2 py-0.5 text-xs font-medium text-danger">
+                    {t("property.statusRented")}
+                  </span>
+                )}
+              </div>
             </Link>
           </li>
         ))}

@@ -8,18 +8,18 @@ import { HouseIcon } from "@/components/illustrations/HouseIcon";
 import { KeyIcon } from "@/components/illustrations/KeyIcon";
 import type { TranslationKey } from "@/lib/i18n/en";
 
-const BENEFITS: { icon: "invite" | "bolt" | "board"; titleKey: TranslationKey; descriptionKey: TranslationKey }[] = [
-  { icon: "invite", titleKey: "landing.benefit1Title", descriptionKey: "landing.benefit1Description" },
+const BENEFITS: { icon: "search" | "bolt" | "board"; titleKey: TranslationKey; descriptionKey: TranslationKey }[] = [
+  { icon: "search", titleKey: "landing.benefit1Title", descriptionKey: "landing.benefit1Description" },
   { icon: "bolt", titleKey: "landing.benefit2Title", descriptionKey: "landing.benefit2Description" },
   { icon: "board", titleKey: "landing.benefit3Title", descriptionKey: "landing.benefit3Description" },
 ];
 
-function BenefitIcon({ icon }: { icon: "invite" | "bolt" | "board" }) {
-  if (icon === "invite") {
+function BenefitIcon({ icon }: { icon: "search" | "bolt" | "board" }) {
+  if (icon === "search") {
     return (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-        <path d="M5.5 8.5V6.75a4.5 4.5 0 019 0V8.5" />
-        <rect x="4" y="8.5" width="12" height="8" rx="2" />
+        <circle cx="8.5" cy="8.5" r="5" />
+        <path d="M16 16l-3.8-3.8" />
       </svg>
     );
   }

@@ -20,6 +20,7 @@ export default function NewPropertyPage() {
   const [additionalCosts, setAdditionalCosts] = useState("");
   const [availableFrom, setAvailableFrom] = useState("");
   const [description, setDescription] = useState("");
+  const [isPubliclyListed, setIsPubliclyListed] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -39,6 +40,7 @@ export default function NewPropertyPage() {
         additionalCosts: Number(additionalCosts),
         availableFrom,
         description,
+        isPubliclyListed,
       });
       router.push(`/homeowner/properties/${propertyId}`);
     } catch (err) {
@@ -188,6 +190,20 @@ export default function NewPropertyPage() {
             onChange={(e) => setDescription(e.target.value)}
             className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
           />
+        </div>
+
+        <div className="flex items-start gap-3 rounded-xl border border-line bg-surface px-3 py-3">
+          <input
+            id="isPubliclyListed"
+            type="checkbox"
+            checked={isPubliclyListed}
+            onChange={(e) => setIsPubliclyListed(e.target.checked)}
+            className="mt-0.5 accent-accent"
+          />
+          <label htmlFor="isPubliclyListed" className="text-sm text-ink">
+            <span className="block font-medium">{t("property.publiclyListed")}</span>
+            <span className="block text-xs text-muted">{t("property.publiclyListedHelp")}</span>
+          </label>
         </div>
 
         {error && <p className="text-sm text-danger">{error}</p>}

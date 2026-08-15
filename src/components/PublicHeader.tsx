@@ -6,6 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const LINKS = [
+  { href: "/browse", labelKey: "publicHeader.browse" },
   { href: "/about", labelKey: "publicHeader.about" },
   { href: "/faq", labelKey: "publicHeader.faq" },
   { href: "/contact", labelKey: "publicHeader.contact" },

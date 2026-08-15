@@ -131,21 +131,31 @@ export default function ApplyPageClient() {
           <p className="text-muted">{t("apply.checkingStatus")}</p>
         )}
 
-        {user && profile && profile.role === "renter" && existingApplication === null && (
-          <div className="space-y-3">
-            <p className="text-ink">
-              {t("apply.applyUsingProfile", { name: `${profile.firstName} ${profile.lastName}` })}
-            </p>
-            {error && <p className="text-sm text-danger">{error}</p>}
-            <button
-              onClick={handleApply}
-              disabled={submitting}
-              className="rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {submitting ? t("apply.submitting") : t("apply.submit")}
-            </button>
-          </div>
-        )}
+        {user &&
+          profile &&
+          profile.role === "renter" &&
+          existingApplication === null &&
+          property.status === "rented" && <p className="text-ink">{t("apply.propertyRented")}</p>}
+
+        {user &&
+          profile &&
+          profile.role === "renter" &&
+          existingApplication === null &&
+          property.status !== "rented" && (
+            <div className="space-y-3">
+              <p className="text-ink">
+                {t("apply.applyUsingProfile", { name: `${profile.firstName} ${profile.lastName}` })}
+              </p>
+              {error && <p className="text-sm text-danger">{error}</p>}
+              <button
+                onClick={handleApply}
+                disabled={submitting}
+                className="rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-accent-ink transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {submitting ? t("apply.submitting") : t("apply.submit")}
+              </button>
+            </div>
+          )}
 
         {user && profile && profile.role === "renter" && existingApplication && (
           <p className="text-ink">

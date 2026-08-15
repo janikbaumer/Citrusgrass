@@ -35,6 +35,12 @@ const en = {
   "property.availableFrom": "Available from",
   "property.description": "Description",
   "property.optional": "(optional)",
+  "property.publiclyListed": "Publicly listed",
+  "property.publiclyListedHelp":
+    "Show this property in public search results on Citrusgrass. Turn off to keep it invite-only, reachable only via a direct apply link.",
+  "property.status": "Status",
+  "property.statusActive": "Active",
+  "property.statusRented": "Rented",
 
   // The word for each role, used to build sentences like "Create your {role} account".
   "roles.homeowner": "homeowner",
@@ -51,6 +57,7 @@ const en = {
 
   // src/components/PublicHeader.tsx
   "publicHeader.brand": "Citrusgrass",
+  "publicHeader.browse": "Browse",
   "publicHeader.about": "About us",
   "publicHeader.faq": "FAQ",
   "publicHeader.contact": "Contact",
@@ -80,9 +87,9 @@ const en = {
 
   // src/app/page.tsx - landing page sections below the hero
   "landing.benefitsTitle": "Why Citrusgrass",
-  "landing.benefit1Title": "Invite-only, not public listings",
+  "landing.benefit1Title": "Search or get invited - your choice",
   "landing.benefit1Description":
-    "Renters only ever see a property after you share a direct apply link - there's no public search to browse.",
+    "Browse every publicly listed property right on Citrusgrass, or apply directly through a private link a homeowner shared with you elsewhere.",
   "landing.benefit2Title": "Apply in one click",
   "landing.benefit2Description":
     "Renters apply using their saved profile - no forms to refill for every listing.",
@@ -146,6 +153,7 @@ const en = {
   "homeownerProperties.addProperty": "Add property",
   "homeownerProperties.empty": "You haven't added a property yet.",
   "homeownerProperties.addFirstOne": "Add your first one",
+  "homeownerProperties.inviteOnly": "Invite-only",
 
   // src/app/homeowner/properties/new/page.tsx
   "homeownerPropertiesNew.title": "Add a property",
@@ -215,6 +223,7 @@ const en = {
   "apply.logOut": "Log out",
   "apply.checkingStatus": "Checking your application status...",
   "apply.applyUsingProfile": "Apply using your existing renter profile ({name}).",
+  "apply.propertyRented": "This property has already been rented.",
   "apply.submitting": "Applying...",
   "apply.submit": "Apply now",
   "apply.alreadyApplied": "You already applied. Status:",
@@ -222,9 +231,9 @@ const en = {
   // src/app/about/page.tsx
   "about.title": "About us",
   "about.p1":
-    "Citrusgrass connects homeowners renting out a property with renters looking for one — without turning it into a public listings marketplace.",
+    "Citrusgrass connects homeowners renting out a property with renters looking for one — search our listings directly, or apply through a link shared elsewhere, like Flatfox or ImmoScout.",
   "about.p2":
-    "A renter only ever sees a property after a homeowner shares a direct apply link for it. There's no browsable search across landlords, so applying always starts from a specific invitation rather than open shopping.",
+    "Browse and search every publicly listed property right on Citrusgrass, or apply directly if a homeowner has shared a private link with you — either way, your application and its status live in one place.",
   "about.p3":
     "Once someone applies, both sides can track where that application stands — from received, to reviewed, to a decision — on a shared status board.",
 
@@ -237,9 +246,9 @@ const en = {
   "faq.q1": "How do I apply for a property?",
   "faq.a1":
     "You need a direct apply link from the homeowner listing it. Open that link, sign up or log in, and submit your application from there.",
-  "faq.q2": "Why can't I search or browse available properties?",
+  "faq.q2": "How do I find a property to apply for?",
   "faq.a2":
-    "Citrusgrass is invite-based by design — you always start from a specific homeowner's apply link rather than an open marketplace, so there's no public search or listing index to browse.",
+    "Search and browse publicly listed properties right on Citrusgrass, or use a direct apply link a homeowner shared with you elsewhere (e.g. on Flatfox or ImmoScout) — both work the same way from there.",
   "faq.q3": "What happens after I apply?",
   "faq.a3":
     "The homeowner sees your application on their pipeline board and moves it through stages as they review it. You can follow the same status from your own dashboard.",
@@ -287,6 +296,12 @@ const en = {
   "pipelineBoard.debtRegisterAvailable": "Debt-enforcement register extract available",
   "pipelineBoard.idDocumentAvailable": "Copy of ID/residence permit available",
   "pipelineBoard.salaryStatementAvailable": "Salary statement available",
+
+  // src/app/browse/page.tsx
+  "browse.title": "Browse listings",
+  "browse.min": "Min",
+  "browse.max": "Max",
+  "browse.noResults": "No listings match your search.",
   "pipelineBoard.noApplicants": "No applicants.",
 
   // src/components/RenterPipelineBoard.tsx

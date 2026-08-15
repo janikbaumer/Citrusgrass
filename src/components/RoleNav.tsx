@@ -12,6 +12,7 @@ import type { TranslationKey } from "@/lib/i18n/en";
 const LINKS: Record<UserRole, { href: string; labelKey: TranslationKey }[]> = {
   renter: [
     { href: "/renter/dashboard", labelKey: "roleNav.dashboard" },
+    { href: "/browse", labelKey: "publicHeader.browse" },
     { href: "/renter/profile", labelKey: "roleNav.profile" },
     { href: "/renter/listings", labelKey: "roleNav.applications" },
     { href: "/renter/settings", labelKey: "roleNav.settings" },

@@ -33,6 +33,12 @@ const de: Record<TranslationKey, string> = {
   "property.availableFrom": "Verfügbar ab",
   "property.description": "Beschreibung",
   "property.optional": "(optional)",
+  "property.publiclyListed": "Öffentlich gelistet",
+  "property.publiclyListedHelp":
+    "Diese Immobilie in den öffentlichen Suchergebnissen auf Citrusgrass anzeigen. Deaktivieren, um sie nur auf Einladung zugänglich zu machen (nur über einen direkten Bewerbungslink erreichbar).",
+  "property.status": "Status",
+  "property.statusActive": "Aktiv",
+  "property.statusRented": "Vermietet",
 
   "roles.homeowner": "Vermieter",
   "roles.renter": "Mieter",
@@ -46,6 +52,7 @@ const de: Record<TranslationKey, string> = {
   "profile.documentInvalidType": "Bitte wähle eine PDF- oder Bilddatei aus.",
 
   "publicHeader.brand": "Citrusgrass",
+  "publicHeader.browse": "Durchsuchen",
   "publicHeader.about": "Über uns",
   "publicHeader.faq": "FAQ",
   "publicHeader.contact": "Kontakt",
@@ -71,9 +78,9 @@ const de: Record<TranslationKey, string> = {
   "home.haveAccount": "Schon ein Konto?",
 
   "landing.benefitsTitle": "Warum Citrusgrass",
-  "landing.benefit1Title": "Nur auf Einladung, keine öffentlichen Inserate",
+  "landing.benefit1Title": "Suchen oder eingeladen werden - deine Wahl",
   "landing.benefit1Description":
-    "Mieter sehen eine Immobilie erst, wenn du einen direkten Bewerbungslink teilst - es gibt keine öffentliche Suche zum Durchstöbern.",
+    "Durchsuche jede öffentlich gelistete Immobilie direkt auf Citrusgrass, oder bewirb dich direkt über einen privaten Link, den dir ein Vermieter anderswo geteilt hat.",
   "landing.benefit2Title": "Bewerbung mit einem Klick",
   "landing.benefit2Description":
     "Mieter bewerben sich mit ihrem gespeicherten Profil - kein erneutes Ausfüllen für jedes Inserat.",
@@ -131,6 +138,7 @@ const de: Record<TranslationKey, string> = {
   "homeownerProperties.addProperty": "Immobilie hinzufügen",
   "homeownerProperties.empty": "Du hast noch keine Immobilie hinzugefügt.",
   "homeownerProperties.addFirstOne": "Füge deine erste hinzu",
+  "homeownerProperties.inviteOnly": "Nur auf Einladung",
 
   "homeownerPropertiesNew.title": "Immobilie hinzufügen",
   "homeownerPropertiesNew.submitting": "Wird hinzugefügt...",
@@ -190,15 +198,16 @@ const de: Record<TranslationKey, string> = {
   "apply.logOut": "Abmelden",
   "apply.checkingStatus": "Bewerbungsstatus wird geprüft...",
   "apply.applyUsingProfile": "Bewirb dich mit deinem bestehenden Mieterprofil ({name}).",
+  "apply.propertyRented": "Diese Immobilie wurde bereits vermietet.",
   "apply.submitting": "Bewerbung wird gesendet...",
   "apply.submit": "Jetzt bewerben",
   "apply.alreadyApplied": "Du hast dich bereits beworben. Status:",
 
   "about.title": "Über uns",
   "about.p1":
-    "Citrusgrass verbindet Vermieter, die eine Immobilie vermieten, mit Mietern, die eine suchen — ohne daraus einen öffentlichen Marktplatz mit Inseraten zu machen.",
+    "Citrusgrass verbindet Vermieter, die eine Immobilie vermieten, mit Mietern, die eine suchen — durchsuche unsere Inserate direkt, oder bewirb dich über einen Link, der anderswo geteilt wurde, z. B. auf Flatfox oder ImmoScout.",
   "about.p2":
-    "Ein Mieter sieht eine Immobilie erst, nachdem ein Vermieter einen direkten Bewerbungslink dafür geteilt hat. Es gibt keine durchsuchbare Übersicht über alle Vermieter, daher beginnt eine Bewerbung immer mit einer konkreten Einladung statt mit offenem Stöbern.",
+    "Durchsuche jede öffentlich gelistete Immobilie direkt auf Citrusgrass, oder bewirb dich direkt, wenn dir ein Vermieter einen privaten Link geteilt hat — so oder so bleiben deine Bewerbung und ihr Status an einem Ort.",
   "about.p3":
     "Sobald sich jemand beworben hat, können beide Seiten den Stand der Bewerbung verfolgen — von eingegangen über geprüft bis zur Entscheidung — auf einer gemeinsamen Statusübersicht.",
 
@@ -209,9 +218,9 @@ const de: Record<TranslationKey, string> = {
   "faq.q1": "Wie bewerbe ich mich für eine Immobilie?",
   "faq.a1":
     "Du brauchst einen direkten Bewerbungslink vom Vermieter, der die Immobilie inseriert. Öffne den Link, registriere dich oder melde dich an und reiche deine Bewerbung von dort aus ein.",
-  "faq.q2": "Warum kann ich verfügbare Immobilien nicht suchen oder durchstöbern?",
+  "faq.q2": "Wie finde ich eine Immobilie, um mich zu bewerben?",
   "faq.a2":
-    "Citrusgrass funktioniert bewusst auf Einladungsbasis — du startest immer über den Bewerbungslink eines bestimmten Vermieters statt über einen offenen Marktplatz, daher gibt es keine öffentliche Suche oder Inseratsübersicht zum Durchstöbern.",
+    "Durchsuche öffentlich gelistete Immobilien direkt auf Citrusgrass, oder nutze einen direkten Bewerbungslink, den dir ein Vermieter anderswo geteilt hat (z. B. auf Flatfox oder ImmoScout) — beides funktioniert von dort an gleich.",
   "faq.q3": "Was passiert, nachdem ich mich beworben habe?",
   "faq.a3":
     "Der Vermieter sieht deine Bewerbung auf seiner Pipeline-Übersicht und bewegt sie durch die einzelnen Phasen, während er sie prüft. Du kannst denselben Status auf deiner eigenen Übersicht mitverfolgen.",
@@ -253,6 +262,11 @@ const de: Record<TranslationKey, string> = {
   "pipelineBoard.debtRegisterAvailable": "Betreibungsregisterauszug verfügbar",
   "pipelineBoard.idDocumentAvailable": "Kopie von Ausweis oder Aufenthaltsbewilligung verfügbar",
   "pipelineBoard.salaryStatementAvailable": "Lohnausweis verfügbar",
+
+  "browse.title": "Immobilien durchsuchen",
+  "browse.min": "Min.",
+  "browse.max": "Max.",
+  "browse.noResults": "Keine Inserate entsprechen deiner Suche.",
   "pipelineBoard.noApplicants": "Keine Bewerber.",
 
   "renterPipelineBoard.nothingHere": "Nichts hier.",
