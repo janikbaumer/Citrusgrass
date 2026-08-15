@@ -18,6 +18,10 @@ export interface UserProfile {
   landlordType?: LandlordType;
   preferredLanguage?: Language;
   photoURL?: string;
+  jobTitle?: string;
+  hasDebtRegisterDocument?: boolean;
+  hasIdDocument?: boolean;
+  hasSalaryStatement?: boolean;
 }
 
 export function isUserRole(value: string | null): value is UserRole {
@@ -27,6 +31,40 @@ export function isUserRole(value: string | null): value is UserRole {
 export function displayName(profile: Pick<UserProfile, "firstName" | "lastName" | "email">): string {
   const fullName = `${profile.firstName || ""} ${profile.lastName || ""}`.trim();
   return fullName || profile.email;
+}
+
+// Includes the mandatory signup fields alongside the optional ones -
+// deliberate, not an oversight: it gives every profile a "free" baseline
+// right after signup instead of starting at 0%. To add a newly-introduced
+// optional field to the completion calculation, add it to the matching
+// list below - nothing else needs to change.
+const RENTER_COMPLETION_FIELDS: (keyof UserProfile)[] = [
+  "firstName",
+  "lastName",
+  "email",
+  "photoURL",
+  "jobTitle",
+  "phone",
+  "salaryRange",
+  "about",
+  "hasDebtRegisterDocument",
+  "hasIdDocument",
+  "hasSalaryStatement",
+];
+
+const HOMEOWNER_COMPLETION_FIELDS: (keyof UserProfile)[] = [
+  "firstName",
+  "lastName",
+  "email",
+  "photoURL",
+  "phone",
+  "landlordType",
+];
+
+export function getProfileCompletion(profile: UserProfile): number {
+  const fields = profile.role === "renter" ? RENTER_COMPLETION_FIELDS : HOMEOWNER_COMPLETION_FIELDS;
+  const filled = fields.filter((field) => !!profile[field]).length;
+  return Math.round((filled / fields.length) * 100);
 }
 
 export interface Property {
@@ -74,6 +112,10 @@ export interface RenterSnapshot {
   phone?: string;
   salaryRange?: string;
   about?: string;
+  jobTitle?: string;
+  hasDebtRegisterDocument?: boolean;
+  hasIdDocument?: boolean;
+  hasSalaryStatement?: boolean;
 }
 
 export type PipelineStatus =

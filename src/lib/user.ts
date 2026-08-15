@@ -43,6 +43,10 @@ export async function updateUserProfile(
       | "landlordType"
       | "preferredLanguage"
       | "photoURL"
+      | "jobTitle"
+      | "hasDebtRegisterDocument"
+      | "hasIdDocument"
+      | "hasSalaryStatement"
     >
   >
 ): Promise<void> {
@@ -57,4 +61,25 @@ export async function uploadProfilePicture(uid: string, file: File): Promise<str
 
 export async function deleteProfilePicture(uid: string): Promise<void> {
   await deleteObject(ref(storage, `profile-pictures/${uid}`));
+}
+
+// The three private renter-document types a tenant can optionally upload
+// (debt-register extract, ID/residence permit copy, salary statement) -
+// see storage.rules for the matching per-type paths. No return value,
+// unlike uploadProfilePicture - these documents stay private, so their
+// download URL must never be stored anywhere a homeowner's client could
+// read it. Only a boolean flag on RenterSnapshot is ever shared with them.
+export type RenterDocumentType = "debt-register-documents" | "id-documents" | "salary-statements";
+
+export async function uploadRenterDocument(
+  uid: string,
+  type: RenterDocumentType,
+  file: File
+): Promise<void> {
+  const documentRef = ref(storage, `${type}/${uid}`);
+  await uploadBytes(documentRef, file, { contentType: file.type });
+}
+
+export async function deleteRenterDocument(uid: string, type: RenterDocumentType): Promise<void> {
+  await deleteObject(ref(storage, `${type}/${uid}`));
 }

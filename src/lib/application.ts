@@ -20,7 +20,19 @@ import type {
 } from "@/lib/types";
 
 export function buildRenterSnapshot(
-  profile: Pick<UserProfile, "firstName" | "lastName" | "email" | "phone" | "salaryRange" | "about">
+  profile: Pick<
+    UserProfile,
+    | "firstName"
+    | "lastName"
+    | "email"
+    | "phone"
+    | "salaryRange"
+    | "about"
+    | "jobTitle"
+    | "hasDebtRegisterDocument"
+    | "hasIdDocument"
+    | "hasSalaryStatement"
+  >
 ): RenterSnapshot {
   const snapshot: RenterSnapshot = {
     firstName: profile.firstName,
@@ -30,6 +42,10 @@ export function buildRenterSnapshot(
   if (profile.phone) snapshot.phone = profile.phone;
   if (profile.salaryRange) snapshot.salaryRange = profile.salaryRange;
   if (profile.about) snapshot.about = profile.about;
+  if (profile.jobTitle) snapshot.jobTitle = profile.jobTitle;
+  if (profile.hasDebtRegisterDocument) snapshot.hasDebtRegisterDocument = true;
+  if (profile.hasIdDocument) snapshot.hasIdDocument = true;
+  if (profile.hasSalaryStatement) snapshot.hasSalaryStatement = true;
   return snapshot;
 }
 

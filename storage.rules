@@ -8,5 +8,34 @@ service firebase.storage {
         && request.resource.contentType.matches('image/.*');
       allow delete: if request.auth != null && request.auth.uid == userId;
     }
+
+    // Unlike profile-pictures above, read is owner-only on all three of the
+    // renter-document types below - these are sensitive documents, so unlike
+    // the photo they must never be readable by anyone else, including a
+    // homeowner reviewing an application. Only a boolean "available" flag is
+    // ever shared with them (see RenterSnapshot in src/lib/types.ts).
+    match /debt-register-documents/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && request.auth.uid == userId
+        && request.resource.size < 10 * 1024 * 1024
+        && (request.resource.contentType == 'application/pdf' || request.resource.contentType.matches('image/.*'));
+      allow delete: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /id-documents/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && request.auth.uid == userId
+        && request.resource.size < 10 * 1024 * 1024
+        && (request.resource.contentType == 'application/pdf' || request.resource.contentType.matches('image/.*'));
+      allow delete: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /salary-statements/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && request.auth.uid == userId
+        && request.resource.size < 10 * 1024 * 1024
+        && (request.resource.contentType == 'application/pdf' || request.resource.contentType.matches('image/.*'));
+      allow delete: if request.auth != null && request.auth.uid == userId;
+    }
   }
 }

@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { deleteProfilePicture, updateUserProfile, uploadProfilePicture } from "@/lib/user";
-import { displayName } from "@/lib/types";
+import { displayName, getProfileCompletion } from "@/lib/types";
 import type { UserRole } from "@/lib/types";
 
 const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
@@ -59,6 +59,7 @@ export function ProfileHeader({ role }: { role: UserRole }) {
   }
 
   const initials = `${profile.firstName?.[0] || ""}${profile.lastName?.[0] || ""}`.toUpperCase();
+  const completion = getProfileCompletion(profile);
 
   return (
     <div className="mb-6 overflow-hidden rounded-2xl bg-surface shadow-warm-sm">
@@ -116,6 +117,18 @@ export function ProfileHeader({ role }: { role: UserRole }) {
           <span className="mt-1 inline-block rounded-full bg-accent/15 px-2 py-0.5 text-xs font-medium capitalize text-accent">
             {t(`roles.${role}`)}
           </span>
+        </div>
+
+        <div className="mt-3 max-w-xs">
+          <div className="mb-1 flex items-center justify-between text-xs font-medium text-muted">
+            <span>{t("profile.completion", { percent: String(completion) })}</span>
+          </div>
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-line">
+            <div
+              className="h-full rounded-full bg-accent transition-[width]"
+              style={{ width: `${completion}%` }}
+            />
+          </div>
         </div>
 
         {error && <p className="mt-2 text-sm text-danger">{error}</p>}

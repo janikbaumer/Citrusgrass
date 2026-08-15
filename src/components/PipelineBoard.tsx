@@ -13,6 +13,25 @@ interface PipelineBoardProps {
   onStatusChange: (application: Application, status: PipelineStatus) => void;
 }
 
+function DocumentBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="mt-1 flex items-center gap-1 text-xs text-good">
+      <svg
+        viewBox="0 0 20 20"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-3.5 w-3.5 shrink-0"
+      >
+        <path d="M4 10.5 8 14.5 16 6" />
+      </svg>
+      {children}
+    </p>
+  );
+}
+
 export function PipelineBoard({ applications, onStatusChange }: PipelineBoardProps) {
   const { t } = useLanguage();
   const statusLabels = getPipelineStatusLabels(t);
@@ -46,6 +65,9 @@ export function PipelineBoard({ applications, onStatusChange }: PipelineBoardPro
                   <p className="text-sm font-medium">
                     {application.renter.firstName} {application.renter.lastName}
                   </p>
+                  {application.renter.jobTitle && (
+                    <p className="text-xs text-muted">{application.renter.jobTitle}</p>
+                  )}
                   <p className="text-xs text-muted">{application.renter.email}</p>
                   {application.renter.phone && (
                     <p className="text-xs text-muted">{application.renter.phone}</p>
@@ -54,6 +76,15 @@ export function PipelineBoard({ applications, onStatusChange }: PipelineBoardPro
                     <p className="mt-1 text-xs text-muted">
                       {t("pipelineBoard.salary")} {application.renter.salaryRange}
                     </p>
+                  )}
+                  {application.renter.hasDebtRegisterDocument && (
+                    <DocumentBadge>{t("pipelineBoard.debtRegisterAvailable")}</DocumentBadge>
+                  )}
+                  {application.renter.hasIdDocument && (
+                    <DocumentBadge>{t("pipelineBoard.idDocumentAvailable")}</DocumentBadge>
+                  )}
+                  {application.renter.hasSalaryStatement && (
+                    <DocumentBadge>{t("pipelineBoard.salaryStatementAvailable")}</DocumentBadge>
                   )}
                   {application.renter.about && (
                     <p className="mt-1 line-clamp-3 text-xs text-muted">

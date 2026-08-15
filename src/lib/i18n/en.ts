@@ -43,8 +43,11 @@ const en = {
   // src/components/ProfileHeader.tsx
   "profile.changePhoto": "Change photo",
   "profile.removePhoto": "Remove photo",
+  "profile.completion": "{percent}% complete",
   "profile.photoTooLarge": "Image must be smaller than 5 MB.",
   "profile.photoInvalidType": "Please choose an image file.",
+  "profile.documentTooLarge": "File must be smaller than 10 MB.",
+  "profile.documentInvalidType": "Please choose a PDF or image file.",
 
   // src/components/PublicHeader.tsx
   "publicHeader.brand": "Citrusgrass",
@@ -107,6 +110,9 @@ const en = {
   "login.submitting": "Logging in...",
   "login.noAccount": "Don't have an account?",
   "login.signUp": "Sign up",
+  "login.forgotPassword": "Forgot password?",
+  "login.enterEmailFirst": "Enter your email above first.",
+  "login.resetEmailSent": "Password reset email sent - check your inbox.",
 
   // src/app/register/page.tsx
   "register.whichAreYou": "Which are you?",
@@ -170,9 +176,19 @@ const en = {
     "You haven't applied to anything yet. Applications you submit via a landlord's apply link will show up here.",
 
   // src/app/renter/profile/page.tsx
+  "renterProfile.personalInfoTitle": "Personal information",
+  "renterProfile.aboutMeTitle": "About me",
+  "renterProfile.documentsTitle": "Relevant documents",
   "renterProfile.salaryRange": "Salary range",
   "renterProfile.selectRange": "Select a range",
   "renterProfile.about": "About you",
+  "renterProfile.jobTitle": "Job title",
+  "renterProfile.debtRegisterLabel": "Debt-enforcement register extract",
+  "renterProfile.idDocumentLabel": "Copy of ID/residence permit",
+  "renterProfile.salaryStatementLabel": "Salary statement",
+  "renterProfile.uploadDocument": "Upload document",
+  "renterProfile.replaceDocument": "Replace",
+  "renterProfile.removeDocument": "Remove",
 
   // Salary range option labels. The stored Firestore *value* stays the
   // original English string for backwards compatibility with existing
@@ -268,6 +284,9 @@ const en = {
 
   // src/components/PipelineBoard.tsx (homeowner-facing)
   "pipelineBoard.salary": "Salary:",
+  "pipelineBoard.debtRegisterAvailable": "Debt-enforcement register extract available",
+  "pipelineBoard.idDocumentAvailable": "Copy of ID/residence permit available",
+  "pipelineBoard.salaryStatementAvailable": "Salary statement available",
   "pipelineBoard.noApplicants": "No applicants.",
 
   // src/components/RenterPipelineBoard.tsx

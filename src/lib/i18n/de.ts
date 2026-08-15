@@ -39,8 +39,11 @@ const de: Record<TranslationKey, string> = {
 
   "profile.changePhoto": "Foto ändern",
   "profile.removePhoto": "Foto entfernen",
+  "profile.completion": "{percent}% vollständig",
   "profile.photoTooLarge": "Das Bild muss kleiner als 5 MB sein.",
   "profile.photoInvalidType": "Bitte wähle eine Bilddatei aus.",
+  "profile.documentTooLarge": "Die Datei muss kleiner als 10 MB sein.",
+  "profile.documentInvalidType": "Bitte wähle eine PDF- oder Bilddatei aus.",
 
   "publicHeader.brand": "Citrusgrass",
   "publicHeader.about": "Über uns",
@@ -97,6 +100,9 @@ const de: Record<TranslationKey, string> = {
   "login.submitting": "Wird angemeldet...",
   "login.noAccount": "Noch kein Konto?",
   "login.signUp": "Registrieren",
+  "login.forgotPassword": "Passwort vergessen?",
+  "login.enterEmailFirst": "Bitte gib zuerst deine E-Mail-Adresse oben ein.",
+  "login.resetEmailSent": "E-Mail zum Zurücksetzen des Passworts gesendet - bitte prüfe dein Postfach.",
 
   "register.whichAreYou": "Was bist du?",
   "register.pickRoleFirst": "Wähle zuerst eine Rolle, damit wir dein Konto richtig einrichten können.",
@@ -149,9 +155,19 @@ const de: Record<TranslationKey, string> = {
   "applications.empty":
     "Du hast dich noch nirgends beworben. Bewerbungen, die du über den Bewerbungslink eines Vermieters einreichst, erscheinen hier.",
 
+  "renterProfile.personalInfoTitle": "Persönliche Angaben",
+  "renterProfile.aboutMeTitle": "Über mich",
+  "renterProfile.documentsTitle": "Relevante Dokumente",
   "renterProfile.salaryRange": "Gehaltsbereich",
   "renterProfile.selectRange": "Bereich auswählen",
   "renterProfile.about": "Über dich",
+  "renterProfile.jobTitle": "Berufsbezeichnung",
+  "renterProfile.debtRegisterLabel": "Betreibungsregisterauszug",
+  "renterProfile.idDocumentLabel": "Kopie von Ausweis oder Aufenthaltsbewilligung",
+  "renterProfile.salaryStatementLabel": "Lohnausweis",
+  "renterProfile.uploadDocument": "Dokument hochladen",
+  "renterProfile.replaceDocument": "Ersetzen",
+  "renterProfile.removeDocument": "Entfernen",
 
   "salaryRange.under30k": "Unter $30'000",
   "salaryRange.30to50k": "$30'000 - $50'000",
@@ -234,6 +250,9 @@ const de: Record<TranslationKey, string> = {
   "pipeline.applicationSent": "Bewerbung gesendet",
 
   "pipelineBoard.salary": "Gehalt:",
+  "pipelineBoard.debtRegisterAvailable": "Betreibungsregisterauszug verfügbar",
+  "pipelineBoard.idDocumentAvailable": "Kopie von Ausweis oder Aufenthaltsbewilligung verfügbar",
+  "pipelineBoard.salaryStatementAvailable": "Lohnausweis verfügbar",
   "pipelineBoard.noApplicants": "Keine Bewerber.",
 
   "renterPipelineBoard.nothingHere": "Nichts hier.",

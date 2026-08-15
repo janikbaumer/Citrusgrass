@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   GoogleAuthProvider,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
@@ -28,6 +29,9 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [resetError, setResetError] = useState<string | null>(null);
+  const [resetMessage, setResetMessage] = useState<string | null>(null);
+  const [resettingPassword, setResettingPassword] = useState(false);
 
   useEffect(() => {
     if (authLoading || !user) return;
@@ -58,6 +62,24 @@ function LoginForm() {
       setError(err instanceof Error ? err.message : t("common.somethingWrong"));
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  async function handleForgotPassword() {
+    setResetError(null);
+    setResetMessage(null);
+    if (!email) {
+      setResetError(t("login.enterEmailFirst"));
+      return;
+    }
+    setResettingPassword(true);
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setResetMessage(t("login.resetEmailSent"));
+    } catch (err) {
+      setResetError(err instanceof Error ? err.message : t("common.somethingWrong"));
+    } finally {
+      setResettingPassword(false);
     }
   }
 
@@ -108,9 +130,19 @@ function LoginForm() {
             />
           </div>
           <div>
-            <label htmlFor="password" className="mb-1 block text-sm font-medium text-ink">
-              {t("field.password")}
-            </label>
+            <div className="mb-1 flex items-center justify-between">
+              <label htmlFor="password" className="block text-sm font-medium text-ink">
+                {t("field.password")}
+              </label>
+              <button
+                type="button"
+                onClick={handleForgotPassword}
+                disabled={resettingPassword}
+                className="text-xs font-medium text-accent underline underline-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {t("login.forgotPassword")}
+              </button>
+            </div>
             <input
               id="password"
               type="password"
@@ -119,6 +151,10 @@ function LoginForm() {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none"
             />
+            {resetError && <p className="mt-1 text-xs text-danger">{resetError}</p>}
+            {resetMessage && !resetError && (
+              <p className="mt-1 text-xs text-good">{resetMessage}</p>
+            )}
           </div>
 
           {error && <p className="text-sm text-danger">{error}</p>}
